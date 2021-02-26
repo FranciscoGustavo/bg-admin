@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useTable } from 'react-table';
+import { useTable, useRowSelect } from 'react-table';
 import './styles.css';
 
 const Table = ({ handleColumns, handleData }) => {

@@ -1,0 +1,21 @@
+.inputText > div {
+  display: flex;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 0px 2px;
+  overflow: hidden;
+}
+
+.inputText select, .inputText input {
+  display: inline-flex;
+  width: 100%;
+  padding: 12px;
+  outline: none;
+  resize: none;
+}
+
+.inputText label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+}
