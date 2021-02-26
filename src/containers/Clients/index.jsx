@@ -4,7 +4,7 @@ import './styles.css';
 
 const Clients = () => {
   return (
-    <LayoutAdmin>
+    <LayoutAdmin title="Clientes">
       <div>
 
       </div>

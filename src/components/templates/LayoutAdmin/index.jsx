@@ -2,10 +2,10 @@ import React from 'react';
 import { Header, Navbar } from '../../organisms';
 import './styles.css';
 
-const LayoutAdmin = ({ children }) => {
+const LayoutAdmin = ({ children, title }) => {
   return (
     <div className="layoutAdmin">
-      <Header />
+      <Header title={title} />
       <Navbar />
       {children}
     </div>

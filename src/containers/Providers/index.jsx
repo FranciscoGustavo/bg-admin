@@ -4,7 +4,7 @@ import './styles.css';
 
 const Providers = () => {
   return (
-    <LayoutAdmin>
+    <LayoutAdmin title="Provedores">
       <div>
 
       </div>
