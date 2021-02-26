@@ -1,68 +1,102 @@
 import React, { useState, useEffect } from 'react';
-import { ProductForm } from '../../components/molecules';
+import { ProductForm, ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
 import { useStateValue } from '../../store/StateProvider';
-import { addProducts } from '../../store/actions';
-import { getProducts  } from '../../localdata/products';
+import { addProducts, openFormProduct, addProduct } from '../../store/actions';
+import { getProducts, saveProduct } from '../../localdata/products';
 import './styles.css';
 
 const Products = () => {
-  const [{ products }, dispatch] = useStateValue();
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [{ products, product }, dispatch] = useStateValue();
+  const [tryLoadDataAgain, setTryLoadDataAgain] = useState(0);
+
+  const hanldeTryLoadDataAgain = () => setTryLoadDataAgain(tryLoadDataAgain + 1);
+
+  const handleEdit = (uid) => {
+    const data = products.data.filter((product) => product.uid === uid)[0];
+    dispatch(openFormProduct({ data, isOpenModal: true }));
+  }
+ 
+  const handleColoseModal = () => {
+    dispatch(openFormProduct({ data: false, isOpenModal: false }));
+  }
+
+  const handleNew = () => {
+    dispatch(openFormProduct({ data: { uid: false, name: '', price: 0, unity: 'kg' }, isOpenModal: true }));
+  }
+
+  const handlePrint = () => {
+    window.print();
+  }
+
+  const handleSendEmail = () => {
+    alert('handleButtonSendEmail');
+  }
+
+  const handleSave = (data) => {
+    const saveData = async () => {
+      const product = await saveProduct(data);
+      dispatch(addProduct(product));
+      handleColoseModal();
+    }
+
+    saveData();
+  }
 
   const columns = [
     { Header: 'Nombre', accessor: 'name' },
     { Header: 'Precio', accessor: 'price' },
     { Header: 'Unidad', accessor: 'unity' },
     {
-      id: 'edit',
-      Cell: () => (<button>Editar</button>)
+      accessor: 'uid',
+      Cell: ({ value }) => (<button onClick={() => handleEdit(value)}>Editar</button>)
     }
   ];
 
   useEffect(() => {
     const getData = async () => {
-      const products = await getProducts();
-      dispatch(addProducts(products));
+      dispatch(addProducts({ data: false, loading: true, error: false }));
+
+      let data = false;
+      let error = false;
+
+      try {
+        data = await getProducts();
+      } catch (err) {
+        error = err.message;
+      }
+
+      dispatch(addProducts({ data, loading: false, error }));
       return products
     }
 
-    getData();
-
-  }, [products])
-
-  const handleColoseModal = () => {
-    setIsOpenModal(false);
-  }
-
-  const handleButtonNew = () => {
-    setIsOpenModal(true)
-    alert('handleButtonNew');
-  }
-
-  const handleButtonPrint = () => {
-    alert('handleButtonPrint');
-  }
-
-  const handleButtonSendEmail = () => {
-    alert('handleButtonSendEmail');
-  }
+    return !products.data ? getData() : null;
+  
+  }, [tryLoadDataAgain]);
 
   return (
     <LayoutAdmin title="Productos">
       <div className="products">
 
-        <div className="products__header">
-          <button onClick={handleButtonNew}>Nuevo</button>
-          <button onClick={handleButtonPrint}>Imprimir</button>
-          <button onClick={handleButtonSendEmail}>Enviar por correo</button>
-        </div>
+        <ToolsHeader
+          onNew={handleNew}
+          onPrint={handlePrint}
+          onSendEmail={handleSendEmail}
+        />
 
-        { products && <Table handleColumns={columns} handleData={products} /> }
-        { !products && <p>Cargando</p> }
+        { products.data && <Table handleColumns={columns} handleData={products.data} /> }
+        { products.loading && <p>Cargando</p> }
+        { products.error && <p onClick={hanldeTryLoadDataAgain}>Error al cargar</p> }
 
-        { isOpenModal && <ProductForm close={handleColoseModal} /> }
+        { product.isOpenModal && (
+          <ProductForm
+            product={product.data}
+            close={handleColoseModal}
+            save={handleSave}
+          />
+        ) }
+  
       </div>
     </LayoutAdmin>
   );

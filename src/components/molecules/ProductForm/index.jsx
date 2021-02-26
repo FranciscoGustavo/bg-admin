@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { InputText } from '../../atoms';
 import './styles.css';
 
-const ProductForm = ({ close }) => {
+const ProductForm = ({ close, product, save }) => {
   const handleValidate = (values) => {
     const errors = {};
     /*if (!values.email) {
@@ -17,11 +17,8 @@ const ProductForm = ({ close }) => {
   }
 
   const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      console.log(values);
-      setSubmitting(false);
-    }, 400);
+    setSubmitting(true);
+    save(values);
   }
 
   return (
@@ -29,7 +26,7 @@ const ProductForm = ({ close }) => {
       <div className="product__container">
         <h1>Fromulario</h1>
         <Formik
-          initialValues={{ name: '', price: 10, unity: 'KG', cover: 'https://thumbs.dreamstime.com/b/pera-verde-51013299.jpg' }}
+          initialValues={{ ...product }}
           validate={handleValidate}
           onSubmit={handleSubmit}
         >
@@ -51,7 +48,7 @@ const ProductForm = ({ close }) => {
                 type="file"
                 id="cover"
                 name="cover"
-                onChange={onChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
               />
            </div>
@@ -85,9 +82,12 @@ const ProductForm = ({ close }) => {
               />
            </div>
            <div className="product__row">
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
+              <button type="submit" disabled={isSubmitting}>
+                Guardar
+              </button>
+              <button type="submit" disabled={isSubmitting} onClick={close}>
+                Cancelar
+              </button>
            </div>
          </form>
        )}
