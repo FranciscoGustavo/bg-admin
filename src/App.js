@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { LayoutAdmin } from './components/templates';
-import { Home } from './containers';
+import { Home, Login } from './containers';
 import './App.css';
 
 function App() {
@@ -12,6 +12,10 @@ function App() {
 	    <LayoutAdmin>
 	      <Home />
 	    </LayoutAdmin>
+	  </Route>
+	  
+	  <Route exact path="/login">
+	    <Login /> 
 	  </Route>
       	</Switch>
       </Router>
