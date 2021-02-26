@@ -2,14 +2,14 @@ import React from 'react';
 import { LayoutAdmin } from '../../components/templates';
 import './styles.css';
 
-const Home = () => {
+const Products = () => {
   return (
     <LayoutAdmin>
-      <div className="home">
-        <h1>Home</h1>
+      <div className="products">
+        <h1>Productos</h1>
       </div>
     </LayoutAdmin>
   );
 }
 
-export default Home; 
+export default Products; 

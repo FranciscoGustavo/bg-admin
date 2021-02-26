@@ -15,3 +15,11 @@
 :root {
   --primary-color: #2A4858;
 }
+
+a, button, label {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}

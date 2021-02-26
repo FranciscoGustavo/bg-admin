@@ -10,35 +10,34 @@
   height: 70px;
 }
 
+.navbar__menu > input {
+  display: none;
+}
+
+.navbar__menu > label, .navbar__menu > a {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 7px;
+  font-weight: bold;
+  color: white;
+}
+
 .navbar__submenu {
-  height: 0;
   background-color: rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
   overflow: hidden;
 }
 
-.navbar__menu > input {
-  display: none;
-}
-
-.navbar__menu > label, .navbar__submenu a {
+.navbar__submenu a {
   display: flex;
   align-items: center;
-  height: 40px;
-  padding: 7px 14px;  
+  height: 0px;
+  padding-left: 30px;  
   color: white;
-  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.navbar__menu > label {
-  font-weight: bold;
-}
-
-.navbar__submenu a {
-  text-decoration: none;
-  padding-left: 30px;
-}
-
-.navbar__menu > input[type="checkbox"]:checked + .navbar__submenu {
-  height: 80px;
+.navbar__menu > input[type="checkbox"]:checked + .navbar__submenu a {
+  height: 40px;
 }

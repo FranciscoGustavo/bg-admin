@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { LayoutAdmin } from './components/templates';
-import { Home, Login } from './containers';
+import ROUTES from './routes';
 import './App.css';
 
 function App() {
@@ -8,15 +7,11 @@ function App() {
     <div className="App">
       <Router>
       	<Switch>
-	  <Route exact path="/">
-	    <LayoutAdmin>
-	      <Home />
-	    </LayoutAdmin>
-	  </Route>
-	  
-	  <Route exact path="/login">
-	    <Login /> 
-	  </Route>
+					{
+						ROUTES.map((props) => (
+							<Route {...props} />
+						))
+					}
       	</Switch>
       </Router>
     </div>
