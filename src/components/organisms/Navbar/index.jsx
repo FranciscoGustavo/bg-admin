@@ -76,10 +76,6 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="navbar__logo">
-      	LOGO
-      </div>
-
       <nav className="navbar__nav">
         {
           NAVBAR.map(({ uid, label, to, submenus }) => (
