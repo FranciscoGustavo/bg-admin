@@ -1,4 +1,10 @@
 .products {
   position: relative;
+  display: grid;
+  grid-template-rows: 40px calc(100% - 60px);
+  gap: 20px;
+  width: 100%;
+  height: 100%;
   padding: 16px;
+  overflow: hidden;
 }
