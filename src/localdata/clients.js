@@ -1,15 +1,17 @@
 const CLIENTS = [
   {
     uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
+    name: 'EL CABRITO TOREADO',
+    address: 'Av. Paseo de la Reforma 373-Piso 20, Cuauhtémoc, 06500 Ciudad de México, CDMX',
+    phone: '55 6235 9871',
+    email: 'client@mail.com'
   },
   {
     uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
+    name: 'EL ALCE',
+    address: 'Av. Paseo de la Reforma 373-Piso 20, Cuauhtémoc, 06500 Ciudad de México, CDMX',
+    phone: '55 6235 9871',
+    email: 'client@mail.com'
   }
 ];
 

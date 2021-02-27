@@ -1,4 +1,4 @@
-import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS } from './actions';
+import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS } from './actions';
 
 export const initialState = {
   navbar: {
@@ -50,6 +50,11 @@ export const initialState = {
 
 export const reducer = (state, { type, payload }) => {
   switch (type) {
+    case ADD_USERS:
+      return {
+        ...state,
+        users: { ...state.users, ...payload },
+      };
     case ADD_CLIENTS:
       return {
         ...state,
