@@ -68,7 +68,7 @@ const Products = () => {
       }
 
       dispatch(addProducts({ data, loading: false, error }));
-      return products
+      return data
     }
 
     return !products.data ? getData() : null;

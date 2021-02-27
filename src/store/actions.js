@@ -21,3 +21,9 @@ export const addProduct = (payload) => ({
   type: ADD_PRODUCT,
   payload
 });
+
+export const ADD_CLIENTS = 'ADD_CLIENTS';
+export const addClients = (payload) => ({
+  type: ADD_CLIENTS,
+  payload
+});
