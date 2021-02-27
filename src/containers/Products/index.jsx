@@ -23,7 +23,7 @@ const Products = () => {
   }
 
   const handleNew = () => {
-    dispatch(openFormProduct({ data: { uid: false, name: '', price: 0, unity: 'kg' }, isOpenModal: true }));
+    dispatch(openFormProduct({ data: { uid: false, code: '', isActive: true, name: '', price: 0, unity: 'kg' }, isOpenModal: true }));
   }
 
   const handlePrint = () => {
@@ -36,7 +36,14 @@ const Products = () => {
 
   const handleSave = (data) => {
     const saveData = async () => {
-      const product = await saveProduct(data);
+      const handleProduct = {
+        code: data.code,
+        isActive: true,
+        name: data.name,
+        price: data.price,
+        unity: data.unity
+      };
+      const product = await saveProduct(data.uid, handleProduct);
       dispatch(addProduct(product));
       handleColoseModal();
     }
@@ -45,9 +52,14 @@ const Products = () => {
   }
 
   const columns = [
+    { Header: 'Codigo', accessor: 'code' },
     { Header: 'Nombre', accessor: 'name' },
     { Header: 'Precio', accessor: 'price' },
     { Header: 'Unidad', accessor: 'unity' },
+    { 
+      Header: 'Estado', accessor: 'isActive',
+      Cell: ({ value }) => (value ? <p>Activo</p> : <p>No Activo</p>)
+    },
     {
       accessor: 'uid',
       Cell: ({ value }) => (<button onClick={() => handleEdit(value)}>Editar</button>)

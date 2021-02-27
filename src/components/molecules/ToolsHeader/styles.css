@@ -1,15 +1,17 @@
 .toolsHeader {
-  border-radius: 16px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
-  background-color: whitesmoke;
+  border-radius: 8px;
+  background-color: #F1F1F1;
   overflow: hidden;
 }
 
 .toolsHeader__button {
+  height: 100%;
   padding: 8px 16px;
+  background-color: transparent;
   outline: none;
+  transition: all 0.2s;
 }
 
 .toolsHeader__button:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #E6E6E6;
 }

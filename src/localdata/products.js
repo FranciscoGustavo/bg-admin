@@ -1,9 +1,13 @@
+import { db } from '../firebase';
+
 const PRODUCTS = [
   {
     uid: 1,
+    code: 'P.0001',
     name: 'PAPA BLANCA GRANDE',
     price: 10,
-    unity: 'KG'
+    unity: 'KG',
+    status: 'Activo',
   },
   {
     uid: 2,
@@ -98,16 +102,33 @@ const PRODUCTS = [
 ]
 
 export const getProducts = () => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(PRODUCTS);
-    // reject(new Error('Not found'));
-  }, 1000);
+  db
+    .collection('products')
+    .onSnapshot((snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        uid: doc.id,
+        ...doc.data()
+      }));
+
+      resolve(data);
+    });
 });
 
-export const saveProduct = (data) => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve({ uid: 5, ...data });
-  }, 1000);
+export const saveProduct = (uid, data) => new Promise((resolve, reject) => {
+  const collection = db.collection('products');
+
+  if (uid) {
+    collection
+      .doc(uid)
+      .set({
+        data
+      });
+      
+  } else {
+    collection.add({ ...data });
+  }
+
+  resolve(true)
 });
 
 export default PRODUCTS;

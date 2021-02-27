@@ -63,11 +63,6 @@ const Table = ({ handleColumns, handleData }) => {
     }
   );
 
-  console.log({
-    selectedFlatRows,
-    selectedRowIds
-  });
-
   return (
     <div className="table">
 

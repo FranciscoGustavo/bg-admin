@@ -1,4 +1,4 @@
-import { Home, Login, Products, Orders, Clients, Providers, Administrators, NotFound } from './containers';
+import { Home, Login, Products, Orders, Clients, Providers, Administrators, NotFound } from '../containers';
 
 const ROUTES = [
   { exact: true, path: '/login', component: Login },
