@@ -54,7 +54,7 @@ const Clients = () => {
 
   return (
     <LayoutAdmin title="Clientes">
-      <div className="clients" >
+      <div className="main clients" >
 
       <ToolsHeader
         onNew={handleNew}

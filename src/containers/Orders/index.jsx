@@ -22,7 +22,7 @@ const Orders = () => {
 
   return (
     <LayoutAdmin title="Pedidos">
-      <div className="orders">
+      <div className="main orders">
         <Table handleColumns={handleColumns} handleData={handleData} />
       </div>
     </LayoutAdmin>

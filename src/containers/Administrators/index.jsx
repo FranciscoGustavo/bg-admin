@@ -53,7 +53,7 @@ const Administrators = () => {
 
   return (
     <LayoutAdmin title="Usuarios">
-      <div className="users" >
+      <div className="main users" >
 
       <ToolsHeader
         onNew={handleNew}

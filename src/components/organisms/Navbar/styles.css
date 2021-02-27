@@ -2,8 +2,20 @@
   width: 250px;
   height: 100%;
   grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  background-color: var(--primary-color);
+  grid-row: 1 / 3;
+  background-color: #f1f1f1;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  padding-left: 16px;
+}
+
+.navbar__logo img {
+  width: 40px;
 }
 
 .navbar__menu > input {
@@ -14,23 +26,28 @@
   display: flex;
   align-items: center;
   height: 40px;
-  padding-left: 7px;
+  padding-left: 16px;
   font-weight: bold;
-  color: white;
+  color: #252525;
 }
 
 .navbar__submenu {
-  background-color: rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
   overflow: hidden;
+}
+
+.navbar__submenu a.active {
+  background-color: #E6E6E6;
+  color: #6e47e6;
+  font-weight: 500;
 }
 
 .navbar__submenu a {
   display: flex;
   align-items: center;
   height: 0px;
-  padding-left: 30px;  
-  color: white;
+  padding-left: 30px;
+  color: #656565;
   transition: all 0.2s;
 }
 

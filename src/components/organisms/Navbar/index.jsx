@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useStateValue } from '../../../store/StateProvider';
 import { handleNavbar } from '../../../store/actions';
+import logo from '../../../assets/img/logo.png';
 import './styles.css';
 
 const NAVBAR = [
@@ -68,7 +69,7 @@ const Navbar = () => {
     submenus && <div className="navbar__submenu">
       {
         submenus.map(({ label, to }, idx) => (
-          <Link key={idx} to={to}>{label}</Link>
+          <NavLink activeClassName="active" key={idx} to={to}>{label}</NavLink>
         ))
       }
     </div>
@@ -76,6 +77,9 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
+      <div className="navbar__logo">
+        <img src={logo} alt=""/>
+      </div>
       <nav className="navbar__nav">
         {
           NAVBAR.map(({ uid, label, to, submenus }) => (

@@ -1,0 +1,45 @@
+.tablePagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #252525;
+}
+
+.tablePagination__left, .tablePagination__right {
+  display: flex;
+  align-items: center;
+}
+
+.tablePagination__right button {
+  width: 16px;
+  height: 16px;
+  margin: 0 5px;
+  background-color: transparent;
+}
+
+.tablePagination__right button svg {
+  font-size: 16px;
+}
+
+.tablePagination__detailCount {
+  display: flex;
+  align-items: center;
+}
+
+.tablePagination__detailCount svg {
+  margin-top: 2.5px;
+}
+
+.tablePagination__input, .tablePagination__select {
+  width: 50px;
+  margin: 0 10px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #EFEFEF;
+  outline: none;
+  cursor: pointer;
+}
+
+.tablePagination__select {
+  width: 100px;
+}

@@ -77,7 +77,7 @@ const Products = () => {
 
   return (
     <LayoutAdmin title="Productos">
-      <div className="products">
+      <div className="main products">
 
         <ToolsHeader
           onNew={handleNew}

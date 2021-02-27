@@ -5,7 +5,7 @@ import './styles.css';
 const Providers = () => {
   return (
     <LayoutAdmin title="Provedores">
-      <div>
+      <div className="main">
 
       </div>
     </LayoutAdmin>

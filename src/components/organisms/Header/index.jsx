@@ -1,15 +1,17 @@
 import React from 'react';
-import logo from '../../../assets/img/logo.png';
+import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
 import './styles.css';
 
 const Header = ({ title }) => {
   return (
     <header className="header">
-      <div className="header__logo">
-        <img src={logo} alt=""/>
-        <h3>bg-admin</h3>
+      <div className="header__left">
+        <MenuOutlinedIcon />
+        <h1 className="header__title">{title}</h1>  
       </div>
-      <h1 className="header__title">{title}</h1>  
+      <div className="header__right">
+
+      </div>
     </header>
   );
 }
