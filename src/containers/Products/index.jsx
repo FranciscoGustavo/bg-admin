@@ -73,7 +73,7 @@ const Products = () => {
 
     return !products.data ? getData() : null;
   
-  }, [tryLoadDataAgain]);
+  }, [tryLoadDataAgain, dispatch, products.data]);
 
   return (
     <LayoutAdmin title="Productos">

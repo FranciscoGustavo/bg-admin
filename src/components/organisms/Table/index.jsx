@@ -4,7 +4,7 @@ import './styles.css';
 
 const Table = ({ handleColumns, handleData }) => {
 
-  const columns = useMemo(() => handleColumns, []);
+  const columns = useMemo(() => handleColumns, [handleColumns]);
   const data = useMemo(() => handleData, [handleData]);
 
   const {

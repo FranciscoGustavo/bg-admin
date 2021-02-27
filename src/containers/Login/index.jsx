@@ -16,9 +16,11 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login__container">
-	<form>
-	  <button type="button" className="login__button" onClick={handleLoginDemo}>Login Demo</button>
-	</form>
+        <form>
+          <input type="email" value={email}/>
+          <input type="password" value={password}/>
+          <button type="button" className="login__button" onClick={handleLoginDemo}>Login Demo</button>
+        </form>
       </div>
     </div>
   );

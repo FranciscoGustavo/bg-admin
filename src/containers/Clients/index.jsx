@@ -50,7 +50,7 @@ const Clients = () => {
 
     return !clients.data ? getData() : null;
   
-  }, []);
+  }, [dispatch, clients.data]);
 
   return (
     <LayoutAdmin title="Clientes">

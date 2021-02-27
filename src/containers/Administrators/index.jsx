@@ -49,7 +49,7 @@ const Administrators = () => {
 
     return !users.data ? getData() : null;
   
-  }, []);
+  }, [dispatch, users.data]);
 
   return (
     <LayoutAdmin title="Usuarios">
