@@ -21,12 +21,12 @@
 .product__form {
   display: grid;
   grid-template-columns: 150px 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(4, auto);
   gap: 16px 24px;
 }
 
 .product__cover {
-  grid-row: 1 / 4;
+  grid-row: 1 / 5;
 }
 
 .product__cover img {
@@ -47,4 +47,15 @@
 
 .product__row-2 {
   grid-template-columns: repeat(2, 1fr);
+}
+
+.product__buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.product__buttons button {
+  border-radius: 8px;
+  padding: 8px 16px;
 }

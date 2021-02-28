@@ -43,8 +43,9 @@ const Products = () => {
         price: data.price,
         unity: data.unity
       };
-      const product = await saveProduct(data.uid, handleProduct);
-      dispatch(addProduct(product));
+      // const product = await saveProduct(data.uid, handleProduct);
+      console.log(data);
+      dispatch(addProduct(data));
       handleColoseModal();
     }
 
