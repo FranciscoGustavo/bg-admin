@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, forwardRef } from 'react';
+import React, { memo, useEffect, useRef, forwardRef } from 'react';
 import { usePagination, useRowSelect, useTable } from 'react-table';
 import { TablePagination } from '../../molecules';
 import './styles.css';
@@ -18,11 +18,7 @@ const IndeterminateCheckbox = forwardRef(
   }
 );
 
-const Table = ({ handleColumns, handleData }) => {
-
-  const columns = useMemo(() => handleColumns, [handleColumns]);
-  const data = useMemo(() => handleData, [handleData]);
-
+const Table = memo(({ columns, data, handleSelectedRows }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -37,7 +33,6 @@ const Table = ({ handleColumns, handleData }) => {
     nextPage,
     previousPage,
     setPageSize,
-    selectedFlatRows,
     state: { pageIndex, pageSize, selectedRowIds },
   } = useTable(
     { columns, data },
@@ -62,6 +57,10 @@ const Table = ({ handleColumns, handleData }) => {
       ])
     }
   );
+
+  useEffect(() => {
+    handleSelectedRows(selectedRowIds);
+  }, [selectedRowIds, handleSelectedRows]);
 
   return (
     <div className="table">
@@ -94,7 +93,7 @@ const Table = ({ handleColumns, handleData }) => {
       </table>
       
       <TablePagination
-        total={handleData.length}
+        total={data.length}
         gotoPage={gotoPage}
         previousPage={previousPage}
         nextPage={nextPage}
@@ -109,6 +108,6 @@ const Table = ({ handleColumns, handleData }) => {
 
     </div>
   );
-}
+});
 
 export default Table; 

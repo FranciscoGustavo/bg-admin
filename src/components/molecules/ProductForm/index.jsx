@@ -56,18 +56,6 @@ const ProductForm = ({ close, product, save }) => {
            <div className="product__row">
               <InputText
                 type="text"
-                name="code"
-                label="Codigo"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.code}
-                error={errors.code}
-                touched={touched.code}
-              />
-            </div>
-           <div className="product__row">
-              <InputText
-                type="text"
                 name="name"
                 label="Nombre"
                 onChange={handleChange}
@@ -77,6 +65,32 @@ const ProductForm = ({ close, product, save }) => {
                 touched={touched.name}
               />
               {errors.name && touched.name && errors.name}
+            </div>
+            <div className="product__row-2">
+              <InputText
+                type="text"
+                name="code"
+                label="Codigo"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.code}
+                error={errors.code}
+                touched={touched.code}
+              />
+              <InputText
+                type="select"
+                name="isActive"
+                label="Estado"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                options={[
+                  { value: true, label: 'Activo' },
+                  { value: false, label: 'No Activo' }
+                ]}
+                value={values.isActive}
+                error={errors.isActive}
+                touched={touched.isActive}
+              />
             </div>
            <div className="product__row-2">
               <InputText

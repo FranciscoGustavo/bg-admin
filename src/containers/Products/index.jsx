@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { ProductForm, ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
 import { useStateValue } from '../../store/StateProvider';
 import { addProducts, openFormProduct, addProduct } from '../../store/actions';
-import { getProducts, saveProduct } from '../../localdata/products';
+import { getProducts, /*saveProduct*/ } from '../../localdata/products';
 import './styles.css';
 
 const Products = () => {
   const [{ products, product }, dispatch] = useStateValue();
   const [tryLoadDataAgain, setTryLoadDataAgain] = useState(0);
+  const [selectedRows, setSelectedRows] = useState();
 
   const hanldeTryLoadDataAgain = () => setTryLoadDataAgain(tryLoadDataAgain + 1);
 
-  const handleEdit = (uid) => {
+  const handleEdit = useCallback((uid) => {
     const data = products.data.filter((product) => product.uid === uid)[0];
     dispatch(openFormProduct({ data, isOpenModal: true }));
-  }
+  }, [dispatch, products.data]);
  
   const handleColoseModal = () => {
     dispatch(openFormProduct({ data: false, isOpenModal: false }));
@@ -26,8 +27,12 @@ const Products = () => {
     dispatch(openFormProduct({ data: { uid: false, code: '', isActive: true, name: '', price: 0, unity: 'kg' }, isOpenModal: true }));
   }
 
+  const handleSelectedRows = useCallback((data) => {
+    setSelectedRows(Object.keys(data));
+  }, []);
+
   const handlePrint = () => {
-    window.print();
+    console.log(selectedRows)
   }
 
   const handleSendEmail = () => {
@@ -38,13 +43,13 @@ const Products = () => {
     const saveData = async () => {
       const handleProduct = {
         code: data.code,
-        isActive: true,
+        isActive: Boolean(data.isActive),
         name: data.name,
         price: data.price,
         unity: data.unity
       };
       // const product = await saveProduct(data.uid, handleProduct);
-      console.log(data);
+      console.log(handleProduct);
       dispatch(addProduct(data));
       handleColoseModal();
     }
@@ -52,7 +57,7 @@ const Products = () => {
     saveData();
   }
 
-  const columns = [
+  const columns = useMemo(() => [
     { Header: 'Codigo', accessor: 'code' },
     { Header: 'Nombre', accessor: 'name' },
     { Header: 'Precio', accessor: 'price' },
@@ -65,7 +70,9 @@ const Products = () => {
       accessor: 'uid',
       Cell: ({ value }) => (<button onClick={() => handleEdit(value)}>Editar</button>)
     }
-  ];
+  ], [handleEdit]);
+
+  const data = useMemo(() => products.data, [products.data])
 
   useEffect(() => {
     const getData = async () => {
@@ -98,7 +105,7 @@ const Products = () => {
           onSendEmail={handleSendEmail}
         />
 
-        { products.data && <Table handleColumns={columns} handleData={products.data} /> }
+        { products.data && <Table columns={columns} data={data} handleSelectedRows={handleSelectedRows} /> }
         { products.loading && <p>Cargando</p> }
         { products.error && <p onClick={hanldeTryLoadDataAgain}>Error al cargar</p> }
 
