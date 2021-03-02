@@ -1,109 +1,9 @@
 import { db } from '../firebase';
 
-const PRODUCTS = [
-  {
-    uid: 1,
-    code: 'P.0001',
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG',
-    status: 'Activo',
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  }
-]
-
 export const getProducts = () => new Promise((resolve, reject) => {
   db
     .collection('products')
+    .orderBy('code', 'desc')
     .onSnapshot((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         uid: doc.id,
@@ -114,21 +14,16 @@ export const getProducts = () => new Promise((resolve, reject) => {
     });
 });
 
-export const saveProduct = (uid, data) => new Promise((resolve, reject) => {
+export const saveProduct = async (uid, data) => {
   const collection = db.collection('products');
-
-  if (uid) {
-    collection
-      .doc(uid)
-      .set({
-        data
-      });
-      
-  } else {
-    collection.add({ ...data });
+  try {
+    const creatingProduct = uid ? await collection.doc(uid).set(data) : await collection.add(data);
+    const createdProduct = {
+      uid: creatingProduct ? creatingProduct.id : uid,
+      ...data
+    }
+    return createdProduct;
+  } catch (error) {
+    console.log(error);
   }
-
-  resolve(true)
-});
-
-export default PRODUCTS;
+};

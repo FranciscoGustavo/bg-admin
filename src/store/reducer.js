@@ -60,14 +60,33 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         clients: { ...state.clients, ...payload },
       };
-    case ADD_PRODUCT:
+    case ADD_PRODUCT: {
+      const { uid, createdProduct } = payload;
+
+      const newStateProducts = !uid 
+        ? [ ...state.products.data, createdProduct ]
+        : state.products.data.map((product) => product.uid === uid ? createdProduct : product );
+
+      const sortedProducts = newStateProducts.sort((a, b) => {
+        if (a.code > b.code) {
+          return -1;
+        }
+        if (a.code < b.code) {
+          return 1;
+        }
+        return 0;
+      })
+
+      const products = {
+        ...state.products,
+        data: sortedProducts,
+      };
+
       return {
         ...state,
-        products: { 
-          ...state.products,
-          data: [ ...state.products.data, payload ]
-        },
+        products
       };
+    };
     case OPEN_FORM_PRODUCT:
       return {
         ...state,

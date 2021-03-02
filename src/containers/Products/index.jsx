@@ -4,7 +4,7 @@ import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
 import { useStateValue } from '../../store/StateProvider';
 import { addProducts, openFormProduct, addProduct } from '../../store/actions';
-import { getProducts, /*saveProduct*/ } from '../../localdata/products';
+import { getProducts, saveProduct } from '../../localdata/products';
 import './styles.css';
 
 const Products = () => {
@@ -41,16 +41,16 @@ const Products = () => {
 
   const handleSave = (data) => {
     const saveData = async () => {
-      const handleProduct = {
+      const uid = data.uid;
+      const product = {
         code: data.code,
         isActive: Boolean(data.isActive),
         name: data.name,
         price: data.price,
         unity: data.unity
       };
-      // const product = await saveProduct(data.uid, handleProduct);
-      console.log(handleProduct);
-      dispatch(addProduct(data));
+      const createdProduct = await saveProduct(uid, product);
+      dispatch(addProduct({ uid, createdProduct }));
       handleColoseModal();
     }
 
