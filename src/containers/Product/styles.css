@@ -1,0 +1,121 @@
+.order {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 21px;
+  /* background-color: red; */
+}
+
+.order__info {
+  /* background-color: green; */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.order__client {
+  width: 60%;
+  /* background-color: blue; */
+}
+
+.order__client > div:first-child {
+  margin-bottom: 16px;
+}
+
+.order__dates {
+  width: 35%;
+  /* background-color: blueviolet; */
+}
+
+.order__createdDate {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background-color: #F1F1F1;
+  overflow: hidden;
+}
+
+.order__createdDate input {
+  background-color: transparent;
+}
+
+.order__createdBody {
+  outline: none;
+}
+
+.order__createdHead {
+  background-color: #6e47e6;
+  color: white;
+}
+
+.order__createdHead, .order__createdBody {
+  display: block;
+  padding: 8px 16px;
+}
+
+.order__products {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.order__products table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order__products table td input {
+  display: inline-block;
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+}
+
+.order__products table td input:focus {
+  border-bottom: 1px solid #6e47e6;
+}
+
+.order__products table th {
+  background-color: #6e47e6;
+  color: #FFF;
+  font-weight: 500;
+}
+
+.order__products table tr:nth-child(even) {
+  background-color: #F1F1F1;
+}
+
+.order__products table th, .order__products table td input {
+  padding: 8px 16px;
+} 
+
+.autocomplete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px 16px;
+  background-color: #F1F1F1;
+  overflow: hidden;
+}
+
+.autocomplete__input {
+  width: 65%;
+  border-bottom: 1px solid #111;
+  padding-bottom: 4px;
+  background-color: transparent;
+  outline: none;
+}
+
+.autocomplete__label {
+  width: 35%;
+  color: #6e47e6;
+}
+
+.autocomplete__input, .autocomplete__label {
+  display: block;
+}

@@ -6,3 +6,4 @@ export { default as Clients } from './Clients';
 export { default as Providers } from './Providers';
 export { default as Administrators } from './Administrators';
 export { default as NotFound } from './NotFound';
+export { default as Product } from './Product';
