@@ -1,0 +1,35 @@
+.order__products {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.order__products table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order__products table td input {
+  display: inline-block;
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+}
+
+.order__products table td input:focus {
+  border-bottom: 1px solid #6e47e6;
+}
+
+.order__products table th {
+  background-color: #6e47e6;
+  color: #FFF;
+  font-weight: 500;
+}
+
+.order__products table tr:nth-child(even) {
+  background-color: #F1F1F1;
+}
+
+.order__products table th, .order__products table td input {
+  padding: 8px 16px;
+} 

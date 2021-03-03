@@ -28,4 +28,25 @@ export const saveProduct = (data) => new Promise((resolve, reject) => {
   }, 1000);
 });
 
+export const getClientsCode = async (code) => {
+  return [
+    'P.0007',
+    'P.0008',
+    'P.0009',
+    'P.0010',
+    'P.0011'
+  ];
+}
+
+export const getClientsName = async (name) => {
+  return [
+    'la doradita sa',
+    'el tiburon',
+    'el cupacabras',
+    'taco feliz',
+    'lemon grass'
+  ];
+}
+
+
 export default CLIENTS;

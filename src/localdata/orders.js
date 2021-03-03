@@ -13,6 +13,28 @@ const ORDERS = [
   }
 ]
 
+const newOrder = {
+  code: 'P.0001',
+  clientCode: '',
+  clientName: '',
+  createdAt: '',
+  deliveryDate: '',
+  products: [
+    {
+      code: '',
+      name: '',
+      unity: '',
+      count: 0,
+      price: 0,
+      totalPrice: 0,
+    }
+  ]
+}
+
+export const getOrder = async (uid) => {
+  if (uid === 'new') return newOrder;
+};
+
 export const getOrders = () => new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve(ORDERS);
