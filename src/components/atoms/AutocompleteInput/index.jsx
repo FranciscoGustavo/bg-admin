@@ -35,7 +35,7 @@ const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onSear
   
   return (
     <div className="autocomplete">
-      <label className="autocomplete__label" htmlFor={name}>{label}</label>
+      { label && <label className="autocomplete__label" htmlFor={name}>{label}</label> }
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}

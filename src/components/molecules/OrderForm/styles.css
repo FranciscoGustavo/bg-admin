@@ -26,6 +26,13 @@
   margin-bottom: 0px;
 }
 
+.orderForm__submit {
+  border-radius: 8px;
+  padding: 8px 16px;
+  background-color: #6e47e6;
+  color: white;
+}
+
 .orderForm__dates {
   width: 35%;
 }

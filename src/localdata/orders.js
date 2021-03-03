@@ -14,16 +14,15 @@ const ORDERS = [
 ]
 
 const newOrder = {
-  code: 'P.0001',
-  clientCode: '',
-  clientName: '',
-  createdAt: '',
-  deliveryDate: '',
+  clientCode: 'P.0015',
+  clientName: 'EL TIBURON',
+  createdAt: '10/15/2021',
+  deliveryDate: '10/15/2021',
   products: [
     {
-      code: '',
-      name: '',
-      unity: '',
+      code: 'P.0001',
+      name: 'PAPA BLANCA',
+      unity: 'KG',
       count: 0,
       price: 0,
       totalPrice: 0,

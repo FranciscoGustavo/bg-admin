@@ -3,14 +3,14 @@ import { AutocompleteInput } from '../../atoms';
 import { getClientsName, getClientsCode } from '../../../localdata/clients';
 import './styles.css';
 
-const OrderForm = ({ onSubmit, onChange, data }) => {
+const OrderForm = ({ onSubmit, onChange, data, columns }) => {
   return (
     <form className="orderForm" onSubmit={onSubmit}>
       <div className="orderForm__info">
         
         <div className="orderForm__client">
           <div>
-            <button type="submit">Guardar</button>
+            <button className="orderForm__submit" type="submit">Guardar</button>
           </div>
           <AutocompleteInput
             type="text"
@@ -68,6 +68,25 @@ const OrderForm = ({ onSubmit, onChange, data }) => {
         </div>
 
       </div>
+
+      <table>
+        <thead>
+          <tr>{
+            columns.map(({ Header }) => (
+              <th>{Header}</th>
+            ))
+          }</tr>
+        </thead>
+        <tbody>
+          {
+            data.products.map((item, idx) => (
+              <tr>{columns.map(({ accessor, Cell }) => (
+                <td>{Cell ? Cell({ name: idx, value: data.products[idx][accessor], onChange }) : item[accessor]}</td>
+              ))}</tr>
+            ))
+          }
+        </tbody>
+      </table>    
     </form>
   );
 }
