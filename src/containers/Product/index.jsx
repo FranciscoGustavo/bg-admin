@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LayoutAdmin } from "../../components/templates";
 import './styles.css';
 
