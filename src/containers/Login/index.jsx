@@ -3,7 +3,8 @@ import { Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { InputText } from '../../components/atoms';
 import { useStateValue } from '../../store/StateProvider';
-import { login } from '../../store/actions';
+import { setUser } from '../../store/actions';
+import { auth } from '../../firebase';
 import './styles.css';
 
 const Login = () => {
@@ -24,13 +25,20 @@ const Login = () => {
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    dispatch(login({ email: values.email }));
-    history.push('/');
+    // dispatch(setUser({ email: values.email }));
+    // history.push('/');
   }
 
   const handleLoginDemo = () => {
-    dispatch(login({ email: 'demo@email.com' }));
-    history.push('/');
+    const email = 'blogging.demos@gmail.com';
+    const password = 'demos@blogging404';
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        dispatch(setUser({ isAuthenticated: true, email }));
+        history.push('/');
+      })
+      .catch((err) => alert(err.message));
   }
 
   return (
@@ -72,7 +80,7 @@ const Login = () => {
                 touched={touched.password}
               />
               <div>
-                <button type="submit" className="login__submit" disabled={isSubmitting} >Entrar</button>
+                <button type="submit" className="login__submit" disabled={isSubmitting}>Entrar</button>
               </div>
               <div>
                 <button type="button" className="login__demo" onClick={handleLoginDemo}>Login Demo</button>

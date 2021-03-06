@@ -1,9 +1,7 @@
-import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, LOGIN } from './actions';
+import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, SET_USER } from './actions';
 
 export const initialState = {
-  user: {
-    isAuthenticated: false,
-  },
+  user: null,
   navbar: {
     sales: false,
     purchases: false,
@@ -53,13 +51,10 @@ export const initialState = {
 
 export const reducer = (state, { type, payload }) => {
   switch (type) {
-    case LOGIN:
+    case SET_USER:
       return {
         ...state,
-        user: {
-          isAuthenticated: true,
-          ...payload,
-        }
+        user: payload,
       }
     case ADD_USERS:
       return {

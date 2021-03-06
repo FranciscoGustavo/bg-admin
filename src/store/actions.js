@@ -34,8 +34,8 @@ export const addUsers = (payload) => ({
   payload
 });
 
-export const LOGIN = 'LOGIN';
-export const login = (payload) => ({
-  type: LOGIN,
+export const SET_USER = 'SET_USER';
+export const setUser = (payload) => ({
+  type: SET_USER,
   payload
 });
