@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import './styles.css';
 
-const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onSearching }) => {
+const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onKeyUp, onSearching, className }) => {
   const [suggestions, setSuggestions] = useState(['Uno', 'Dos', 'Tres']);
 
   const onSuggestionsFetchRequested = async ({ value }) => {
@@ -33,8 +33,10 @@ const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onSear
     onChange({ target: { name, value: suggestion } })
   }
   
+  const handleKeyUp = (_event) => _event.keyCode === 13 ? onKeyUp(_event) : null;
+
   return (
-    <div className="autocomplete">
+    <div className={`autocomplete ${className ? className : ''}`}>
       { label && <label className="autocomplete__label" htmlFor={name}>{label}</label> }
       <Autosuggest
         suggestions={suggestions}
@@ -49,7 +51,8 @@ const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onSear
           name: name,
           value: value,
           onChange: onChange,
-          onBlur: onBlur
+          onBlur: onBlur,
+          onKeyUp: onKeyUp ? handleKeyUp : null,
         }}
       />
     </div>

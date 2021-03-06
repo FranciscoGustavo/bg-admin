@@ -1,0 +1,16 @@
+.orderForm__inputSuggestion.autocomplete {
+  padding: 0px;
+  background-color: transparent;
+}
+
+.orderForm__inputSuggestion.autocomplete .autocomplete__label {
+  display: none;
+}
+
+.orderForm__inputSuggestion.autocomplete .react-autosuggest__container {
+  width: 100%;
+}
+
+.orderForm__inputSuggestion.autocomplete .react-autosuggest__input:focus, .orderForm__input:focus {
+  border-bottom: solid 1.5px #6e47e6;
+}

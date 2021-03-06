@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-// import { AutocompleteInput } from '../../components/atoms';
+import { AutocompleteInput } from '../../components/atoms';
 import { OrderForm } from '../../components/molecules';
 import { LayoutAdmin } from "../../components/templates";
 import { getOrder } from '../../localdata/orders';
+import { getClientsName } from '../../localdata/clients';
 import './styles.css';
 
 const Order = () => {
@@ -13,6 +14,7 @@ const Order = () => {
   const handleCell = (type, nameInput) => {
     return ({ name, value, onChange, onKeyUp }) => (
       <input
+        className="orderForm__input"
         type={type}
         name={`${nameInput}-${name}`}
         value={value}
@@ -46,15 +48,13 @@ const Order = () => {
     }
 
     const element = document.querySelector(`input[name=${splitedNameInput.join('-')}`);
-    // console.log(element);
+    
     if (element) element.focus();
-    console.log((keyCode === 13 && splitedNameInput[1] === 'code' && !element));
-    console.log(keyCode, splitedNameInput[1], element);
+
     if (
       (keyCode === 13 && splitedNameInput[1] === 'code' && !element) ||
       (keyCode === 40 && splitedNameInput[1] === 'price' && !element)
-    ) {
-      console.log('Insertar nuevo nodo');
+      ) {
       setData({
         ...data,
         products: [
@@ -68,7 +68,7 @@ const Order = () => {
             totalPrice: 0,
           }
         ]
-      })
+      });
     }
   }
 
@@ -77,8 +77,8 @@ const Order = () => {
     const regex = /products/;
     if (regex.test(name)) {
       const splitedName = name.split('-');
-      const index = splitedName[1];
-      const propertyName = splitedName[2]
+      const index = splitedName[2];
+      const propertyName = splitedName[1]
       const products = data?.products || [];
       products[index] = {
         ...products[index],
@@ -114,7 +114,7 @@ const Order = () => {
     {
       Header: 'Nombre',
       accessor: 'name',
-      Cell: handleCell('text', 'products-name'),
+      Cell: ({ name, value, onChange, onKeyUp }) => <AutocompleteInput className="orderForm__inputSuggestion" type="text" name={`products-name-${name}`} value={value} onChange={onChange} onSearching={getClientsName} onKeyUp={onKeyUp} />,
     },
     { Header: 'Unidad', accessor: 'unity' },
     {
