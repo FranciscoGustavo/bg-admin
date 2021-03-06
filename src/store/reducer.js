@@ -1,6 +1,9 @@
-import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS } from './actions';
+import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, LOGIN } from './actions';
 
 export const initialState = {
+  user: {
+    isAuthenticated: false,
+  },
   navbar: {
     sales: false,
     purchases: false,
@@ -31,7 +34,7 @@ export const initialState = {
     loading: false,
     error: false,
   },
-  user: {
+  admin: {
     data: false,
     isOpenForm: false,
     error: false,
@@ -50,6 +53,14 @@ export const initialState = {
 
 export const reducer = (state, { type, payload }) => {
   switch (type) {
+    case LOGIN:
+      return {
+        ...state,
+        user: {
+          isAuthenticated: true,
+          ...payload,
+        }
+      }
     case ADD_USERS:
       return {
         ...state,

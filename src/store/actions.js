@@ -33,3 +33,9 @@ export const addUsers = (payload) => ({
   type: ADD_USERS,
   payload
 });
+
+export const LOGIN = 'LOGIN';
+export const login = (payload) => ({
+  type: LOGIN,
+  payload
+});
