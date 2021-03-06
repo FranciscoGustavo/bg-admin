@@ -3,7 +3,7 @@ import { AutocompleteInput } from '../../atoms';
 import { getClientsName, getClientsCode } from '../../../localdata/clients';
 import './styles.css';
 
-const OrderForm = ({ onSubmit, onChange, data, columns }) => {
+const OrderForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => {
   return (
     <form className="orderForm" onSubmit={onSubmit}>
       <div className="orderForm__info">
@@ -69,7 +69,7 @@ const OrderForm = ({ onSubmit, onChange, data, columns }) => {
 
       </div>
 
-      <table>
+      <table className="orderForm__table" >
         <thead>
           <tr>{
             columns.map(({ Header }) => (
@@ -81,12 +81,24 @@ const OrderForm = ({ onSubmit, onChange, data, columns }) => {
           {
             data.products.map((item, idx) => (
               <tr>{columns.map(({ accessor, Cell }) => (
-                <td>{Cell ? Cell({ name: idx, value: data.products[idx][accessor], onChange }) : item[accessor]}</td>
+                <td>{Cell ? Cell({ name: idx, value: data.products[idx][accessor], onChange, onKeyUp }) : <span>{item[accessor]}</span>}</td>
               ))}</tr>
             ))
           }
         </tbody>
       </table>    
+          
+      <div className="orderForm__total">
+        <p>
+          <span>Numero de productos</span>
+          <span>{data.products.length}</span>
+        </p>
+        <p>
+          <span>El total es:</span>
+          <span>$ {data.total}</span>
+        </p>
+      </div>
+
     </form>
   );
 }
