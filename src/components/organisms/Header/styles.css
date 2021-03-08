@@ -26,3 +26,52 @@
   font-size: 30px;
   font-weight: 500;
 }
+
+.header__user {
+  position: relative;
+}
+
+.header__user img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%; 
+  cursor: pointer;
+}
+
+.header__userMenuContainer {
+  position: absolute;
+  right: 0;
+  top: 100%;
+}
+
+.header__userMenu {
+  margin-top: 0px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+  transition: margin-top 0.2s;
+}
+
+.header__userMenu button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+  height: 0px;
+  padding: 0 16px;
+  background-color: white;
+  transition: height 0.1s;
+  transition: background-color 0.2s;
+}
+
+.header__userMenu button:hover {
+  background-color: #f1f1ff;
+}
+
+.header__user:hover .header__userMenu button {
+  height: 40px;
+}
+
+.header__user:hover .header__userMenu {
+  margin-top: 20px;
+}
