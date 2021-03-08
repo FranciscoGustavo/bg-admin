@@ -1,32 +1,41 @@
-const CLIENTS = [
-  {
-    uid: 1,
-    name: 'EL CABRITO TOREADO',
-    address: 'Av. Paseo de la Reforma 373-Piso 20, Cuauhtémoc, 06500 Ciudad de México, CDMX',
-    phone: '55 6235 9871',
-    email: 'client@mail.com'
-  },
-  {
-    uid: 2,
-    name: 'EL ALCE',
-    address: 'Av. Paseo de la Reforma 373-Piso 20, Cuauhtémoc, 06500 Ciudad de México, CDMX',
-    phone: '55 6235 9871',
-    email: 'client@mail.com'
-  }
-];
+import { db } from '../firebase';
+
+export const SCHEMA_CLIENT = {
+  uid: null,
+  code: '',
+  name: '',
+  address: '',
+  phone: '',
+  email: ''
+}
 
 export const getClients = () => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(CLIENTS);
-    // reject(new Error('Not found'));
-  }, 1000);
+  db
+    .collection('clients')
+    .orderBy('code', 'desc')
+    .onSnapshot((snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        uid: doc.id,
+        ...doc.data()
+      }));
+
+      resolve(data);
+    });
 });
 
-export const saveProduct = (data) => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve({ uid: 5, ...data });
-  }, 1000);
-});
+export const saveClient = async (uid, data) => {
+  const collection = db.collection('clients');
+  try {
+    const creatingClient = uid ? await collection.doc(uid).set(data) : await collection.add(data);
+    const createdClient = {
+      uid: creatingClient ? creatingClient.id : uid,
+      ...data
+    };
+    return createdClient;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const getClientsCode = async (code) => {
   return [
@@ -47,6 +56,3 @@ export const getClientsName = async (name) => {
     'lemon grass'
   ];
 }
-
-
-export default CLIENTS;

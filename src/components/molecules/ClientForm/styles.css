@@ -1,0 +1,47 @@
+.client {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.14);
+}
+
+.client__container {
+  width: 90%;
+  max-width: 600px;
+  border-radius: 16px;
+  padding: 32px 24px;
+  background-color: white;
+}
+
+.client__form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px 0px;
+}
+
+.client__row, .client__row-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 20px;
+}
+
+.client__row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.client__buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.client__buttons button {
+  border-radius: 8px;
+  padding: 8px 16px;
+}

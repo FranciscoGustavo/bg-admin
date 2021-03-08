@@ -4,6 +4,9 @@ export const handleNavbar = (payload) => ({
   payload
 });
 
+/**
+ * Actions of products
+ */
 export const ADD_PRODUCTS = 'ADD_PRODUCTS';
 export const addProducts = (payload) => ({
   type: ADD_PRODUCTS,
@@ -22,18 +25,39 @@ export const addProduct = (payload) => ({
   payload
 });
 
+/**
+ * Actions of clients
+ */
 export const ADD_CLIENTS = 'ADD_CLIENTS';
 export const addClients = (payload) => ({
   type: ADD_CLIENTS,
   payload
 });
 
+export const OPEN_FORM_CLIENT = 'OPEN_FORM_CLIENT';
+export const openFormClient = (payload) => ({
+  type: OPEN_FORM_CLIENT,
+  payload
+});
+
+export const ADD_CLIENT = 'ADD_CLIENT';
+export const addClient = (payload) => ({
+  type: ADD_CLIENT,
+  payload
+});
+
+/**
+ * Actions of
+ */
 export const ADD_USERS = 'ADD_USERS';
 export const addUsers = (payload) => ({
   type: ADD_USERS,
   payload
 });
 
+/**
+ * Actions of user signed
+ */
 export const SET_USER = 'SET_USER';
 export const setUser = (payload) => ({
   type: SET_USER,
