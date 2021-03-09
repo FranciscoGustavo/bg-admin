@@ -111,7 +111,7 @@ const Order = () => {
 
         setData({
           ...data,
-          total: products.reduce((a, b) => a.totalPrice + b.totalPrice),
+          total: products.reduce((a, b) => a + b.totalPrice, 0),
           products,
         });
 
@@ -132,7 +132,7 @@ const Order = () => {
             
             setData({
               ...data,
-              total: products.reduce((a, b) => a.totalPrice + b.totalPrice),
+              total: products.reduce((a, b) => a + b.totalPrice, 0),
               products
             });
           }
@@ -179,6 +179,7 @@ const Order = () => {
     const saveData = async () => {
       const uid = data.uid;
       const order = {
+        code: data.code,
         clientCode: data.clientCode,
         clientName: data.clientName,
         createdAt: data.createdAt,
@@ -186,9 +187,9 @@ const Order = () => {
         total: data.total,
         products: data.products,
       };
-
+      
       const createdOrder = await saveOrder(uid, order);
-      console.log(createdOrder);
+      alert(`Pedido con el uid: ${createdOrder.uid} fue creado`);
     }
     saveData();
   }

@@ -1,38 +1,16 @@
 import { db } from '../firebase';
-const ORDERS = [
-  {
-    uid: 1,
-    name: 'PAPA BLANCA GRANDE',
-    price: 10,
-    unity: 'KG'
-  },
-  {
-    uid: 2,
-    name: 'UVA VERDE',
-    price: 10,
-    unity: 'KG'
-  }
-]
 
-const newOrder = {
-  clientCode: 'P.0015',
-  clientName: 'EL TIBURON',
+const SCHEMA_ORDER = {
+  clientCode: '',
+  clientName: '',
   createdAt: '2021-05-25',
   deliveryDate: '2021-08-03',
-  total: 1289.5,
+  total: 0,
   products: [
     {
-      code: 'P.0001',
-      name: 'PAPA BLANCA',
-      unity: 'KG',
-      count: 0,
-      price: 0,
-      totalPrice: 0,
-    },
-    {
-      code: 'P.0001',
-      name: 'PAPA BLANCA',
-      unity: 'KG',
+      code: '',
+      name: '',
+      unity: '',
       count: 0,
       price: 0,
       totalPrice: 0,
@@ -41,14 +19,27 @@ const newOrder = {
 }
 
 export const getOrder = async (uid) => {
-  if (uid === 'new') return newOrder;
+  if (uid === 'new') {
+    const countDocuments = await db.collection('orders').get();
+    const currentDocument = countDocuments.size + 1;
+    const currentDocumentStr = String(currentDocument).split('').reverse();
+    const CODE = '0000'.split('').map((value, idx) => currentDocumentStr[idx] ? currentDocumentStr[idx] : value).reverse().join('');
+
+    return {
+      code: `P.${CODE}`,
+      ...SCHEMA_ORDER
+    };
+  }
 
   const order = await db
     .collection('orders')
     .doc(uid)
     .get();
 
-  return order.data();
+  return {
+    uid: order.id,
+    ...order.data(),
+  }
 };
 
 export const getOrders = async () => {
@@ -77,5 +68,3 @@ export const saveOrder = async (uid, data) => {
     console.log(error);
   }
 }
-
-export default ORDERS;

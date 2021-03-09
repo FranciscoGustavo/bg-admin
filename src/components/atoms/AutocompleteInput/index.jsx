@@ -29,7 +29,10 @@ const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onKeyU
     </div>
   );
   
-  const onSuggestionSelected = (_event, { suggestion }) => {
+  const onSuggestionSelected = (_event, { suggestion, method }) => {
+    if (method === 'enter') {
+      _event.preventDefault();
+    }
     onChange({ target: { name, value: suggestion } })
   }
   

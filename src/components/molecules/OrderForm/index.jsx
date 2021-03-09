@@ -5,12 +5,12 @@ import './styles.css';
 
 const OrderForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => {
   return (
-    <form className="orderForm" onSubmit={onSubmit}>
+    <form className="orderForm">
       <div className="orderForm__info">
         
         <div className="orderForm__client">
           <div>
-            <button className="orderForm__submit" type="submit">Guardar</button>
+            <button className="orderForm__submit" type="button" onClick={onSubmit}>Guardar</button>
           </div>
           <AutocompleteInput
             type="text"
