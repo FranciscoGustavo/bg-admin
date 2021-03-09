@@ -37,7 +37,6 @@ const OrderForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => {
               <label
                 className="orderForm__createdHead"
                 htmlFor="createdAt"
-
               >Fecha</label>
               <input
                 className="orderForm__createdBody"

@@ -63,3 +63,12 @@ export const setUser = (payload) => ({
   type: SET_USER,
   payload
 });
+
+/**
+ * Actions of orders
+ */
+ export const ADD_ORDERS = 'ADD_ORDERS';
+ export const addOrders = (payload) => ({
+   type: ADD_ORDERS,
+   payload
+ });

@@ -23,6 +23,18 @@ export const getClients = () => new Promise((resolve, reject) => {
     });
 });
 
+export const getClient = async (field, clientNameOrCode) => {
+  const client = await db
+    .collection('clients')
+      .where(field, "==", clientNameOrCode)
+      .get();
+
+  return client.docs.map((doc) => ({
+    uid: doc.id,
+    ...doc.data()
+  }))[0];
+};
+
 export const saveClient = async (uid, data) => {
   const collection = db.collection('clients');
   try {
@@ -38,21 +50,10 @@ export const saveClient = async (uid, data) => {
 };
 
 export const getClientsCode = async (code) => {
-  return [
-    'P.0007',
-    'P.0008',
-    'P.0009',
-    'P.0010',
-    'P.0011'
-  ];
+  return [];
 }
 
 export const getClientsName = async (name) => {
-  return [
-    'la doradita sa',
-    'el tiburon',
-    'el cupacabras',
-    'taco feliz',
-    'lemon grass'
-  ];
+  const clients = await getClients();
+  return clients.map((client) => client.name);
 }

@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import { AutocompleteInput } from '../../components/atoms';
 import { OrderForm } from '../../components/molecules';
 import { LayoutAdmin } from "../../components/templates";
-import { getOrder } from '../../localdata/orders';
-import { getClientsName } from '../../localdata/clients';
+import { getProductsName, getProductDetails } from '../../localdata/products';
+import { getOrder, saveOrder } from '../../localdata/orders';
+import { getClient } from '../../localdata/clients';
 import './styles.css';
 
 const Order = () => {
@@ -74,35 +75,122 @@ const Order = () => {
 
   const onChange = useCallback((_event) => {
     const name = _event.target.name;
+    const value = _event.target.value;
     const regex = /products/;
+
+    /**
+     * This part change of array of products
+     */
     if (regex.test(name)) {
       const splitedName = name.split('-');
       const index = splitedName[2];
-      const propertyName = splitedName[1]
+      const propertyName = splitedName[1];
+
       const products = data?.products || [];
+      
       products[index] = {
         ...products[index],
-        [propertyName]: _event.target.value,
+        [propertyName]: value,
       }
-      /* console.log({
-        ...data,
-        products
-      }); */
+
       setData({
         ...data,
         products
       });
-    } else {
-      setData({
-        ...data,
-        [_event.target.name]: _event.target.value
-      });
+
+      if (propertyName === 'count' || propertyName === 'price') {
+        const count = propertyName === 'count' ? value : products[index].count;
+        const price = propertyName === 'price' ? value : products[index].price;
+
+        products[index] = {
+          ...products[index],
+          count,
+          price,
+          totalPrice: Number(count) * Number(price),
+        };
+
+        setData({
+          ...data,
+          total: products.reduce((a, b) => a.totalPrice + b.totalPrice),
+          products,
+        });
+
+      }
+
+      if (propertyName === 'name' || propertyName === 'code') {
+        const getProduct = async () => {
+          const product = await getProductDetails(propertyName,value);
+          if (product) {
+            products[index] = {
+              code: product.code,
+              name: product.name,
+              unity: product.unity,
+              count: 1,
+              price: product.price,
+              totalPrice: product.price,
+            };
+            
+            setData({
+              ...data,
+              total: products.reduce((a, b) => a.totalPrice + b.totalPrice),
+              products
+            });
+          }
+        }
+
+        getProduct();
+      }
+
+      return;
+    }
+
+    /**
+     * This part change other field of order
+     */
+    setData({
+      ...data,
+      [name]: value
+    });
+
+    /**
+     * If is the code or name by client then find a complete all data
+     */
+    if (name === 'clientCode' || name === 'clientName') {
+      const getClientNameAndCode = async () => {
+        try {
+          const client = await getClient(name.substr(6, 10).toLocaleLowerCase(), value);
+          if (client) {
+            setData({
+              ...data,
+              clientCode: client.code,
+              clientName: client.name,
+            });
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      getClientNameAndCode();
     }
   }, [data]);
 
   const onSubmit = (_event) => {
     _event.preventDefault();
-    // console.log(data, 'Enviando');
+    const saveData = async () => {
+      const uid = data.uid;
+      const order = {
+        clientCode: data.clientCode,
+        clientName: data.clientName,
+        createdAt: data.createdAt,
+        deliveryDate: data.deliveryDate,
+        total: data.total,
+        products: data.products,
+      };
+
+      const createdOrder = await saveOrder(uid, order);
+      console.log(createdOrder);
+    }
+    saveData();
   }
 
   const columns = useMemo(() => [
@@ -114,7 +202,7 @@ const Order = () => {
     {
       Header: 'Nombre',
       accessor: 'name',
-      Cell: ({ name, value, onChange, onKeyUp }) => <AutocompleteInput className="orderForm__inputSuggestion" type="text" name={`products-name-${name}`} value={value} onChange={onChange} onSearching={getClientsName} onKeyUp={onKeyUp} />,
+      Cell: ({ name, value, onChange, onKeyUp }) => <AutocompleteInput className="orderForm__inputSuggestion" type="text" name={`products-name-${name}`} value={value} onChange={onChange} onSearching={getProductsName} onKeyUp={onKeyUp} />,
     },
     { Header: 'Unidad', accessor: 'unity' },
     {

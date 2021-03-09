@@ -1,13 +1,18 @@
-import React, { useMemo, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useMemo, useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from "../../components/templates";
+import { useStateValue } from '../../store/StateProvider';
+import { addOrders } from '../../store/actions';
+import { getOrders } from '../../localdata/orders';
 import './styles.css';
 
 const Orders = () => {
+  const history = useHistory();
+  const [{ orders }, dispatch] = useStateValue();
 
-  const handleNew = () => {}
+  const handleNew = () => history.push('/orders/new');
   const handlePrint = () => {}
   const handleSendEmail = () => {}
 
@@ -17,31 +22,50 @@ const Orders = () => {
 
   const columns = useMemo(() => [
     { Header: 'Codigo', accessor: 'code' },
-    { Header: 'Cliente', accessor: 'name' },
-    { Header: 'Articulos', accessor: 'price' },
-    { Header: 'Precio Total', accessor: 'unity' },
-    { Header: 'Descripcion', accessor: 'desc' },
+    { Header: 'Cliente', accessor: 'clientName' },
+    { Header: 'Articulos', accessor: 'totalItems' },
+    { Header: 'Precio Total', accessor: 'total' },
     {
       accessor: 'uid',
       Cell: ({ value }) => (<Link to={`/orders/${value}`} >Editar</Link>)
     }
   ], []);
 
-  const data = useMemo(() => [
-    { uid: '1', name: 'El BUEN TIBURON SA DE CV', price: 5, unity: 200, desc: 'lorem ipsum' },
-    { uid: '2', name: 'El BUEN TIBURON SA DE CV', price: 5, unity: 200, desc: 'lorem ipsum' },
-    { uid: '3', name: 'El BUEN TIBURON SA DE CV', price: 5, unity: 200, desc: 'lorem ipsum' },
-  ], [])
+  const data = useMemo(() => orders.data, [orders.data]);
+
+  useEffect(() => {
+    const getData = async () => {
+      dispatch(addOrders({ data: false, loading: true }));
+
+      let data = false;
+      let error = false;
+
+      try {
+        data = await getOrders();
+      } catch (err) {
+        error = err.message;
+      }
+
+      dispatch(addOrders({ data, loading: false, error }));
+      return data;
+    }
+
+    if (!orders.data) getData();
+  }, [dispatch, orders.data]);
 
   return (
     <LayoutAdmin title="Pedidos">
       <div className="main orders">
+        
         <ToolsHeader
           onNew={handleNew}
           onPrint={handlePrint}
           onSendEmail={handleSendEmail}
         />
-        <Table columns={columns} data={data} handleSelectedRows={handleSelectedRows} />
+
+        { orders.data && <Table columns={columns} data={data} handleSelectedRows={handleSelectedRows} /> }
+        { orders.loading && <p>Cargando</p> }
+        { orders.error && <p>Error al cargar</p> }
       </div>
     </LayoutAdmin>
   );

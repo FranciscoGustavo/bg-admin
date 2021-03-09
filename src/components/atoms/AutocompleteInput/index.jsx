@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import './styles.css';
 
 const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onKeyUp, onSearching, className }) => {
-  const [suggestions, setSuggestions] = useState(['Uno', 'Dos', 'Tres']);
+  const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = async ({ value }) => {
     if (!value) {

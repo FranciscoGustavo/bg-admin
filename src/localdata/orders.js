@@ -1,3 +1,4 @@
+import { db } from '../firebase';
 const ORDERS = [
   {
     uid: 1,
@@ -41,19 +42,40 @@ const newOrder = {
 
 export const getOrder = async (uid) => {
   if (uid === 'new') return newOrder;
+
+  const order = await db
+    .collection('orders')
+    .doc(uid)
+    .get();
+
+  return order.data();
 };
 
-export const getOrders = () => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(ORDERS);
-    // reject(new Error('Not found'));
-  }, 1000);
-});
+export const getOrders = async () => {
+  const orders = await db
+    .collection('orders')
+    .orderBy('code', 'desc')
+    .get();
 
-export const saveOrder = (data) => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve({ uid: 5, ...data });
-  }, 1000);
-});
+  return orders.docs.map((doc) => ({
+    uid: doc.id,
+    ...doc.data(),
+    totalItems: doc.data().products.length
+  }));
+}
+
+export const saveOrder = async (uid, data) => {
+  const collection = db.collection('orders');
+  try {
+    const creatingOrder = uid ? await collection.doc(uid).set(data) : await collection.add(data);
+    const createdOrder = {
+      uid: creatingOrder ? creatingOrder.id : uid,
+      ...data
+    }
+    return createdOrder;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export default ORDERS;

@@ -1,4 +1,4 @@
-import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, SET_USER, OPEN_FORM_CLIENT, ADD_CLIENT } from './actions';
+import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, SET_USER, OPEN_FORM_CLIENT, ADD_CLIENT, ADD_ORDERS } from './actions';
 
 const RESOURCES = [
   'product',
@@ -40,6 +40,11 @@ export const initialState = {
 
 export const reducer = (state, { type, payload }) => {
   switch (type) {
+    case ADD_ORDERS:
+      return {
+        ...state,
+        orders: { ...state.orders, ...payload },
+      };
     case ADD_CLIENT: {
       const { uid, savedClient } = payload;
 
