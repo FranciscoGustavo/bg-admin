@@ -1,4 +1,4 @@
-import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, SET_USER, OPEN_FORM_CLIENT, ADD_CLIENT, ADD_ORDERS, ADD_PROVIDERS, OPEN_FORM_PROVIDER } from './actions';
+import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, SET_USER, OPEN_FORM_CLIENT, ADD_CLIENT, ADD_ORDERS, ADD_PROVIDERS, OPEN_FORM_PROVIDER, ADD_PROVIDER } from './actions';
 
 const RESOURCES = [
   'product',
@@ -40,6 +40,33 @@ export const initialState = {
 
 export const reducer = (state, { type, payload }) => {
   switch (type) {
+    case ADD_PROVIDER: {
+      const { uid, savedProvider } = payload;
+
+      const newStateProviders = !uid 
+        ? [ ...state.providers.data, savedProvider ]
+        : state.providers.data.map((provider) => provider.uid === uid ? savedProvider : provider );
+
+      const sortedProviders = newStateProviders.sort((a, b) => {
+        if (a.code > b.code) {
+          return -1;
+        }
+        if (a.code < b.code) {
+          return 1;
+        }
+        return 0;
+      })
+
+      const providers = {
+        ...state.providers,
+        data: sortedProviders,
+      };
+
+      return {
+        ...state,
+        providers
+      };
+    };
     case OPEN_FORM_PROVIDER:
       return {
         ...state,

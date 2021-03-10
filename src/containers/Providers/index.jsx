@@ -3,7 +3,7 @@ import { ToolsHeader, ClientForm } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from "../../components/templates";
 import { useStateValue } from '../../store/StateProvider';
-import { addProviders, openFormProvider } from '../../store/actions';
+import { addProviders, addProvider, openFormProvider } from '../../store/actions';
 import { getProviders, saveProvider, SCHEMA_PROVIDER } from '../../localdata/providers';
 import './styles.css';
 
@@ -30,7 +30,8 @@ const Providers = () => {
       }
 
       const savedProvider = await saveProvider(uid, provider);
-      console.log(savedProvider);
+      dispatch(addProvider({ uid, savedProvider }))
+      handleCloseModal();
     }
     saveData();
   }
