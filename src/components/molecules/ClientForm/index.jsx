@@ -29,7 +29,6 @@ const ClientForm = ({ close, client, save }) => {
   }
 
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log('Cliked');
     setSubmitting(true);
     save(values);
   }

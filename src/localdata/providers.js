@@ -1,3 +1,5 @@
+import { db } from '../firebase';
+
 const PROVIDRES = [
   {
     uid: 1,
@@ -13,17 +15,38 @@ const PROVIDRES = [
   }
 ]
 
-export const getProviders = () => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(PROVIDRES);
-    // reject(new Error('Not found'));
-  }, 1000);
-});
+export const SCHEMA_PROVIDER = {
+  uid: null,
+  code: '',
+  name: '',
+  address: '',
+  phone: '',
+  email: ''
+};
 
-export const saveProvider = (data) => new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve({ uid: 5, ...data });
-  }, 1000);
-});
+export const getProviders = async () => {
+  const providers = await db
+    .collection('providers')
+    .get();
+
+  return providers.docs.map((doc) => ({
+      uid: doc.id,
+      ...doc.data()
+  }));
+}
+
+export const saveProvider = async (uid, data) => {
+  const collection = db.collection('providers');
+  try {
+    const creatingProvider = uid ? await collection.doc(uid).set(data) : await collection.add(data);
+    const createdProvider = {
+      uid: creatingProvider ? creatingProvider.id : uid,
+      ...data
+    };
+    return createdProvider;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export default PROVIDRES;

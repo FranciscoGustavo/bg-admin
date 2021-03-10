@@ -72,3 +72,24 @@ export const setUser = (payload) => ({
    type: ADD_ORDERS,
    payload
  });
+
+ /**
+  * Actions of Providers
+  */
+export const ADD_PROVIDERS = 'ADD_PROVIDERS';
+export const addProviders = (payload) => ({
+  type: ADD_PROVIDERS,
+  payload
+});
+
+export const OPEN_FORM_PROVIDER = 'OPEN_FORM_PROVIDER';
+export const openFormProvider = (payload) => ({
+  type: OPEN_FORM_PROVIDER,
+  payload
+});
+
+export const ADD_PROVIDER = 'ADD_PROVIDER';
+export const addProvider = (payload) => ({
+  type: ADD_PROVIDER,
+  payload
+});
