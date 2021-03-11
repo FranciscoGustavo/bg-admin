@@ -1,7 +1,7 @@
 export const HANDLE_NAVBAR = 'HANDLE_NAVBAR';
 export const handleNavbar = (payload) => ({
   type: HANDLE_NAVBAR,
-  payload
+  payload,
 });
 
 /**
@@ -10,19 +10,19 @@ export const handleNavbar = (payload) => ({
 export const ADD_PRODUCTS = 'ADD_PRODUCTS';
 export const addProducts = (payload) => ({
   type: ADD_PRODUCTS,
-  payload
+  payload,
 });
 
 export const OPEN_FORM_PRODUCT = 'OPEN_FORM_PRODUCT';
 export const openFormProduct = (payload) => ({
   type: OPEN_FORM_PRODUCT,
-  payload
+  payload,
 });
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const addProduct = (payload) => ({
   type: ADD_PRODUCT,
-  payload
+  payload,
 });
 
 /**
@@ -31,19 +31,19 @@ export const addProduct = (payload) => ({
 export const ADD_CLIENTS = 'ADD_CLIENTS';
 export const addClients = (payload) => ({
   type: ADD_CLIENTS,
-  payload
+  payload,
 });
 
 export const OPEN_FORM_CLIENT = 'OPEN_FORM_CLIENT';
 export const openFormClient = (payload) => ({
   type: OPEN_FORM_CLIENT,
-  payload
+  payload,
 });
 
 export const ADD_CLIENT = 'ADD_CLIENT';
 export const addClient = (payload) => ({
   type: ADD_CLIENT,
-  payload
+  payload,
 });
 
 /**
@@ -52,7 +52,7 @@ export const addClient = (payload) => ({
 export const ADD_USERS = 'ADD_USERS';
 export const addUsers = (payload) => ({
   type: ADD_USERS,
-  payload
+  payload,
 });
 
 /**
@@ -61,35 +61,35 @@ export const addUsers = (payload) => ({
 export const SET_USER = 'SET_USER';
 export const setUser = (payload) => ({
   type: SET_USER,
-  payload
+  payload,
 });
 
 /**
  * Actions of orders
  */
- export const ADD_ORDERS = 'ADD_ORDERS';
- export const addOrders = (payload) => ({
-   type: ADD_ORDERS,
-   payload
- });
+export const ADD_ORDERS = 'ADD_ORDERS';
+export const addOrders = (payload) => ({
+  type: ADD_ORDERS,
+  payload,
+});
 
- /**
-  * Actions of Providers
-  */
+/**
+ * Actions of Providers
+ */
 export const ADD_PROVIDERS = 'ADD_PROVIDERS';
 export const addProviders = (payload) => ({
   type: ADD_PROVIDERS,
-  payload
+  payload,
 });
 
 export const OPEN_FORM_PROVIDER = 'OPEN_FORM_PROVIDER';
 export const openFormProvider = (payload) => ({
   type: OPEN_FORM_PROVIDER,
-  payload
+  payload,
 });
 
 export const ADD_PROVIDER = 'ADD_PROVIDER';
 export const addProvider = (payload) => ({
   type: ADD_PROVIDER,
-  payload
+  payload,
 });

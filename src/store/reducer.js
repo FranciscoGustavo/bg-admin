@@ -1,11 +1,20 @@
-import { HANDLE_NAVBAR, ADD_PRODUCTS, OPEN_FORM_PRODUCT, ADD_PRODUCT, ADD_CLIENTS, ADD_USERS, SET_USER, OPEN_FORM_CLIENT, ADD_CLIENT, ADD_ORDERS, ADD_PROVIDERS, OPEN_FORM_PROVIDER, ADD_PROVIDER } from './actions';
+import {
+  HANDLE_NAVBAR,
+  ADD_PRODUCTS,
+  OPEN_FORM_PRODUCT,
+  ADD_PRODUCT,
+  ADD_CLIENTS,
+  ADD_USERS,
+  SET_USER,
+  OPEN_FORM_CLIENT,
+  ADD_CLIENT,
+  ADD_ORDERS,
+  ADD_PROVIDERS,
+  OPEN_FORM_PROVIDER,
+  ADD_PROVIDER,
+} from './actions';
 
-const RESOURCES = [
-  'product',
-  'order',
-  'client',
-  'provider'
-];
+const RESOURCES = ['product', 'order', 'client', 'provider'];
 
 const createInitialState = (resources) => {
   const initialState = {};
@@ -25,27 +34,28 @@ const createInitialState = (resources) => {
   });
 
   return initialState;
-}
-
+};
 
 export const initialState = {
   user: null,
   navbar: {
     sales: false,
     purchases: false,
-    users: false
+    users: false,
   },
-  ...createInitialState(RESOURCES)
-}
+  ...createInitialState(RESOURCES),
+};
 
 export const reducer = (state, { type, payload }) => {
   switch (type) {
     case ADD_PROVIDER: {
       const { uid, savedProvider } = payload;
 
-      const newStateProviders = !uid 
-        ? [ ...state.providers.data, savedProvider ]
-        : state.providers.data.map((provider) => provider.uid === uid ? savedProvider : provider );
+      const newStateProviders = !uid
+        ? [...state.providers.data, savedProvider]
+        : state.providers.data.map((provider) =>
+            provider.uid === uid ? savedProvider : provider
+          );
 
       const sortedProviders = newStateProviders.sort((a, b) => {
         if (a.code > b.code) {
@@ -55,7 +65,7 @@ export const reducer = (state, { type, payload }) => {
           return 1;
         }
         return 0;
-      })
+      });
 
       const providers = {
         ...state.providers,
@@ -64,14 +74,14 @@ export const reducer = (state, { type, payload }) => {
 
       return {
         ...state,
-        providers
+        providers,
       };
-    };
+    }
     case OPEN_FORM_PROVIDER:
       return {
         ...state,
         provider: { ...state.provider, ...payload },
-      }
+      };
     case ADD_PROVIDERS:
       return {
         ...state,
@@ -85,9 +95,11 @@ export const reducer = (state, { type, payload }) => {
     case ADD_CLIENT: {
       const { uid, savedClient } = payload;
 
-      const newStateClients = !uid 
-        ? [ ...state.clients.data, savedClient ]
-        : state.clients.data.map((client) => client.uid === uid ? savedClient : client );
+      const newStateClients = !uid
+        ? [...state.clients.data, savedClient]
+        : state.clients.data.map((client) =>
+            client.uid === uid ? savedClient : client
+          );
 
       const sortedClients = newStateClients.sort((a, b) => {
         if (a.code > b.code) {
@@ -97,7 +109,7 @@ export const reducer = (state, { type, payload }) => {
           return 1;
         }
         return 0;
-      })
+      });
 
       const clients = {
         ...state.clients,
@@ -106,19 +118,19 @@ export const reducer = (state, { type, payload }) => {
 
       return {
         ...state,
-        clients
+        clients,
       };
-    };
+    }
     case OPEN_FORM_CLIENT:
       return {
         ...state,
         client: { ...state.client, ...payload },
-      }
+      };
     case SET_USER:
       return {
         ...state,
         user: payload,
-      }
+      };
     case ADD_USERS:
       return {
         ...state,
@@ -132,9 +144,11 @@ export const reducer = (state, { type, payload }) => {
     case ADD_PRODUCT: {
       const { uid, createdProduct } = payload;
 
-      const newStateProducts = !uid 
-        ? [ ...state.products.data, createdProduct ]
-        : state.products.data.map((product) => product.uid === uid ? createdProduct : product );
+      const newStateProducts = !uid
+        ? [...state.products.data, createdProduct]
+        : state.products.data.map((product) =>
+            product.uid === uid ? createdProduct : product
+          );
 
       const sortedProducts = newStateProducts.sort((a, b) => {
         if (a.code > b.code) {
@@ -144,7 +158,7 @@ export const reducer = (state, { type, payload }) => {
           return 1;
         }
         return 0;
-      })
+      });
 
       const products = {
         ...state.products,
@@ -153,14 +167,14 @@ export const reducer = (state, { type, payload }) => {
 
       return {
         ...state,
-        products
+        products,
       };
-    };
+    }
     case OPEN_FORM_PRODUCT:
       return {
         ...state,
         product: { ...state.product, ...payload },
-      }
+      };
     case ADD_PRODUCTS:
       return {
         ...state,
@@ -169,9 +183,9 @@ export const reducer = (state, { type, payload }) => {
     case HANDLE_NAVBAR:
       return {
         ...state,
-        navbar: { ...state.navbar, ...payload }
-      };  
+        navbar: { ...state.navbar, ...payload },
+      };
     default:
       return state;
   }
-}
+};

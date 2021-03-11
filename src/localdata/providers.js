@@ -5,15 +5,15 @@ const PROVIDRES = [
     uid: 1,
     name: 'LA STRONG BERRY',
     price: 10,
-    unity: 'KG'
+    unity: 'KG',
   },
   {
     uid: 2,
     name: 'THE PAIN APPLE',
     price: 10,
-    unity: 'KG'
-  }
-]
+    unity: 'KG',
+  },
+];
 
 export const SCHEMA_PROVIDER = {
   uid: null,
@@ -21,27 +21,27 @@ export const SCHEMA_PROVIDER = {
   name: '',
   address: '',
   phone: '',
-  email: ''
+  email: '',
 };
 
 export const getProviders = async () => {
-  const providers = await db
-    .collection('providers')
-    .get();
+  const providers = await db.collection('providers').get();
 
   return providers.docs.map((doc) => ({
-      uid: doc.id,
-      ...doc.data()
+    uid: doc.id,
+    ...doc.data(),
   }));
-}
+};
 
 export const saveProvider = async (uid, data) => {
   const collection = db.collection('providers');
   try {
-    const creatingProvider = uid ? await collection.doc(uid).set(data) : await collection.add(data);
+    const creatingProvider = uid
+      ? await collection.doc(uid).set(data)
+      : await collection.add(data);
     const createdProvider = {
       uid: creatingProvider ? creatingProvider.id : uid,
-      ...data
+      ...data,
     };
     return createdProvider;
   } catch (error) {

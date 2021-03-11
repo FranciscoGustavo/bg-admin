@@ -6,42 +6,44 @@ export const SCHEMA_CLIENT = {
   name: '',
   address: '',
   phone: '',
-  email: ''
-}
+  email: '',
+};
 
-export const getClients = () => new Promise((resolve, reject) => {
-  db
-    .collection('clients')
-    .orderBy('code', 'desc')
-    .onSnapshot((snapshot) => {
-      const data = snapshot.docs.map((doc) => ({
-        uid: doc.id,
-        ...doc.data()
-      }));
+export const getClients = () =>
+  new Promise((resolve, reject) => {
+    db.collection('clients')
+      .orderBy('code', 'desc')
+      .onSnapshot((snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          uid: doc.id,
+          ...doc.data(),
+        }));
 
-      resolve(data);
-    });
-});
+        resolve(data);
+      });
+  });
 
 export const getClient = async (field, clientNameOrCode) => {
   const client = await db
     .collection('clients')
-      .where(field, "==", clientNameOrCode)
-      .get();
+    .where(field, '==', clientNameOrCode)
+    .get();
 
   return client.docs.map((doc) => ({
     uid: doc.id,
-    ...doc.data()
+    ...doc.data(),
   }))[0];
 };
 
 export const saveClient = async (uid, data) => {
   const collection = db.collection('clients');
   try {
-    const creatingClient = uid ? await collection.doc(uid).set(data) : await collection.add(data);
+    const creatingClient = uid
+      ? await collection.doc(uid).set(data)
+      : await collection.add(data);
     const createdClient = {
       uid: creatingClient ? creatingClient.id : uid,
-      ...data
+      ...data,
     };
     return createdClient;
   } catch (error) {
@@ -51,9 +53,9 @@ export const saveClient = async (uid, data) => {
 
 export const getClientsCode = async (code) => {
   return [];
-}
+};
 
 export const getClientsName = async (name) => {
   const clients = await getClients();
   return clients.map((client) => client.name);
-}
+};

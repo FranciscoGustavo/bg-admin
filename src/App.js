@@ -8,32 +8,32 @@ import { auth } from './firebase';
 import './App.css';
 
 function App() {
-	const [{ user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
-	useEffect(() => {
-		auth.onAuthStateChanged((authUser) => {
-			if (authUser) {
-				dispatch(setUser({ isAuthenticated: true, ...authUser}));
-			} else {
-				dispatch(setUser({ isAuthenticated: false }));
-			}
-		});
-	}, [dispatch]);
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch(setUser({ isAuthenticated: true, ...authUser }));
+      } else {
+        dispatch(setUser({ isAuthenticated: false }));
+      }
+    });
+  }, [dispatch]);
 
-	if (user === null) return <h1>Cargando</h1>
+  if (user === null) return <h1>Cargando</h1>;
 
   return (
     <div className="App">
       <Router>
-      	<Switch>
-					{
-						ROUTES.map(({ isProtected, ...rest }) => {
-							return isProtected 
-								? <ProtectedRoute {...rest} auth={user.isAuthenticated} /> 
-								: <Route {...rest} />
-						})
-					}
-      	</Switch>
+        <Switch>
+          {ROUTES.map(({ isProtected, ...rest }) => {
+            return isProtected ? (
+              <ProtectedRoute {...rest} auth={user.isAuthenticated} />
+            ) : (
+              <Route {...rest} />
+            );
+          })}
+        </Switch>
       </Router>
     </div>
   );

@@ -15,56 +15,58 @@ const SCHEMA_ORDER = {
       price: 0,
       totalPrice: 0,
     },
-  ]
-}
+  ],
+};
 
 export const getOrder = async (uid) => {
   if (uid === 'new') {
     const countDocuments = await db.collection('orders').get();
     const currentDocument = countDocuments.size + 1;
     const currentDocumentStr = String(currentDocument).split('').reverse();
-    const CODE = '0000'.split('').map((value, idx) => currentDocumentStr[idx] ? currentDocumentStr[idx] : value).reverse().join('');
+    const CODE = '0000'
+      .split('')
+      .map((value, idx) =>
+        currentDocumentStr[idx] ? currentDocumentStr[idx] : value
+      )
+      .reverse()
+      .join('');
 
     return {
       code: `P.${CODE}`,
-      ...SCHEMA_ORDER
+      ...SCHEMA_ORDER,
     };
   }
 
-  const order = await db
-    .collection('orders')
-    .doc(uid)
-    .get();
+  const order = await db.collection('orders').doc(uid).get();
 
   return {
     uid: order.id,
     ...order.data(),
-  }
+  };
 };
 
 export const getOrders = async () => {
-  const orders = await db
-    .collection('orders')
-    .orderBy('code', 'desc')
-    .get();
+  const orders = await db.collection('orders').orderBy('code', 'desc').get();
 
   return orders.docs.map((doc) => ({
     uid: doc.id,
     ...doc.data(),
-    totalItems: doc.data().products.length
+    totalItems: doc.data().products.length,
   }));
-}
+};
 
 export const saveOrder = async (uid, data) => {
   const collection = db.collection('orders');
   try {
-    const creatingOrder = uid ? await collection.doc(uid).set(data) : await collection.add(data);
+    const creatingOrder = uid
+      ? await collection.doc(uid).set(data)
+      : await collection.add(data);
     const createdOrder = {
       uid: creatingOrder ? creatingOrder.id : uid,
-      ...data
-    }
+      ...data,
+    };
     return createdOrder;
   } catch (error) {
     console.log(error);
   }
-}
+};
