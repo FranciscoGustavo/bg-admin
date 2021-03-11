@@ -26,7 +26,7 @@ const Administrators = () => {
     { Header: 'Correo', accessor: 'email' },
     {
       accessor: 'uid',
-      Cell: () => <button>Editar</button>,
+      Cell: () => <button type="button">Editar</button>,
     },
   ];
 

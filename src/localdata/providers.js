@@ -45,7 +45,7 @@ export const saveProvider = async (uid, data) => {
     };
     return createdProvider;
   } catch (error) {
-    console.error(error);
+    return console.error(error);
   }
 };
 

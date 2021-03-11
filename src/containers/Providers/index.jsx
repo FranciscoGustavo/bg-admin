@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { ToolsHeader, ClientForm } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
@@ -34,8 +35,8 @@ const Providers = () => {
 
   const handleSave = (data) => {
     const saveData = async () => {
-      const uid = data.uid;
-      const provider = {
+      const { uid } = data;
+      const emptyProvider = {
         code: data.code,
         name: data.name,
         address: data.address,
@@ -43,7 +44,7 @@ const Providers = () => {
         email: data.email,
       };
 
-      const savedProvider = await saveProvider(uid, provider);
+      const savedProvider = await saveProvider(uid, emptyProvider);
       dispatch(addProvider({ uid, savedProvider }));
       handleCloseModal();
     };
@@ -52,7 +53,9 @@ const Providers = () => {
 
   const handleEdit = useCallback(
     (uid) => {
-      const data = providers.data.filter((provider) => provider.uid === uid)[0];
+      const data = providers.data.filter(
+        (filterProvider) => filterProvider.uid === uid
+      )[0];
       dispatch(openFormProvider({ data, isOpenModal: true, error: false }));
     },
     [dispatch, providers.data]
@@ -62,6 +65,13 @@ const Providers = () => {
   const handleSendEmail = () => {};
   const handleSelectedRows = () => {};
 
+  const cellEdit = ({ value }) => (
+    <button type="button" onClick={() => handleEdit(value)}>
+      Editar
+    </button>
+  );
+  cellEdit.propTypes = { value: PropTypes.string.isRequired };
+
   const columns = useMemo(
     () => [
       { Header: 'Codigo', accessor: 'code' },
@@ -69,12 +79,7 @@ const Providers = () => {
       { Header: 'Dirección', accessor: 'address' },
       { Header: 'Telefono', accessor: 'phone' },
       { Header: 'Correo', accessor: 'email' },
-      {
-        accessor: 'uid',
-        Cell: ({ value }) => (
-          <button onClick={() => handleEdit(value)}>Editar</button>
-        ),
-      },
+      { accessor: 'uid', Cell: cellEdit },
     ],
     [handleEdit]
   );
@@ -85,16 +90,16 @@ const Providers = () => {
     const getData = async () => {
       dispatch(addProviders({ data: false, loading: true, error: false }));
 
-      let data = false;
+      let dataProvider = false;
       let error = false;
 
       try {
-        data = await getProviders();
+        dataProvider = await getProviders();
       } catch (err) {
         error = err.message;
       }
 
-      dispatch(addProviders({ data, loading: false, error }));
+      dispatch(addProviders({ dataProvider, loading: false, error }));
       return data;
     };
 

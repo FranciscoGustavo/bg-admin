@@ -9,19 +9,13 @@ export const SCHEMA_CLIENT = {
   email: '',
 };
 
-export const getClients = () =>
-  new Promise((resolve, reject) => {
-    db.collection('clients')
-      .orderBy('code', 'desc')
-      .onSnapshot((snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          uid: doc.id,
-          ...doc.data(),
-        }));
-
-        resolve(data);
-      });
-  });
+export const getClients = async () => {
+  const clients = await db.collection('clients').orderBy('code', 'desc').get();
+  return clients.docs.map((doc) => ({
+    uid: doc.id,
+    ...doc.data(),
+  }));
+};
 
 export const getClient = async (field, clientNameOrCode) => {
   const client = await db
@@ -47,15 +41,13 @@ export const saveClient = async (uid, data) => {
     };
     return createdClient;
   } catch (error) {
-    console.error(error);
+    return console.error(error);
   }
 };
 
-export const getClientsCode = async (code) => {
-  return [];
-};
+export const getClientsCode = async () => [];
 
-export const getClientsName = async (name) => {
+export const getClientsName = async () => {
   const clients = await getClients();
   return clients.map((client) => client.name);
 };

@@ -1,18 +1,16 @@
 import { db } from '../firebase';
 
-export const getProducts = () =>
-  new Promise((resolve, reject) => {
-    db.collection('products')
-      .orderBy('code', 'desc')
-      .onSnapshot((snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          uid: doc.id,
-          ...doc.data(),
-        }));
+export const getProducts = async () => {
+  const products = await db
+    .collection('products')
+    .orderBy('code', 'desc')
+    .get();
 
-        resolve(data);
-      });
-  });
+  return products.docs.map((doc) => ({
+    uid: doc.id,
+    ...doc.data(),
+  }));
+};
 
 export const getProductDetails = async (field, productNameOrCode) => {
   const products = await db

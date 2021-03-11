@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import { Header, Navbar } from '../../organisms';
 import './styles.css';
 
-const LayoutAdmin = ({ children, title }) => {
-  return (
-    <div className="layoutAdmin">
-      <Header title={title} />
-      <Navbar />
-      {children}
-    </div>
-  );
-};
+const LayoutAdmin = ({ children, title }) => (
+  <div className="layoutAdmin">
+    <Header title={title} />
+    <Navbar />
+    {children}
+  </div>
+);
 
 LayoutAdmin.defaultProps = {
   title: '',

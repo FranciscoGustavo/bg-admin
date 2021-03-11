@@ -13,19 +13,8 @@ const USERS = [
   },
 ];
 
-export const getUsers = () =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(USERS);
-      // reject(new Error('Not found'));
-    }, 1000);
-  });
+export const getUsers = async () => USERS;
 
-export const saveUser = (data) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({ uid: 5, ...data });
-    }, 1000);
-  });
+export const saveUser = (data) => ({ uid: 5, ...data });
 
 export default USERS;

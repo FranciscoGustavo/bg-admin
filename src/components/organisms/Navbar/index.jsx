@@ -16,25 +16,25 @@ const NAVBAR = [
     uid: 'sales',
     label: 'Ventas',
     submenus: [
-      { label: 'Productos', to: '/products' },
-      { label: 'Pedidos', to: '/orders' },
+      { uid: 'sales-products', label: 'Productos', to: '/products' },
+      { uid: 'sales-orders', label: 'Pedidos', to: '/orders' },
     ],
   },
   {
     uid: 'purchases',
     label: 'Compras',
     submenus: [
-      { label: 'Recepcion de Mercancia', to: '/merchandise-reception' },
-      { label: 'Inventario', to: '/inventory' },
+      { uid: 'purchases-merchandise-reception', label: 'Recepcion de Mercancia', to: '/merchandise-reception' },
+      { uid: 'purchases-inventory', label: 'Inventario', to: '/inventory' },
     ],
   },
   {
     uid: 'users',
     label: 'Usuarios',
     submenus: [
-      { label: 'Clientes', to: '/clients' },
-      { label: 'Provedores', to: '/providers' },
-      { label: 'Administradores', to: '/users' },
+      { uid: 'users-clients', label: 'Clientes', to: '/clients' },
+      { uid: 'users-providers', label: 'Provedores', to: '/providers' },
+      { uid: 'users-admins', label: 'Administradores', to: '/users' },
     ],
   },
 ];
@@ -65,11 +65,11 @@ const Navbar = () => {
     );
   };
 
-  const handleRenderSubmenus = (submenus, uid) =>
+  const handleRenderSubmenus = (submenus) =>
     submenus && (
       <div className="navbar__submenu">
-        {submenus.map(({ label, to }) => (
-          <NavLink activeClassName="active" key={uid} to={to}>
+        {submenus.map(({ uid: subUid, label, to }) => (
+          <NavLink activeClassName="active" key={subUid} to={to}>
             {label}
           </NavLink>
         ))}
@@ -85,7 +85,7 @@ const Navbar = () => {
         {NAVBAR.map(({ uid, label, to, submenus }) => (
           <div key={uid} className="navbar__menu">
             {handleRenderMenuItem(uid, label, to, submenus)}
-            {handleRenderSubmenus(submenus, uid)}
+            {handleRenderSubmenus(submenus)}
           </div>
         ))}
       </nav>

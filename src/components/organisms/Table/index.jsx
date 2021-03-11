@@ -15,7 +15,31 @@ const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
   return <input type="checkbox" ref={resolveRef} {...rest} />;
 });
 
+IndeterminateCheckbox.propTypes = {
+  indeterminate: PropTypes.bool.isRequired
+}
+
 const Table = memo(({ columns, data, handleSelectedRows }) => {
+  const headerSelection = ({ getToggleAllPageRowsSelectedProps }) => (
+    <div>
+      <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
+    </div>
+  );
+
+  headerSelection.propTypes = {
+    getToggleAllPageRowsSelectedProps: PropTypes.func.isRequired,
+  };
+
+  const cellSelection = ({ row }) => (
+    <div>
+      <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+    </div>
+  );
+
+  cellSelection.propTypes = {
+    row: PropTypes.objectOf().isRequired,
+  };
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -35,16 +59,8 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
     hooks.visibleColumns.push((visibleColumns) => [
       {
         id: 'selection',
-        Header: ({ getToggleAllPageRowsSelectedProps }) => (
-          <div>
-            <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
-          </div>
-        ),
-        Cell: ({ row }) => (
-          <div>
-            <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-          </div>
-        ),
+        Header: headerSelection,
+        Cell: cellSelection,
       },
       ...visibleColumns,
     ]);
@@ -99,8 +115,8 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
 });
 
 Table.propTypes = {
-  columns: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
+  columns: PropTypes.objectOf().isRequired,
+  data: PropTypes.objectOf().isRequired,
   handleSelectedRows: PropTypes.func.isRequired,
 };
 

@@ -26,7 +26,7 @@ const createInitialState = (resources) => {
       error: false,
     };
 
-    initialState[resource + 's'] = {
+    initialState[`${resource}s`] = {
       data: false,
       loading: false,
       error: false,

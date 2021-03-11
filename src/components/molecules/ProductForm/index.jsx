@@ -137,7 +137,7 @@ const ProductForm = ({ close, product, save }) => {
 
 ProductForm.propTypes = {
   close: PropTypes.func.isRequired,
-  product: PropTypes.object.isRequired,
+  product: PropTypes.objectOf().isRequired,
   save: PropTypes.func.isRequired,
 };
 

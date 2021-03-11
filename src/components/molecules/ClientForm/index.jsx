@@ -135,7 +135,7 @@ const ClientForm = ({ close, client, save }) => {
 
 ClientForm.propTypes = {
   close: PropTypes.func.isRequired,
-  client: PropTypes.object.isRequired,
+  client: PropTypes.objectOf().isRequired,
   save: PropTypes.func.isRequired,
 };
 

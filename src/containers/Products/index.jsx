@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { ProductForm, ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
@@ -17,7 +18,9 @@ const Products = () => {
 
   const handleEdit = useCallback(
     (uid) => {
-      const data = products.data.filter((product) => product.uid === uid)[0];
+      const data = products.data.filter(
+        (filterProduct) => filterProduct.uid === uid
+      )[0];
       dispatch(openFormProduct({ data, isOpenModal: true }));
     },
     [dispatch, products.data]
@@ -57,15 +60,15 @@ const Products = () => {
 
   const handleSave = (data) => {
     const saveData = async () => {
-      const uid = data.uid;
-      const product = {
+      const { uid } = data;
+      const emptyProduct = {
         code: data.code,
         isActive: Boolean(data.isActive),
         name: data.name,
         price: data.price,
         unity: data.unity,
       };
-      const createdProduct = await saveProduct(uid, product);
+      const createdProduct = await saveProduct(uid, emptyProduct);
       dispatch(addProduct({ uid, createdProduct }));
       handleColoseModal();
     };
@@ -73,23 +76,25 @@ const Products = () => {
     saveData();
   };
 
+  const cellIsActive = ({ value }) =>
+    value ? <p>Activo</p> : <p>No Activo</p>;
+  cellIsActive.propTypes = { value: PropTypes.string.isRequired };
+
+  const cellEdit = ({ value }) => (
+    <button type="button" onClick={() => handleEdit(value)}>
+      Editar
+    </button>
+  );
+  cellEdit.propTypes = { value: PropTypes.string.isRequired };
+
   const columns = useMemo(
     () => [
       { Header: 'Codigo', accessor: 'code' },
       { Header: 'Nombre', accessor: 'name' },
       { Header: 'Precio', accessor: 'price' },
       { Header: 'Unidad', accessor: 'unity' },
-      {
-        Header: 'Estado',
-        accessor: 'isActive',
-        Cell: ({ value }) => (value ? <p>Activo</p> : <p>No Activo</p>),
-      },
-      {
-        accessor: 'uid',
-        Cell: ({ value }) => (
-          <button onClick={() => handleEdit(value)}>Editar</button>
-        ),
-      },
+      { Header: 'Estado', accessor: 'isActive', Cell: cellIsActive },
+      { accessor: 'uid', Cell: cellEdit },
     ],
     [handleEdit]
   );
@@ -100,17 +105,17 @@ const Products = () => {
     const getData = async () => {
       dispatch(addProducts({ data: false, loading: true, error: false }));
 
-      let data = false;
+      let dataProduct = false;
       let error = false;
 
       try {
-        data = await getProducts();
+        dataProduct = await getProducts();
       } catch (err) {
         error = err.message;
       }
 
-      dispatch(addProducts({ data, loading: false, error }));
-      return data;
+      dispatch(addProducts({ dataProduct, loading: false, error }));
+      return dataProduct;
     };
 
     return !products.data ? getData() : null;
@@ -134,7 +139,9 @@ const Products = () => {
         )}
         {products.loading && <p>Cargando</p>}
         {products.error && (
-          <p onClick={hanldeTryLoadDataAgain}>Error al cargar</p>
+          <button type="button" onClick={hanldeTryLoadDataAgain}>
+            Error al cargar
+          </button>
         )}
 
         {product.isOpenModal && (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { AutocompleteInput } from '../../components/atoms';
 import { OrderForm } from '../../components/molecules';
@@ -12,21 +13,8 @@ const Order = () => {
   const { uid } = useParams();
   const [data, setData] = useState(null);
 
-  const handleCell = (type, nameInput) => {
-    return ({ name, value, onChange, onKeyUp }) => (
-      <input
-        className="orderForm__input"
-        type={type}
-        name={`${nameInput}-${name}`}
-        value={value}
-        onKeyUp={onKeyUp}
-        onChange={onChange}
-      />
-    );
-  };
-
   const handleKeyPress = (e) => {
-    const keyCode = e.keyCode;
+    const { keyCode } = e;
     const splitedNameInput = e.target.name.split('-');
 
     // When key enter is pressed
@@ -77,8 +65,7 @@ const Order = () => {
 
   const onChange = useCallback(
     (_event) => {
-      const name = _event.target.name;
-      const value = _event.target.value;
+      const { name, value } = _event.target;
       const regex = /products/;
 
       /**
@@ -186,8 +173,8 @@ const Order = () => {
   const onSubmit = (_event) => {
     _event.preventDefault();
     const saveData = async () => {
-      const uid = data.uid;
-      const order = {
+      const { uid: dataUid } = data;
+      const emptyOrder = {
         code: data.code,
         clientCode: data.clientCode,
         clientName: data.clientName,
@@ -197,44 +184,88 @@ const Order = () => {
         products: data.products,
       };
 
-      const createdOrder = await saveOrder(uid, order);
+      const createdOrder = await saveOrder(dataUid, emptyOrder);
       alert(`Pedido con el uid: ${createdOrder.uid} fue creado`);
     };
     saveData();
   };
+
+  const cellInputPropTypes = {
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onKeyUp: PropTypes.func.isRequired,
+  };
+
+  // const cellInputDefault
+
+  const cellDefault = (type, nameInput) => {
+    const cellInputDefault = ({
+      name,
+      value,
+      onChange: onInputSubmit,
+      onKeyUp,
+    }) => (
+      <input
+        className="orderForm__input"
+        type={type}
+        name={`${nameInput}-${name}`}
+        value={value}
+        onKeyUp={onKeyUp}
+        onChange={onInputSubmit}
+      />
+    );
+
+    cellInputDefault.propTypes = cellInputPropTypes;
+    return cellInputPropTypes;
+  };
+
+  cellDefault.propTypes = {
+    name: PropTypes.string.isRequired,
+    nameInput: PropTypes.string.isRequired,
+  };
+
+  const cellNameProduct = ({
+    name,
+    value,
+    onChange: onInputSubmit,
+    onKeyUp,
+  }) => (
+    <AutocompleteInput
+      className="orderForm__inputSuggestion"
+      type="text"
+      name={`products-name-${name}`}
+      value={value}
+      onChange={onInputSubmit}
+      onSearching={getProductsName}
+      onKeyUp={onKeyUp}
+    />
+  );
+
+  cellNameProduct.propTypes = cellInputPropTypes;
 
   const columns = useMemo(
     () => [
       {
         Header: 'Articulo',
         accessor: 'code',
-        Cell: handleCell('text', 'products-code'),
+        Cell: cellDefault('text', 'products-code'),
       },
       {
         Header: 'Nombre',
         accessor: 'name',
-        Cell: ({ name, value, onChange, onKeyUp }) => (
-          <AutocompleteInput
-            className="orderForm__inputSuggestion"
-            type="text"
-            name={`products-name-${name}`}
-            value={value}
-            onChange={onChange}
-            onSearching={getProductsName}
-            onKeyUp={onKeyUp}
-          />
-        ),
+        Cell: cellNameProduct,
       },
       { Header: 'Unidad', accessor: 'unity' },
       {
         Header: 'Cantidad',
         accessor: 'count',
-        Cell: handleCell('text', 'products-count'),
+        Cell: cellDefault('text', 'products-count'),
       },
       {
         Header: 'Precio',
         accessor: 'price',
-        Cell: handleCell('text', 'products-price'),
+        Cell: cellDefault('text', 'products-price'),
       },
       { Header: 'Importe', accessor: 'totalPrice' },
     ],
@@ -246,8 +277,8 @@ const Order = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const order = await getOrder(uid);
-        setData(order);
+        const dataOrder = await getOrder(uid);
+        setData(dataOrder);
       } catch (err) {
         console.log(err);
       }

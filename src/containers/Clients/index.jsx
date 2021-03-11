@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { ToolsHeader, ClientForm } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
@@ -12,7 +13,9 @@ const Clients = () => {
 
   const handleEdit = useCallback(
     (uid) => {
-      const data = clients.data.filter((client) => client.uid === uid)[0];
+      const data = clients.data.filter(
+        (filterClient) => filterClient.uid === uid
+      )[0];
       dispatch(openFormClient({ data, isOpenModal: true, error: false }));
     },
     [dispatch, clients.data]
@@ -44,19 +47,28 @@ const Clients = () => {
 
   const handleSave = (data) => {
     const saveData = async () => {
-      const uid = data.uid;
-      const client = {
+      const { uid } = data;
+      const emptyClient = {
         code: data.code,
         name: data.name,
         address: data.address,
         phone: data.phone,
         email: data.email,
       };
-      const savedClient = await saveClient(uid, client);
+      const savedClient = await saveClient(uid, emptyClient);
       dispatch(addClient({ uid, savedClient }));
       handleCloseModal();
     };
     saveData();
+  };
+
+  const cellEdit = ({ value }) => (
+    <button type="button" onClick={() => handleEdit(value)}>
+      Editar
+    </button>
+  );
+  cellEdit.propTypes = {
+    value: PropTypes.string.isRequired,
   };
 
   const columns = useMemo(
@@ -66,12 +78,7 @@ const Clients = () => {
       { Header: 'Dirección', accessor: 'address' },
       { Header: 'Telefono', accessor: 'phone' },
       { Header: 'Correo', accessor: 'email' },
-      {
-        accessor: 'uid',
-        Cell: ({ value }) => (
-          <button onClick={() => handleEdit(value)}>Editar</button>
-        ),
-      },
+      { accessor: 'uid', Cell: cellEdit },
     ],
     [handleEdit]
   );
@@ -82,16 +89,16 @@ const Clients = () => {
     const getData = async () => {
       dispatch(addClients({ data: false, loading: true, error: false }));
 
-      let data = false;
+      let dataClients = false;
       let error = false;
 
       try {
-        data = await getClients();
+        dataClients = await getClients();
       } catch (err) {
         error = err.message;
       }
 
-      dispatch(addClients({ data, loading: false, error }));
+      dispatch(addClients({ dataClients, loading: false, error }));
       return data;
     };
 

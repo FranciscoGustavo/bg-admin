@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
@@ -20,6 +21,11 @@ const Orders = () => {
     console.log(data);
   }, []);
 
+  const cellEdit = ({ value }) => <Link to={`/orders/${value}`}>Editar</Link>;
+  cellEdit.propTypes = {
+    value: PropTypes.string.isRequired,
+  };
+
   const columns = useMemo(
     () => [
       { Header: 'Codigo', accessor: 'code' },
@@ -28,7 +34,7 @@ const Orders = () => {
       { Header: 'Precio Total', accessor: 'total' },
       {
         accessor: 'uid',
-        Cell: ({ value }) => <Link to={`/orders/${value}`}>Editar</Link>,
+        Cell: cellEdit,
       },
     ],
     []
@@ -40,16 +46,16 @@ const Orders = () => {
     const getData = async () => {
       dispatch(addOrders({ data: false, loading: true }));
 
-      let data = false;
+      let dataOrders = false;
       let error = false;
 
       try {
-        data = await getOrders();
+        dataOrders = await getOrders();
       } catch (err) {
         error = err.message;
       }
 
-      dispatch(addOrders({ data, loading: false, error }));
+      dispatch(addOrders({ dataOrders, loading: false, error }));
       return data;
     };
 
