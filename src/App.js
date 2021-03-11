@@ -26,13 +26,13 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          {ROUTES.map(({ isProtected, ...rest }) => {
-            return isProtected ? (
+          {ROUTES.map(({ isProtected, ...rest }) =>
+            isProtected ? (
               <ProtectedRoute {...rest} auth={user.isAuthenticated} />
             ) : (
               <Route {...rest} />
-            );
-          })}
+            )
+          )}
         </Switch>
       </Router>
     </div>

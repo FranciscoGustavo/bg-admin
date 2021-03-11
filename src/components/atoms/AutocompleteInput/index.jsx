@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
 import './styles.css';
 
@@ -15,14 +16,14 @@ const AutocompleteInput = ({
 }) => {
   const [suggestions, setSuggestions] = useState([]);
 
-  const onSuggestionsFetchRequested = async ({ value }) => {
-    if (!value) {
+  const onSuggestionsFetchRequested = async ({ value: suggestionValue }) => {
+    if (!suggestionValue) {
       setSuggestions([]);
       return;
     }
 
     try {
-      const findedSugesstions = await onSearching(value);
+      const findedSugesstions = await onSearching(suggestionValue);
       setSuggestions(findedSugesstions);
     } catch (err) {
       setSuggestions([]);
@@ -50,7 +51,7 @@ const AutocompleteInput = ({
     _event.keyCode === 13 ? onKeyUp(_event) : null;
 
   return (
-    <div className={`autocomplete ${className ? className : ''}`}>
+    <div className={`autocomplete ${className}`}>
       {label && (
         <label className="autocomplete__label" htmlFor={name}>
           {label}
@@ -65,16 +66,35 @@ const AutocompleteInput = ({
         onSuggestionSelected={onSuggestionSelected}
         inputProps={{
           id: name,
-          type: type,
-          name: name,
-          value: value,
-          onChange: onChange,
-          onBlur: onBlur,
+          type,
+          name,
+          value,
+          onChange,
+          onBlur,
           onKeyUp: onKeyUp ? handleKeyUp : null,
         }}
       />
     </div>
   );
+};
+AutocompleteInput.defaultProps = {
+  type: 'text',
+  label: false,
+  onBlur: false,
+  onKeyUp: false,
+  className: '',
+};
+
+AutocompleteInput.propTypes = {
+  type: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  onKeyUp: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  onSearching: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
 export default AutocompleteInput;
