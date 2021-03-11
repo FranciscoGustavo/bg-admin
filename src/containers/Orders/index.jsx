@@ -55,7 +55,7 @@ const Orders = () => {
         error = err.message;
       }
 
-      dispatch(addOrders({ dataOrders, loading: false, error }));
+      dispatch(addOrders({ data: dataOrders, loading: false, error }));
       return data;
     };
 

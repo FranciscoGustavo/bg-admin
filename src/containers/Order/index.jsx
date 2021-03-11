@@ -197,8 +197,6 @@ const Order = () => {
     onKeyUp: PropTypes.func.isRequired,
   };
 
-  // const cellInputDefault
-
   const cellDefault = (type, nameInput) => {
     const cellInputDefault = ({
       name,
@@ -217,7 +215,7 @@ const Order = () => {
     );
 
     cellInputDefault.propTypes = cellInputPropTypes;
-    return cellInputPropTypes;
+    return cellInputDefault;
   };
 
   cellDefault.propTypes = {
