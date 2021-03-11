@@ -99,7 +99,7 @@ const Providers = () => {
         error = err.message;
       }
 
-      dispatch(addProviders({ dataProvider, loading: false, error }));
+      dispatch(addProviders({ data: dataProvider, loading: false, error }));
       return data;
     };
 

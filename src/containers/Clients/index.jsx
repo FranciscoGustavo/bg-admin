@@ -98,7 +98,7 @@ const Clients = () => {
         error = err.message;
       }
 
-      dispatch(addClients({ dataClients, loading: false, error }));
+      dispatch(addClients({ data: dataClients, loading: false, error }));
       return data;
     };
 

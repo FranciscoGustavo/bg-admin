@@ -87,7 +87,7 @@ const TablePagination = ({
 );
 
 TablePagination.propTypes = {
-  total: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
   gotoPage: PropTypes.func.isRequired,
   previousPage: PropTypes.func.isRequired,
   nextPage: PropTypes.func.isRequired,

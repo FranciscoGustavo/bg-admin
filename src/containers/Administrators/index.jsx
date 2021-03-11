@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
 import { useStateValue } from '../../store/StateProvider';
-import { addUsers } from '../../store/actions';
+import { addAdministrators } from '../../store/actions';
 import { getUsers } from '../../localdata/users';
 import './styles.css';
 
 const Administrators = () => {
-  const [{ users }, dispatch] = useStateValue();
+  const [{ administrators }, dispatch] = useStateValue();
 
   const handleNew = () => {};
 
@@ -20,7 +20,9 @@ const Administrators = () => {
     alert('handleButtonSendEmail');
   };
 
-  const columns = [
+  const handleSelectedRows = () => {}
+
+  const columns = useMemo(() => [
     { Header: 'Nombre', accessor: 'name' },
     { Header: 'Telefono', accessor: 'phone' },
     { Header: 'Correo', accessor: 'email' },
@@ -28,27 +30,29 @@ const Administrators = () => {
       accessor: 'uid',
       Cell: () => <button type="button">Editar</button>,
     },
-  ];
+  ], []);
+
+  const data = useMemo(() => administrators.data, [administrators.data])
 
   useEffect(() => {
     const getData = async () => {
-      dispatch(addUsers({ data: false, loading: true, error: false }));
+      dispatch(addAdministrators({ data: false, loading: true, error: false }));
 
-      let data = false;
+      let dataAdministrators = false;
       let error = false;
 
       try {
-        data = await getUsers();
+        dataAdministrators = await getUsers();
       } catch (err) {
         error = err.message;
       }
-
-      dispatch(addUsers({ data, loading: false, error }));
+      console.log(dataAdministrators);
+      dispatch(addAdministrators({ data: dataAdministrators, loading: false, error }));
       return data;
     };
 
-    return !users.data ? getData() : null;
-  }, [dispatch, users.data]);
+    if (!administrators.data) getData();
+  }, [dispatch, administrators.data]);
 
   return (
     <LayoutAdmin title="Usuarios">
@@ -59,11 +63,11 @@ const Administrators = () => {
           onSendEmail={handleSendEmail}
         />
 
-        {users.data && (
-          <Table handleColumns={columns} handleData={users.data} />
+        {administrators.data && (
+          <Table columns={columns} data={data} handleSelectedRows={handleSelectedRows}/>
         )}
-        {users.loading && <p>Cargando</p>}
-        {users.error && <p>Error al cargar</p>}
+        {administrators.loading && <p>Cargando</p>}
+        {administrators.error && <p>Error al cargar</p>}
       </div>
     </LayoutAdmin>
   );

@@ -47,11 +47,11 @@ export const addClient = (payload) => ({
 });
 
 /**
- * Actions of
+ * Actions of administrators
  */
-export const ADD_USERS = 'ADD_USERS';
-export const addUsers = (payload) => ({
-  type: ADD_USERS,
+export const ADD_ADMINISTRATORS = 'ADD_ADMINISTRATORS';
+export const addAdministrators = (payload) => ({
+  type: ADD_ADMINISTRATORS,
   payload,
 });
 

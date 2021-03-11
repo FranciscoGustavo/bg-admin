@@ -4,7 +4,7 @@ import {
   OPEN_FORM_PRODUCT,
   ADD_PRODUCT,
   ADD_CLIENTS,
-  ADD_USERS,
+  ADD_ADMINISTRATORS,
   SET_USER,
   OPEN_FORM_CLIENT,
   ADD_CLIENT,
@@ -14,7 +14,7 @@ import {
   ADD_PROVIDER,
 } from './actions';
 
-const RESOURCES = ['product', 'order', 'client', 'provider'];
+const RESOURCES = ['product', 'order', 'client', 'provider', 'administrator'];
 
 const createInitialState = (resources) => {
   const initialState = {};
@@ -131,10 +131,10 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         user: payload,
       };
-    case ADD_USERS:
+    case ADD_ADMINISTRATORS:
       return {
         ...state,
-        users: { ...state.users, ...payload },
+        administrators: { ...state.administrators, ...payload },
       };
     case ADD_CLIENTS:
       return {

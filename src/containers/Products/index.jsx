@@ -114,7 +114,7 @@ const Products = () => {
         error = err.message;
       }
 
-      dispatch(addProducts({ dataProduct, loading: false, error }));
+      dispatch(addProducts({ data: dataProduct, loading: false, error }));
       return dataProduct;
     };
 
