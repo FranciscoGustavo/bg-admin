@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 import ArrowForwardOutlinedIcon from '@material-ui/icons/ArrowForwardOutlined';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
@@ -47,32 +48,62 @@ const TablePagination = ({
             setPageSize(Number(e.target.value));
           }}
         >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Mostrar {pageSize}
+          {[10, 20, 30, 40, 50].map((pageSizeOption) => (
+            <option key={pageSizeOption} value={pageSizeOption}>
+              Mostrar {pageSizeOption}
             </option>
           ))}
         </select>
       </div>
       <div className="tablePagination__right">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+        <button
+          type="button"
+          onClick={() => gotoPage(0)}
+          disabled={!canPreviousPage}
+        >
           <ArrowBackIosOutlinedIcon />
         </button>
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <button
+          type="button"
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+        >
           <ArrowBackOutlinedIcon />
         </button>
         <span>
           {pageIndex + 1} de {pageOptions.length}
         </span>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
+        <button
+          type="button"
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+        >
           <ArrowForwardOutlinedIcon />
         </button>
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+        <button
+          type="button"
+          onClick={() => gotoPage(pageCount - 1)}
+          disabled={!canNextPage}
+        >
           <ArrowForwardIosOutlinedIcon />
         </button>
       </div>
     </div>
   );
+};
+
+TablePagination.propTypes = {
+  total: PropTypes.string.isRequired,
+  gotoPage: PropTypes.func.isRequired,
+  previousPage: PropTypes.func.isRequired,
+  nextPage: PropTypes.func.isRequired,
+  canPreviousPage: PropTypes.bool.isRequired,
+  canNextPage: PropTypes.bool.isRequired,
+  setPageSize: PropTypes.func.isRequired,
+  pageIndex: PropTypes.number.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  pageOptions: PropTypes.object.isRequired,
+  pageSize: PropTypes.number.isRequired,
 };
 
 export default TablePagination;

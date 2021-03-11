@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { InputText } from '../../atoms';
 import './styles.css';
@@ -28,18 +29,22 @@ const ClientForm = ({ close, client, save }) => {
     return errors;
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     save(values);
   };
 
   return (
-    <div className="client" onClick={close}>
-      <div className="client__container" onClick={handleStopPropagation}>
+    <div className="client" onClick={close} onKeyDown={close}>
+      <div
+        className="client__container"
+        onClick={handleStopPropagation}
+        onKeyDown={handleStopPropagation}
+      >
         <Formik
           initialValues={{ ...client }}
           validate={handleValidate}
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
         >
           {({
             values,
@@ -126,6 +131,12 @@ const ClientForm = ({ close, client, save }) => {
       </div>
     </div>
   );
+};
+
+ClientForm.propTypes = {
+  close: PropTypes.func.isRequired,
+  client: PropTypes.object.isRequired,
+  save: PropTypes.func.isRequired,
 };
 
 export default ClientForm;

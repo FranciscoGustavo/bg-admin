@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AutocompleteInput } from '../../atoms';
 import { getClientsName, getClientsCode } from '../../../localdata/clients';
 import './styles.css';
@@ -58,7 +59,7 @@ const OrderForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => {
           </div>
 
           <div className="orderForm__deliveryDate">
-            <label htmlFor="">Entrega:</label>
+            <label htmlFor="deliveryDate">Entrega:</label>
             <input
               type="date"
               id="deliveryDate"
@@ -112,6 +113,14 @@ const OrderForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => {
       </div>
     </form>
   );
+};
+
+OrderForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onKeyUp: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  columns: PropTypes.object.isRequired,
 };
 
 export default OrderForm;

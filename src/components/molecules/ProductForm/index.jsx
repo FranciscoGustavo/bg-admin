@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { InputText } from '../../atoms';
 import './styles.css';
@@ -18,7 +19,7 @@ const ProductForm = ({ close, product, save }) => {
     return errors;
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     save(values);
   };
@@ -29,7 +30,7 @@ const ProductForm = ({ close, product, save }) => {
         <Formik
           initialValues={{ ...product }}
           validate={handleValidate}
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
         >
           {({
             values,
@@ -44,9 +45,7 @@ const ProductForm = ({ close, product, save }) => {
               <div className="product__cover">
                 <label htmlFor="cover">
                   <img
-                    src={
-                      'https://thumbs.dreamstime.com/b/pera-verde-51013299.jpg' /* values.cover */
-                    }
+                    src="https://thumbs.dreamstime.com/b/pera-verde-51013299.jpg"
                     alt=""
                   />
                 </label>
@@ -134,6 +133,12 @@ const ProductForm = ({ close, product, save }) => {
       </div>
     </div>
   );
+};
+
+ProductForm.propTypes = {
+  close: PropTypes.func.isRequired,
+  product: PropTypes.object.isRequired,
+  save: PropTypes.func.isRequired,
 };
 
 export default ProductForm;

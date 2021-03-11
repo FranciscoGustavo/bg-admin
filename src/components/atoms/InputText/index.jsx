@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
 const InputText = ({
@@ -15,15 +16,17 @@ const InputText = ({
   const renderOptions = () => {
     if (options)
       return options.map((option) => {
-        if (typeof option === 'object') {
+        if (typeof option === 'object' && option.value === value) {
           return (
-            <option key={option.label} value={option.value}>
+            <option key={option.label} value={value}>
               {option.label}
             </option>
           );
-        } else if (typeof option === 'object' && option.value === value) {
+        }
+
+        if (typeof option === 'object') {
           return (
-            <option key={option.label} value={value}>
+            <option key={option.label} value={option.value}>
               {option.label}
             </option>
           );
@@ -35,24 +38,22 @@ const InputText = ({
               {option}
             </option>
           );
-        } else {
-          return (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          );
         }
+
+        return (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        );
       });
     return null;
   };
 
-  const renderSelect = () => {
-    return (
-      <select id={name} name={name} onChange={onChange} value={value}>
-        {renderOptions()}
-      </select>
-    );
-  };
+  const renderSelect = () => (
+    <select id={name} name={name} onChange={onChange} value={value}>
+      {renderOptions()}
+    </select>
+  );
 
   return (
     <div className="inputText">
@@ -74,6 +75,26 @@ const InputText = ({
       {error && touched && <p className="inputText__error">{error}</p>}
     </div>
   );
+};
+
+InputText.defaultProps = {
+  type: 'text',
+  options: false,
+  onBlur: false,
+  error: false,
+  touched: false,
+};
+
+InputText.propTypes = {
+  type: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  options: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  touched: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default InputText;
