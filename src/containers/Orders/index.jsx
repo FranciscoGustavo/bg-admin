@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
+import { Loading } from '../../components/atoms';
 import { ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
@@ -78,7 +79,7 @@ const Orders = () => {
             handleSelectedRows={handleSelectedRows}
           />
         )}
-        {orders.loading && <p>Cargando</p>}
+        {orders.loading && <Loading />}
         {orders.error && <p>Error al cargar</p>}
       </div>
     </LayoutAdmin>

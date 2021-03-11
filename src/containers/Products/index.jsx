@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Loading } from '../../components/atoms';
 import { ProductForm, ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
@@ -137,7 +138,7 @@ const Products = () => {
             handleSelectedRows={handleSelectedRows}
           />
         )}
-        {products.loading && <p>Cargando</p>}
+        {products.loading && <Loading />}
         {products.error && (
           <button type="button" onClick={hanldeTryLoadDataAgain}>
             Error al cargar

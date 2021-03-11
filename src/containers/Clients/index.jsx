@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Loading } from '../../components/atoms';
 import { ToolsHeader, ClientForm } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
@@ -121,7 +122,7 @@ const Clients = () => {
             handleSelectedRows={handleSelectedRows}
           />
         )}
-        {clients.loading && <p>Cargando</p>}
+        {clients.loading && <Loading />}
         {clients.error && <p>Error al cargar</p>}
 
         {client.isOpenModal && (

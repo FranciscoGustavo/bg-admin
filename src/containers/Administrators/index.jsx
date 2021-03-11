@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
+import { Loading } from '../../components/atoms';
 import { ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
 import { LayoutAdmin } from '../../components/templates';
@@ -66,7 +67,7 @@ const Administrators = () => {
         {administrators.data && (
           <Table columns={columns} data={data} handleSelectedRows={handleSelectedRows}/>
         )}
-        {administrators.loading && <p>Cargando</p>}
+        {administrators.loading && <Loading />}
         {administrators.error && <p>Error al cargar</p>}
       </div>
     </LayoutAdmin>
