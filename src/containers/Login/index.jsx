@@ -22,7 +22,7 @@ const Login = () => {
     return errors;
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     // dispatch(setUser({ email: values.email }));
     // history.push('/');
@@ -46,7 +46,7 @@ const Login = () => {
         <Formik
           initialValues={{ email: '', password: '' }}
           validate={handleValidate}
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
         >
           {({
             values,

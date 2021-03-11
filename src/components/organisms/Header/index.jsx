@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
 import { useStateValue } from '../../../store/StateProvider';
 import { setUser } from '../../../store/actions';
@@ -31,14 +32,24 @@ const Header = ({ title }) => {
           <img src={DefaultAvatar} alt="default avatar" />
           <div className="header__userMenuContainer">
             <div className="header__userMenu">
-              <button>Perfil</button>
-              <button onClick={handleClickLogout}>Salir</button>
+              <button type="button">Perfil</button>
+              <button type="button" onClick={handleClickLogout}>
+                Salir
+              </button>
             </div>
           </div>
         </div>
       </div>
     </header>
   );
+};
+
+Header.defaultProps = {
+  title: '',
+};
+
+Header.propTypes = {
+  title: PropTypes.string,
 };
 
 export default Header;

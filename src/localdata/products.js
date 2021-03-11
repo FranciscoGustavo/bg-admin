@@ -28,9 +28,7 @@ export const getProductDetails = async (field, productNameOrCode) => {
 
 export const getProductsName = async (name) => {
   const product = await getProducts();
-  return product
-    .map((p) => p.name)
-    .filter((product) => product.indexOf(name) !== -1);
+  return product.map((p) => p.name).filter((p) => p.indexOf(name) !== -1);
 };
 
 export const saveProduct = async (uid, data) => {
@@ -45,6 +43,6 @@ export const saveProduct = async (uid, data) => {
     };
     return createdProduct;
   } catch (error) {
-    console.log(error);
+    return console.log(error);
   }
 };

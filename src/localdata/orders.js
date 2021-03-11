@@ -67,6 +67,6 @@ export const saveOrder = async (uid, data) => {
     };
     return createdOrder;
   } catch (error) {
-    console.log(error);
+    return console.log(error);
   }
 };

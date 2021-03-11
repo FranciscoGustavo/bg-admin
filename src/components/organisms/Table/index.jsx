@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useRef, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import { usePagination, useRowSelect, useTable } from 'react-table';
 import { TablePagination } from '../../molecules';
 import './styles.css';
@@ -31,7 +32,7 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
     setPageSize,
     state: { pageIndex, pageSize, selectedRowIds },
   } = useTable({ columns, data }, usePagination, useRowSelect, (hooks) => {
-    hooks.visibleColumns.push((columns) => [
+    hooks.visibleColumns.push((visibleColumns) => [
       {
         id: 'selection',
         Header: ({ getToggleAllPageRowsSelectedProps }) => (
@@ -45,7 +46,7 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
           </div>
         ),
       },
-      ...columns,
+      ...visibleColumns,
     ]);
   });
 
@@ -67,7 +68,7 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
         </thead>
 
         <tbody className="table__body" {...getTableBodyProps()}>
-          {page.map((row, i) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -96,5 +97,11 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
     </div>
   );
 });
+
+Table.propTypes = {
+  columns: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  handleSelectedRows: PropTypes.func.isRequired,
+};
 
 export default Table;

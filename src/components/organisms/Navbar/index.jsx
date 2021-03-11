@@ -43,7 +43,7 @@ const Navbar = () => {
   const [{ navbar }, dispatch] = useStateValue();
 
   const handleCheckChange = (e) => {
-    const name = e.target.name;
+    const { name } = e.target;
     dispatch(handleNavbar({ [name]: !navbar[name] }));
   };
 
@@ -68,8 +68,8 @@ const Navbar = () => {
   const handleRenderSubmenus = (submenus, uid) =>
     submenus && (
       <div className="navbar__submenu">
-        {submenus.map(({ label, to }, idx) => (
-          <NavLink activeClassName="active" key={idx} to={to}>
+        {submenus.map(({ label, to }) => (
+          <NavLink activeClassName="active" key={uid} to={to}>
             {label}
           </NavLink>
         ))}
