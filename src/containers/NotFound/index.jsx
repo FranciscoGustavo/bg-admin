@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutAdmin } from "../../components/templates";
+import { LayoutAdmin } from '../../components/templates';
 import './styles.css';
 
 const NotFound = () => {
@@ -10,6 +10,6 @@ const NotFound = () => {
       </div>
     </LayoutAdmin>
   );
-}
+};
 
-export default NotFound; 
+export default NotFound;

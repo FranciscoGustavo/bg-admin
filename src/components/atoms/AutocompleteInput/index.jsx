@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import './styles.css';
 
-const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onKeyUp, onSearching, className }) => {
+const AutocompleteInput = ({
+  type,
+  label,
+  name,
+  value,
+  onChange,
+  onBlur,
+  onKeyUp,
+  onSearching,
+  className,
+}) => {
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = async ({ value }) => {
@@ -17,30 +27,35 @@ const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onKeyU
     } catch (err) {
       setSuggestions([]);
     }
-  }
+  };
 
   const onSuggestionsClearRequested = () => setSuggestions([]);
 
   const getSuggestionValue = (suggestion) => suggestion;
-  
+
   const renderSuggestion = (suggestion) => (
     <div>
       <p>{suggestion}</p>
     </div>
   );
-  
+
   const onSuggestionSelected = (_event, { suggestion, method }) => {
     if (method === 'enter') {
       _event.preventDefault();
     }
-    onChange({ target: { name, value: suggestion } })
-  }
-  
-  const handleKeyUp = (_event) => _event.keyCode === 13 ? onKeyUp(_event) : null;
+    onChange({ target: { name, value: suggestion } });
+  };
+
+  const handleKeyUp = (_event) =>
+    _event.keyCode === 13 ? onKeyUp(_event) : null;
 
   return (
     <div className={`autocomplete ${className ? className : ''}`}>
-      { label && <label className="autocomplete__label" htmlFor={name}>{label}</label> }
+      {label && (
+        <label className="autocomplete__label" htmlFor={name}>
+          {label}
+        </label>
+      )}
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -60,6 +75,6 @@ const AutocompleteInput = ({  type, label, name, value, onChange, onBlur, onKeyU
       />
     </div>
   );
-}
+};
 
-export default AutocompleteInput; 
+export default AutocompleteInput;

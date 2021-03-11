@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { ToolsHeader } from '../../components/molecules';
 import { Table } from '../../components/organisms';
-import { LayoutAdmin } from "../../components/templates";
+import { LayoutAdmin } from '../../components/templates';
 import { useStateValue } from '../../store/StateProvider';
 import { addOrders } from '../../store/actions';
 import { getOrders } from '../../localdata/orders';
@@ -13,23 +13,26 @@ const Orders = () => {
   const [{ orders }, dispatch] = useStateValue();
 
   const handleNew = () => history.push('/orders/new');
-  const handlePrint = () => {}
-  const handleSendEmail = () => {}
+  const handlePrint = () => {};
+  const handleSendEmail = () => {};
 
   const handleSelectedRows = useCallback((data) => {
     console.log(data);
   }, []);
 
-  const columns = useMemo(() => [
-    { Header: 'Codigo', accessor: 'code' },
-    { Header: 'Cliente', accessor: 'clientName' },
-    { Header: 'Articulos', accessor: 'totalItems' },
-    { Header: 'Precio Total', accessor: 'total' },
-    {
-      accessor: 'uid',
-      Cell: ({ value }) => (<Link to={`/orders/${value}`} >Editar</Link>)
-    }
-  ], []);
+  const columns = useMemo(
+    () => [
+      { Header: 'Codigo', accessor: 'code' },
+      { Header: 'Cliente', accessor: 'clientName' },
+      { Header: 'Articulos', accessor: 'totalItems' },
+      { Header: 'Precio Total', accessor: 'total' },
+      {
+        accessor: 'uid',
+        Cell: ({ value }) => <Link to={`/orders/${value}`}>Editar</Link>,
+      },
+    ],
+    []
+  );
 
   const data = useMemo(() => orders.data, [orders.data]);
 
@@ -48,7 +51,7 @@ const Orders = () => {
 
       dispatch(addOrders({ data, loading: false, error }));
       return data;
-    }
+    };
 
     if (!orders.data) getData();
   }, [dispatch, orders.data]);
@@ -56,19 +59,24 @@ const Orders = () => {
   return (
     <LayoutAdmin title="Pedidos">
       <div className="main orders">
-        
         <ToolsHeader
           onNew={handleNew}
           onPrint={handlePrint}
           onSendEmail={handleSendEmail}
         />
 
-        { orders.data && <Table columns={columns} data={data} handleSelectedRows={handleSelectedRows} /> }
-        { orders.loading && <p>Cargando</p> }
-        { orders.error && <p>Error al cargar</p> }
+        {orders.data && (
+          <Table
+            columns={columns}
+            data={data}
+            handleSelectedRows={handleSelectedRows}
+          />
+        )}
+        {orders.loading && <p>Cargando</p>}
+        {orders.error && <p>Error al cargar</p>}
       </div>
     </LayoutAdmin>
   );
-}
+};
 
-export default Orders; 
+export default Orders;

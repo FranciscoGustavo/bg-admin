@@ -10,6 +10,6 @@ const Home = () => {
       </div>
     </LayoutAdmin>
   );
-}
+};
 
-export default Home; 
+export default Home;

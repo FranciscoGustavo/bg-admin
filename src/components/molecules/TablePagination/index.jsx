@@ -6,18 +6,28 @@ import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutli
 import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
 import './styles.css';
 
-const TablePagination = ({ total, gotoPage, previousPage, nextPage, canPreviousPage, canNextPage, setPageSize, pageIndex, pageCount, pageOptions, pageSize }) => {
+const TablePagination = ({
+  total,
+  gotoPage,
+  previousPage,
+  nextPage,
+  canPreviousPage,
+  canNextPage,
+  setPageSize,
+  pageIndex,
+  pageCount,
+  pageOptions,
+  pageSize,
+}) => {
   return (
     <div className="tablePagination">
       <div className="tablePagination__left">
-        <span className="tablePagination__detailCount" >
-          <strong>
-            {(pageIndex + 1) * pageSize - (pageSize) + 1}
-          </strong>
+        <span className="tablePagination__detailCount">
+          <strong>{(pageIndex + 1) * pageSize - pageSize + 1}</strong>
           <RemoveOutlinedIcon />
           <strong>
             {(pageIndex + 1) * pageSize} de {total}
-          </strong>  
+          </strong>
         </span>
 
         <input
@@ -26,7 +36,7 @@ const TablePagination = ({ total, gotoPage, previousPage, nextPage, canPreviousP
           defaultValue={pageIndex + 1}
           onChange={(e) => {
             const page = e.target.value ? Number(e.target.value - 1) : 0;
-            gotoPage(page)
+            gotoPage(page);
           }}
         />
 
@@ -45,7 +55,6 @@ const TablePagination = ({ total, gotoPage, previousPage, nextPage, canPreviousP
         </select>
       </div>
       <div className="tablePagination__right">
-
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           <ArrowBackIosOutlinedIcon />
         </button>
@@ -62,9 +71,8 @@ const TablePagination = ({ total, gotoPage, previousPage, nextPage, canPreviousP
           <ArrowForwardIosOutlinedIcon />
         </button>
       </div>
-
     </div>
   );
-}
+};
 
-export default TablePagination; 
+export default TablePagination;

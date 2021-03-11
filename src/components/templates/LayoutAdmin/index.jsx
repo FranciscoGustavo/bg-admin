@@ -10,6 +10,6 @@ const LayoutAdmin = ({ children, title }) => {
       {children}
     </div>
   );
-}
+};
 
-export default LayoutAdmin; 
+export default LayoutAdmin;

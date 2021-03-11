@@ -20,14 +20,13 @@ const Login = () => {
       errors.password = 'La contraseña es obligatoria';
     }
     return errors;
-
-  }
+  };
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     // dispatch(setUser({ email: values.email }));
     // history.push('/');
-  }
+  };
 
   const handleLoginDemo = () => {
     const email = 'blogging.demos@gmail.com';
@@ -39,7 +38,7 @@ const Login = () => {
         history.push('/');
       })
       .catch((err) => alert(err.message));
-  }
+  };
 
   return (
     <div className="login">
@@ -58,7 +57,7 @@ const Login = () => {
             handleSubmit,
             isSubmitting,
           }) => (
-            <form className="login__form" onSubmit={handleSubmit} >
+            <form className="login__form" onSubmit={handleSubmit}>
               <InputText
                 type="email"
                 name="email"
@@ -80,10 +79,22 @@ const Login = () => {
                 touched={touched.password}
               />
               <div>
-                <button type="submit" className="login__submit" disabled={isSubmitting}>Entrar</button>
+                <button
+                  type="submit"
+                  className="login__submit"
+                  disabled={isSubmitting}
+                >
+                  Entrar
+                </button>
               </div>
               <div>
-                <button type="button" className="login__demo" onClick={handleLoginDemo}>Login Demo</button>
+                <button
+                  type="button"
+                  className="login__demo"
+                  onClick={handleLoginDemo}
+                >
+                  Login Demo
+                </button>
               </div>
             </form>
           )}
@@ -91,6 +102,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Login; 
+export default Login;

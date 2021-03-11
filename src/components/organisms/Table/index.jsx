@@ -3,20 +3,16 @@ import { usePagination, useRowSelect, useTable } from 'react-table';
 import { TablePagination } from '../../molecules';
 import './styles.css';
 
-const IndeterminateCheckbox = forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = useRef();
-    const resolveRef = ref || defaultRef;
+const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
+  const defaultRef = useRef();
+  const resolveRef = ref || defaultRef;
 
-    useEffect(() => {
-      resolveRef.current.indeterminate = indeterminate;
-    }, [resolveRef, indeterminate]);
+  useEffect(() => {
+    resolveRef.current.indeterminate = indeterminate;
+  }, [resolveRef, indeterminate]);
 
-    return (
-      <input type="checkbox" ref={resolveRef} {...rest} />
-    );
-  }
-);
+  return <input type="checkbox" ref={resolveRef} {...rest} />;
+});
 
 const Table = memo(({ columns, data, handleSelectedRows }) => {
   const {
@@ -34,29 +30,24 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize, selectedRowIds },
-  } = useTable(
-    { columns, data },
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => [
-        {
-          id: 'selection',
-          Header: ({ getToggleAllPageRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()}/>
-            </div>
-          ),
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()}/>
-            </div>
-          ),
-        },
-        ...columns,
-      ])
-    }
-  );
+  } = useTable({ columns, data }, usePagination, useRowSelect, (hooks) => {
+    hooks.visibleColumns.push((columns) => [
+      {
+        id: 'selection',
+        Header: ({ getToggleAllPageRowsSelectedProps }) => (
+          <div>
+            <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
+          </div>
+        ),
+        Cell: ({ row }) => (
+          <div>
+            <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+          </div>
+        ),
+      },
+      ...columns,
+    ]);
+  });
 
   useEffect(() => {
     handleSelectedRows(selectedRowIds);
@@ -64,9 +55,7 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
 
   return (
     <div className="table">
-
       <table className="table__table" {...getTableProps()}>
-            
         <thead className="table__header">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -82,16 +71,15 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 ))}
               </tr>
-            )
+            );
           })}
         </tbody>
-
       </table>
-      
+
       <TablePagination
         total={data.length}
         gotoPage={gotoPage}
@@ -105,9 +93,8 @@ const Table = memo(({ columns, data, handleSelectedRows }) => {
         pageOptions={pageOptions}
         pageSize={pageSize}
       />
-
     </div>
   );
 });
 
-export default Table; 
+export default Table;
