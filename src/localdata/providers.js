@@ -1,20 +1,5 @@
 import { db } from '../firebase';
 
-const PROVIDRES = [
-  {
-    uid: 1,
-    name: 'LA STRONG BERRY',
-    price: 10,
-    unity: 'KG',
-  },
-  {
-    uid: 2,
-    name: 'THE PAIN APPLE',
-    price: 10,
-    unity: 'KG',
-  },
-];
-
 export const SCHEMA_PROVIDER = {
   uid: null,
   code: '',
@@ -61,4 +46,10 @@ export const saveProvider = async (uid, data) => {
   }
 };
 
-export default PROVIDRES;
+export const getProvidersCode = async () => [];
+
+export const getProvidersName = async () => {
+  const providers = await getProviders();
+  return providers.map((provider) => provider.name);
+};
+

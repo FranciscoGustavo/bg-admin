@@ -2,10 +2,10 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { AutocompleteInput, Loading } from '../../components/atoms';
-import { OrderForm } from '../../components/molecules';
+import { ReceptionForm } from '../../components/molecules';
 import { LayoutAdmin } from '../../components/templates';
 import { getProductsName, getProductDetails } from '../../localdata/products';
-import { getReception } from '../../localdata/receptions';
+import { getReception, saveReception } from '../../localdata/receptions';
 import { getProvider } from '../../localdata/providers';
 import './styles.css';
 
@@ -173,19 +173,19 @@ const Reception = () => {
   const onSubmit = (_event) => {
     _event.preventDefault();
     const saveData = async () => {
-      // const { uid: dataUid } = data;
+      const { uid: dataUid } = data;
       const emptyReception = {
         code: data.code,
-        clientCode: data.clientCode,
-        clientName: data.clientName,
+        providerCode: data.clientCode,
+        providerName: data.clientName,
         createdAt: data.createdAt,
         deliveryDate: data.deliveryDate,
         total: data.total,
         products: data.products,
       };
       console.log(emptyReception);
-      // const createdOrder = await saveReception(dataUid, emptyReception);
-      // alert(`Recepción con el uid: ${createdOrder.uid} fue creado`);
+      const createdReception = await saveReception(dataUid, emptyReception);
+      alert(`Recepción con el uid: ${createdReception.uid} fue creado`);
     };
     saveData();
   };
@@ -288,7 +288,7 @@ const Reception = () => {
   return (
     <LayoutAdmin title="Recepción">
       {data && (
-        <OrderForm
+        <ReceptionForm
           onSubmit={onSubmit}
           onChange={onChange}
           onKeyUp={handleKeyPress}
