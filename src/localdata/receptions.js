@@ -18,9 +18,9 @@ const SCHEMA_RECEPTION = {
   ],
 };
 
-export const getOrder = async (uid) => {
+export const getReception = async (uid) => {
   if (uid === 'new') {
-    const countDocuments = await db.collection('providers').get();
+    const countDocuments = await db.collection('receptions').get();
     const currentDocument = countDocuments.size + 1;
     const currentDocumentStr = String(currentDocument).split('').reverse();
     const CODE = '0000'
@@ -37,16 +37,19 @@ export const getOrder = async (uid) => {
     };
   }
 
-  const order = await db.collection('orders').doc(uid).get();
+  const reception = await db.collection('receptions').doc(uid).get();
 
   return {
-    uid: order.id,
-    ...order.data(),
+    uid: reception.id,
+    ...reception.data(),
   };
 };
 
 export const getReceptions = async () => {
-  const receptions = await db.collection('receptions').orderBy('code', 'desc').get();
+  const receptions = await db
+    .collection('receptions')
+    .orderBy('code', 'desc')
+    .get();
 
   return receptions.docs.map((doc) => ({
     uid: doc.id,
@@ -55,18 +58,18 @@ export const getReceptions = async () => {
   }));
 };
 
-export const saveOrder = async (uid, data) => {
-  const collection = db.collection('orders');
+export const saveReception = async (uid, data) => {
+  const collection = db.collection('receptions');
   try {
-    const creatingOrder = uid
+    const creatingReception = uid
       ? await collection.doc(uid).set(data)
       : await collection.add(data);
-    const createdOrder = {
-      uid: creatingOrder ? creatingOrder.id : uid,
+    const createdReception = {
+      uid: creatingReception ? creatingReception.id : uid,
       ...data,
     };
-    return createdOrder;
+    return createdReception;
   } catch (error) {
-    return console.log(error);
+    return error;
   }
 };

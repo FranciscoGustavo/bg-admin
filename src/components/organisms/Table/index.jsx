@@ -16,8 +16,8 @@ const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
 });
 
 IndeterminateCheckbox.propTypes = {
-  indeterminate: PropTypes.bool.isRequired
-}
+  indeterminate: PropTypes.bool.isRequired,
+};
 
 const Table = memo(({ columns, data, handleSelectedRows }) => {
   const headerSelection = ({ getToggleAllPageRowsSelectedProps }) => (

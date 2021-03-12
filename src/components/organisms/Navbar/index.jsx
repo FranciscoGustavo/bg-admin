@@ -24,7 +24,11 @@ const NAVBAR = [
     uid: 'purchases',
     label: 'Compras',
     submenus: [
-      { uid: 'purchases-merchandise-reception', label: 'Recepcion de Mercancia', to: '/merchandise-reception' },
+      {
+        uid: 'purchases-merchandise-reception',
+        label: 'Recepcion de Mercancia',
+        to: '/merchandise-reception',
+      },
       { uid: 'purchases-inventory', label: 'Inventario', to: '/inventory' },
     ],
   },

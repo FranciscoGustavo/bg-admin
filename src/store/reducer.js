@@ -15,7 +15,14 @@ import {
   ADD_RECEPTIONS,
 } from './actions';
 
-const RESOURCES = ['product', 'order', 'client', 'provider', 'administrator', 'receptions'];
+const RESOURCES = [
+  'product',
+  'order',
+  'client',
+  'provider',
+  'administrator',
+  'receptions',
+];
 
 const createInitialState = (resources) => {
   const initialState = {};
@@ -94,10 +101,10 @@ export const reducer = (state, { type, payload }) => {
         orders: { ...state.orders, ...payload },
       };
     case ADD_RECEPTIONS:
-        return {
-          ...state,
-          receptions: { ...state.receptions, ...payload },
-        };
+      return {
+        ...state,
+        receptions: { ...state.receptions, ...payload },
+      };
     case ADD_CLIENT: {
       const { uid, savedClient } = payload;
 

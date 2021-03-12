@@ -22,7 +22,9 @@ const MerchandiseReception = () => {
     console.log(data);
   }, []);
 
-  const cellEdit = ({ value }) => <Link to={`/merchandise-reception/${value}`}>Editar</Link>;
+  const cellEdit = ({ value }) => (
+    <Link to={`/merchandise-reception/${value}`}>Editar</Link>
+  );
   cellEdit.propTypes = {
     value: PropTypes.string.isRequired,
   };

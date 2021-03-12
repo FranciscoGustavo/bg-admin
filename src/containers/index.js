@@ -8,3 +8,4 @@ export { default as Administrators } from './Administrators';
 export { default as NotFound } from './NotFound';
 export { default as Order } from './Order';
 export { default as MerchandiseReception } from './MerchandiseReception';
+export { default as Reception } from './Reception';

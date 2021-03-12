@@ -41,6 +41,6 @@ export const saveProduct = async (uid, data) => {
     };
     return createdProduct;
   } catch (error) {
-    return console.log(error);
+    return error;
   }
 };

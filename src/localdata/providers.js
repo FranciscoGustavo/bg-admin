@@ -33,6 +33,18 @@ export const getProviders = async () => {
   }));
 };
 
+export const getProvider = async (field, providerNameOrCode) => {
+  const provider = await db
+    .collection('providers')
+    .where(field, '==', providerNameOrCode)
+    .get();
+
+  return provider.docs.map((doc) => ({
+    uid: doc.id,
+    ...doc.data(),
+  }))[0];
+};
+
 export const saveProvider = async (uid, data) => {
   const collection = db.collection('providers');
   try {
@@ -45,7 +57,7 @@ export const saveProvider = async (uid, data) => {
     };
     return createdProvider;
   } catch (error) {
-    return console.error(error);
+    return error;
   }
 };
 

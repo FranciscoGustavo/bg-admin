@@ -41,7 +41,7 @@ export const saveClient = async (uid, data) => {
     };
     return createdClient;
   } catch (error) {
-    return console.error(error);
+    return error;
   }
 };
 

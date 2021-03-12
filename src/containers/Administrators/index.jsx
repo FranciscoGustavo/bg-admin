@@ -21,19 +21,22 @@ const Administrators = () => {
     alert('handleButtonSendEmail');
   };
 
-  const handleSelectedRows = () => {}
+  const handleSelectedRows = () => {};
 
-  const columns = useMemo(() => [
-    { Header: 'Nombre', accessor: 'name' },
-    { Header: 'Telefono', accessor: 'phone' },
-    { Header: 'Correo', accessor: 'email' },
-    {
-      accessor: 'uid',
-      Cell: () => <button type="button">Editar</button>,
-    },
-  ], []);
+  const columns = useMemo(
+    () => [
+      { Header: 'Nombre', accessor: 'name' },
+      { Header: 'Telefono', accessor: 'phone' },
+      { Header: 'Correo', accessor: 'email' },
+      {
+        accessor: 'uid',
+        Cell: () => <button type="button">Editar</button>,
+      },
+    ],
+    []
+  );
 
-  const data = useMemo(() => administrators.data, [administrators.data])
+  const data = useMemo(() => administrators.data, [administrators.data]);
 
   useEffect(() => {
     const getData = async () => {
@@ -48,7 +51,9 @@ const Administrators = () => {
         error = err.message;
       }
       console.log(dataAdministrators);
-      dispatch(addAdministrators({ data: dataAdministrators, loading: false, error }));
+      dispatch(
+        addAdministrators({ data: dataAdministrators, loading: false, error })
+      );
       return data;
     };
 
@@ -65,7 +70,11 @@ const Administrators = () => {
         />
 
         {administrators.data && (
-          <Table columns={columns} data={data} handleSelectedRows={handleSelectedRows}/>
+          <Table
+            columns={columns}
+            data={data}
+            handleSelectedRows={handleSelectedRows}
+          />
         )}
         {administrators.loading && <Loading />}
         {administrators.error && <p>Error al cargar</p>}
