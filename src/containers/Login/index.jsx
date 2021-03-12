@@ -37,7 +37,9 @@ const Login = () => {
         dispatch(setUser({ isAuthenticated: true, email }));
         history.push('/');
       })
-      .catch((err) => alert(err.message));
+      .catch(() => {
+        // handle error
+      });
   };
 
   return (

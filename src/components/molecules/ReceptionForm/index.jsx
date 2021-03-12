@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AutocompleteInput } from '../../atoms';
-import { getProvidersName, getProvidersCode } from '../../../localdata/providers';
+import {
+  getProvidersName,
+  getProvidersCode,
+} from '../../../localdata/providers';
 import './styles.css';
 
 const RecemptionForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => (

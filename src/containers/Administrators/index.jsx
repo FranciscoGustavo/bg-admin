@@ -17,9 +17,7 @@ const Administrators = () => {
     window.print();
   };
 
-  const handleSendEmail = () => {
-    alert('handleButtonSendEmail');
-  };
+  const handleSendEmail = () => {};
 
   const handleSelectedRows = () => {};
 
@@ -50,7 +48,7 @@ const Administrators = () => {
       } catch (err) {
         error = err.message;
       }
-      console.log(dataAdministrators);
+
       dispatch(
         addAdministrators({ data: dataAdministrators, loading: false, error })
       );

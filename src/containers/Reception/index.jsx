@@ -160,8 +160,8 @@ const Reception = () => {
                 clientName: client.name,
               });
             }
-          } catch (err) {
-            console.log(err);
+          } catch {
+            //
           }
         };
         getClientNameAndCode();
@@ -183,9 +183,7 @@ const Reception = () => {
         total: data.total,
         products: data.products,
       };
-      console.log(emptyReception);
-      const createdReception = await saveReception(dataUid, emptyReception);
-      alert(`Recepción con el uid: ${createdReception.uid} fue creado`);
+      await saveReception(dataUid, emptyReception);
     };
     saveData();
   };
@@ -277,8 +275,8 @@ const Reception = () => {
       try {
         const dataReception = await getReception(uid);
         setData(dataReception);
-      } catch (err) {
-        console.log(err);
+      } catch {
+        //
       }
     };
 

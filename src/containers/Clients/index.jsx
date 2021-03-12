@@ -43,7 +43,7 @@ const Clients = () => {
   };
 
   const handleSendEmail = () => {
-    alert('handleButtonSendEmail');
+    // handle
   };
 
   const handleSave = (data) => {

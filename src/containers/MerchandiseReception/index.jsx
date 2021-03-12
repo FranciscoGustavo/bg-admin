@@ -18,9 +18,7 @@ const MerchandiseReception = () => {
   const handlePrint = () => {};
   const handleSendEmail = () => {};
 
-  const handleSelectedRows = useCallback((data) => {
-    console.log(data);
-  }, []);
+  const handleSelectedRows = useCallback(() => {}, []);
 
   const cellEdit = ({ value }) => (
     <Link to={`/merchandise-reception/${value}`}>Editar</Link>

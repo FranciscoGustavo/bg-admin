@@ -18,9 +18,7 @@ const Orders = () => {
   const handlePrint = () => {};
   const handleSendEmail = () => {};
 
-  const handleSelectedRows = useCallback((data) => {
-    console.log(data);
-  }, []);
+  const handleSelectedRows = useCallback(() => {}, []);
 
   const cellEdit = ({ value }) => <Link to={`/orders/${value}`}>Editar</Link>;
   cellEdit.propTypes = {

@@ -16,8 +16,8 @@ const Header = ({ title }) => {
       .then(() => {
         dispatch(setUser(null));
       })
-      .catch((err) => {
-        alert(err.message);
+      .catch(() => {
+        // handle error
       });
   };
 

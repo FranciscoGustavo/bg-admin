@@ -12,7 +12,7 @@ import './styles.css';
 const Products = () => {
   const [{ products, product }, dispatch] = useStateValue();
   const [tryLoadDataAgain, setTryLoadDataAgain] = useState(0);
-  const [selectedRows, setSelectedRows] = useState();
+  const [, setSelectedRows] = useState();
 
   const hanldeTryLoadDataAgain = () =>
     setTryLoadDataAgain(tryLoadDataAgain + 1);
@@ -52,12 +52,10 @@ const Products = () => {
   }, []);
 
   const handlePrint = () => {
-    console.log(selectedRows);
+    // console.info(selectedRows);
   };
 
-  const handleSendEmail = () => {
-    alert('handleButtonSendEmail');
-  };
+  const handleSendEmail = () => {};
 
   const handleSave = (data) => {
     const saveData = async () => {

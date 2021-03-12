@@ -52,4 +52,3 @@ export const getProvidersName = async () => {
   const providers = await getProviders();
   return providers.map((provider) => provider.name);
 };
-

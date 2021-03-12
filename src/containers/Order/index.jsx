@@ -160,8 +160,8 @@ const Order = () => {
                 clientName: client.name,
               });
             }
-          } catch (err) {
-            console.log(err);
+          } catch {
+            //
           }
         };
         getClientNameAndCode();
@@ -184,8 +184,7 @@ const Order = () => {
         products: data.products,
       };
 
-      const createdOrder = await saveOrder(dataUid, emptyOrder);
-      alert(`Pedido con el uid: ${createdOrder.uid} fue creado`);
+      await saveOrder(dataUid, emptyOrder);
     };
     saveData();
   };
@@ -277,8 +276,8 @@ const Order = () => {
       try {
         const dataOrder = await getOrder(uid);
         setData(dataOrder);
-      } catch (err) {
-        console.log(err);
+      } catch {
+        //
       }
     };
 
