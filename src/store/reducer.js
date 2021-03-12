@@ -12,9 +12,10 @@ import {
   ADD_PROVIDERS,
   OPEN_FORM_PROVIDER,
   ADD_PROVIDER,
+  ADD_RECEPTIONS,
 } from './actions';
 
-const RESOURCES = ['product', 'order', 'client', 'provider', 'administrator'];
+const RESOURCES = ['product', 'order', 'client', 'provider', 'administrator', 'receptions'];
 
 const createInitialState = (resources) => {
   const initialState = {};
@@ -92,6 +93,11 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         orders: { ...state.orders, ...payload },
       };
+    case ADD_RECEPTIONS:
+        return {
+          ...state,
+          receptions: { ...state.receptions, ...payload },
+        };
     case ADD_CLIENT: {
       const { uid, savedClient } = payload;
 

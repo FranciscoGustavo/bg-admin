@@ -8,6 +8,7 @@ import {
   Administrators,
   NotFound,
   Order,
+  MerchandiseReception
 } from '../containers';
 
 const ROUTES = [
@@ -15,6 +16,7 @@ const ROUTES = [
   { exact: true, path: '/products', component: Products, isProtected: true },
   { exact: true, path: '/orders', component: Orders, isProtected: true },
   { exact: true, path: '/orders/:uid', component: Order, isProtected: true },
+  { exact: true, path: '/merchandise-reception', component: MerchandiseReception, isProtected: true },
   { exact: true, path: '/clients', component: Clients, isProtected: true },
   { exact: true, path: '/providers', component: Providers, isProtected: true },
   { exact: true, path: '/users', component: Administrators, isProtected: true },

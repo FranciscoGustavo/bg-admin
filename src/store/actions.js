@@ -74,6 +74,15 @@ export const addOrders = (payload) => ({
 });
 
 /**
+ * Actions of receptions
+ */
+ export const ADD_RECEPTIONS = 'ADD_RECEPTIONS';
+ export const addReceptions = (payload) => ({
+   type: ADD_RECEPTIONS,
+   payload,
+ });
+
+/**
  * Actions of Providers
  */
 export const ADD_PROVIDERS = 'ADD_PROVIDERS';
