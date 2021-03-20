@@ -1,8 +1,8 @@
 import { db } from '../firebase';
 
 const SCHEMA_RECEPTION = {
-  clientCode: '',
-  clientName: '',
+  providerCode: '',
+  providerName: '',
   createdAt: '2021-05-25',
   deliveryDate: '2021-08-03',
   total: 0,
