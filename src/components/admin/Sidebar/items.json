@@ -10,9 +10,9 @@
     "label": "Ventas",
     "to": false,
     "submenu": [
-      { "uid": "sales-products", "label": "Productos", "to": "/products"
+      { "uid": "sales-products", "label": "Productos", "to": "/admin/products"
       },
-      { "uid": "sales-orders", "label": "Pedidos", "to": "/orders"
+      { "uid": "sales-orders", "label": "Pedidos", "to": "/admin/orders"
       }
     ]
   },
@@ -26,7 +26,7 @@
         "label": "Recepcion de Mercancia",
         "to": "/merchandise-reception"
       },
-      { "uid": "purchases-inventory", "label": "Inventario", "to": "/inventory"
+      { "uid": "purchases-inventory", "label": "Inventario", "to": "/admin/inventory"
       }
     ]
   },
@@ -36,13 +36,13 @@
     "to": false,
     "submenu": [
       {
-        "uid": "users-clients", "label": "Clientes", "to": "/clients"
+        "uid": "users-clients", "label": "Clientes", "to": "/admin/clients"
       },
       {
-        "uid": "users-providers", "label": "Provedores", "to": "/providers"
+        "uid": "users-providers", "label": "Provedores", "to": "/admin/providers"
       },
       {
-        "uid": "users-admins", "label": "Administradores", "to": "/users"
+        "uid": "users-admins", "label": "Administradores", "to": "/admin/users"
       }
     ]
   }
