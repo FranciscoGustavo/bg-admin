@@ -1,0 +1,49 @@
+[
+  {
+    "uid": "home",
+    "label": "Home",
+    "to": "/admin",
+    "submenu": false
+  },
+  {
+    "uid": "sales",
+    "label": "Ventas",
+    "to": false,
+    "submenu": [
+      { "uid": "sales-products", "label": "Productos", "to": "/products"
+      },
+      { "uid": "sales-orders", "label": "Pedidos", "to": "/orders"
+      }
+    ]
+  },
+  {
+    "uid": "purchases",
+    "label": "Compras",
+    "to": false,
+    "submenu": [
+      {
+        "uid": "purchases-merchandise-reception",
+        "label": "Recepcion de Mercancia",
+        "to": "/merchandise-reception"
+      },
+      { "uid": "purchases-inventory", "label": "Inventario", "to": "/inventory"
+      }
+    ]
+  },
+  {
+    "uid": "users",
+    "label": "Usuarios",
+    "to": false,
+    "submenu": [
+      {
+        "uid": "users-clients", "label": "Clientes", "to": "/clients"
+      },
+      {
+        "uid": "users-providers", "label": "Provedores", "to": "/providers"
+      },
+      {
+        "uid": "users-admins", "label": "Administradores", "to": "/users"
+      }
+    ]
+  }
+]
