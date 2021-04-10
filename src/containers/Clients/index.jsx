@@ -15,11 +15,11 @@ const Clients = () => {
   const handleEdit = useCallback(
     (uid) => {
       const data = clients.data.filter(
-        (filterClient) => filterClient.uid === uid
+        (filterClient) => filterClient.uid === uid,
       )[0];
       dispatch(openFormClient({ data, isOpenModal: true, error: false }));
     },
-    [dispatch, clients.data]
+    [dispatch, clients.data],
   );
 
   const handleCloseModal = () => {
@@ -32,7 +32,7 @@ const Clients = () => {
         data: { ...SCHEMA_CLIENT },
         isOpenModal: true,
         error: false,
-      })
+      }),
     );
   };
 
@@ -81,7 +81,7 @@ const Clients = () => {
       { Header: 'Correo', accessor: 'email' },
       { accessor: 'uid', Cell: cellEdit },
     ],
-    [handleEdit]
+    [handleEdit],
   );
 
   const data = useMemo(() => clients.data, [clients.data]);

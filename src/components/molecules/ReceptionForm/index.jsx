@@ -7,7 +7,9 @@ import {
 } from '../../../localdata/providers';
 import './styles.css';
 
-const RecemptionForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => (
+const RecemptionForm = ({
+  onSubmit, onChange, onKeyUp, data, columns,
+}) => (
   <form className="orderForm">
     <div className="orderForm__info">
       <div className="orderForm__client">
@@ -110,7 +112,10 @@ const RecemptionForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => (
       </p>
       <p>
         <span>El total es:</span>
-        <span>$ {data.total}</span>
+        <span>
+          $
+          {data.total}
+        </span>
       </p>
     </div>
   </form>

@@ -36,7 +36,7 @@ const Orders = () => {
         Cell: cellEdit,
       },
     ],
-    []
+    [],
   );
 
   const data = useMemo(() => orders.data, [orders.data]);

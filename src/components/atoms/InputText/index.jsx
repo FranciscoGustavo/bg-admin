@@ -14,7 +14,7 @@ const InputText = ({
   touched,
 }) => {
   const renderOptions = () => {
-    if (options)
+    if (options) {
       return options.map((option) => {
         if (typeof option === 'object' && option.value === value) {
           return (
@@ -46,6 +46,7 @@ const InputText = ({
           </option>
         );
       });
+    }
     return null;
   };
 

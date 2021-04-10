@@ -47,8 +47,7 @@ const AutocompleteInput = ({
     onChange({ target: { name, value: suggestion } });
   };
 
-  const handleKeyUp = (_event) =>
-    _event.keyCode === 13 ? onKeyUp(_event) : null;
+  const handleKeyUp = (_event) => (_event.keyCode === 13 ? onKeyUp(_event) : null);
 
   return (
     <div className={`autocomplete ${className}`}>

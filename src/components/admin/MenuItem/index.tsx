@@ -5,13 +5,13 @@ import {
   ListItem,
   ListItemText,
   Collapse,
-  Button
+  Button,
 } from '@material-ui/core';
 import { useStyles } from './styles';
 
 const CollapseSubmenu = ({ submenu, isOpen }) => {
   const { SListSubItem, SListItemButton } = useStyles();
-  
+
   return (
     <Collapse in={isOpen}>
       <List disablePadding>
@@ -27,33 +27,35 @@ const CollapseSubmenu = ({ submenu, isOpen }) => {
       </List>
     </Collapse>
   );
-}
+};
 
 const MenuItem = ({ label, to, submenu }) => {
   const { SListItem, SListItemButton, SListItemText } = useStyles();
   const [isOpen, handleIsOpen] = useState(false);
-  
-  if (!submenu) return (
-    <ListItem className={SListItem}>
-    <Link href={to}>
-      <Button className={SListItemButton} component="a">
-        {label}
-      </Button>
-    </Link>
-    </ListItem>
-  );
+
+  if (!submenu) {
+    return (
+      <ListItem className={SListItem}>
+        <Link href={to}>
+          <Button className={SListItemButton} component="a">
+            {label}
+          </Button>
+        </Link>
+      </ListItem>
+    );
+  }
 
   return (
     <>
-    
-    <ListItem className={SListItemButton} button onClick={() => handleIsOpen(!isOpen)}>
-      <ListItemText className={SListItemText}>
-        {label}
-      </ListItemText>
-    </ListItem>
-      {submenu && <CollapseSubmenu submenu={submenu} isOpen={isOpen}/>}
+
+      <ListItem className={SListItemButton} button onClick={() => handleIsOpen(!isOpen)}>
+        <ListItemText className={SListItemText}>
+          {label}
+        </ListItemText>
+      </ListItem>
+      {submenu && <CollapseSubmenu submenu={submenu} isOpen={isOpen} />}
     </>
   );
-}
+};
 
 export default MenuItem;

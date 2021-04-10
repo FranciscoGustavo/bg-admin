@@ -1,4 +1,6 @@
-import React, { memo, useEffect, useRef, forwardRef } from 'react';
+import React, {
+  memo, useEffect, useRef, forwardRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { usePagination, useRowSelect, useTable } from 'react-table';
 import { TablePagination } from '../../molecules';

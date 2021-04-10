@@ -61,9 +61,7 @@ export const reducer = (state, { type, payload }) => {
 
       const newStateProviders = !uid
         ? [...state.providers.data, savedProvider]
-        : state.providers.data.map((provider) =>
-            provider.uid === uid ? savedProvider : provider
-          );
+        : state.providers.data.map((provider) => (provider.uid === uid ? savedProvider : provider));
 
       const sortedProviders = newStateProviders.sort((a, b) => {
         if (a.code > b.code) {
@@ -110,9 +108,7 @@ export const reducer = (state, { type, payload }) => {
 
       const newStateClients = !uid
         ? [...state.clients.data, savedClient]
-        : state.clients.data.map((client) =>
-            client.uid === uid ? savedClient : client
-          );
+        : state.clients.data.map((client) => (client.uid === uid ? savedClient : client));
 
       const sortedClients = newStateClients.sort((a, b) => {
         if (a.code > b.code) {
@@ -159,9 +155,7 @@ export const reducer = (state, { type, payload }) => {
 
       const newStateProducts = !uid
         ? [...state.products.data, createdProduct]
-        : state.products.data.map((product) =>
-            product.uid === uid ? createdProduct : product
-          );
+        : state.products.data.map((product) => (product.uid === uid ? createdProduct : product));
 
       const sortedProducts = newStateProducts.sort((a, b) => {
         if (a.code > b.code) {

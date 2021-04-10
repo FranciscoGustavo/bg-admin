@@ -11,8 +11,8 @@ const LayoutAdmin = ({ children }) => {
     DashboardLayoutContainer,
     DashboardLayoutContent,
   } = useStyles();
-return (
-  <div className={DashboardLayoutRoot}>
+  return (
+    <div className={DashboardLayoutRoot}>
       <Header onMobileNavOpen={() => setMobileNavOpen(true)} />
       <Sidebar
         onMobileClose={() => setMobileNavOpen(false)}
@@ -24,7 +24,7 @@ return (
         </div>
       </div>
     </div>
-);
-}
+  );
+};
 
 export default LayoutAdmin;

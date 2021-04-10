@@ -16,7 +16,7 @@ const MyApp = (props: AppProps) => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>My page</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -25,7 +25,7 @@ const MyApp = (props: AppProps) => {
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 };
 

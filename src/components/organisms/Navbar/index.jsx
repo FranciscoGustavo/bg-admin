@@ -69,16 +69,15 @@ const Navbar = () => {
     );
   };
 
-  const handleRenderSubmenus = (submenus) =>
-    submenus && (
-      <div className="navbar__submenu">
-        {submenus.map(({ uid: subUid, label, to }) => (
-          <NavLink activeClassName="active" key={subUid} to={to}>
-            {label}
-          </NavLink>
-        ))}
-      </div>
-    );
+  const handleRenderSubmenus = (submenus) => submenus && (
+  <div className="navbar__submenu">
+    {submenus.map(({ uid: subUid, label, to }) => (
+      <NavLink activeClassName="active" key={subUid} to={to}>
+        {label}
+      </NavLink>
+    ))}
+  </div>
+  );
 
   return (
     <div className="navbar">
@@ -86,7 +85,9 @@ const Navbar = () => {
         <img src={logo} alt="" />
       </div>
       <nav className="navbar__nav">
-        {NAVBAR.map(({ uid, label, to, submenus }) => (
+        {NAVBAR.map(({
+          uid, label, to, submenus,
+        }) => (
           <div key={uid} className="navbar__menu">
             {handleRenderMenuItem(uid, label, to, submenus)}
             {handleRenderSubmenus(submenus)}

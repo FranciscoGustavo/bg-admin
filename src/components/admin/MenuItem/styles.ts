@@ -31,6 +31,6 @@ export const useStyles = makeStyles((theme) => ({
     '& span': {
       fontSize: '0.875rem',
       fontWeight: 500,
-    }
-  }
+    },
+  },
 }));

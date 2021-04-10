@@ -38,7 +38,7 @@ const MerchandiseReception = () => {
         Cell: cellEdit,
       },
     ],
-    []
+    [],
   );
 
   const data = useMemo(() => receptions.data, [receptions.data]);

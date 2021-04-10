@@ -25,9 +25,7 @@ export const getOrder = async (uid) => {
     const currentDocumentStr = String(currentDocument).split('').reverse();
     const CODE = '0000'
       .split('')
-      .map((value, idx) =>
-        currentDocumentStr[idx] ? currentDocumentStr[idx] : value
-      )
+      .map((value, idx) => (currentDocumentStr[idx] ? currentDocumentStr[idx] : value))
       .reverse()
       .join('');
 
