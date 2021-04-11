@@ -10,14 +10,15 @@ import {
 import { useStyles } from './styles';
 
 type Submenu = {
+  uid: string;
   label: string;
   to: string;
-}
+};
 
 type CollapseSubmenuProps = {
   submenu: Array<Submenu>;
   isOpen: boolean;
-}
+};
 
 const CollapseSubmenu: FC<CollapseSubmenuProps> = ({ submenu, isOpen }) => {
   const { SListSubItem, SListItemButton } = useStyles();
@@ -25,8 +26,8 @@ const CollapseSubmenu: FC<CollapseSubmenuProps> = ({ submenu, isOpen }) => {
   return (
     <Collapse in={isOpen}>
       <List disablePadding>
-        {submenu.map(({ label, to }) => (
-          <ListItem className={SListSubItem}>
+        {submenu.map(({ uid, label, to }) => (
+          <ListItem key={uid} className={SListSubItem}>
             <Link href={to}>
               <Button className={SListItemButton} component="a">
                 {label}
@@ -41,9 +42,9 @@ const CollapseSubmenu: FC<CollapseSubmenuProps> = ({ submenu, isOpen }) => {
 
 type MenuItemProps = {
   label: string;
-  to: string;
+  to: boolean | string;
   submenu: boolean | Array<Submenu>;
-}
+};
 
 const MenuItem: FC<MenuItemProps> = ({ label, to, submenu }) => {
   const { SListItem, SListItemButton, SListItemText } = useStyles();
@@ -52,7 +53,7 @@ const MenuItem: FC<MenuItemProps> = ({ label, to, submenu }) => {
   if (!submenu) {
     return (
       <ListItem className={SListItem}>
-        <Link href={to}>
+        <Link href={to as string}>
           <Button className={SListItemButton} component="a">
             {label}
           </Button>
@@ -70,7 +71,9 @@ const MenuItem: FC<MenuItemProps> = ({ label, to, submenu }) => {
       >
         <ListItemText className={SListItemText}>{label}</ListItemText>
       </ListItem>
-      {submenu && <CollapseSubmenu submenu={submenu as Array<Submenu>} isOpen={isOpen} />}
+      {submenu && (
+        <CollapseSubmenu submenu={submenu as Array<Submenu>} isOpen={isOpen} />
+      )}
     </>
   );
 };

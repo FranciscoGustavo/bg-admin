@@ -1,37 +1,46 @@
 {
     "env": {
         "browser": true,
-        "es2021": true,
-        "node": true
+        "node": true,
+        "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
         "airbnb",
+        "plugin:@typescript-eslint/recommended",
+        "airbnb/hooks",
+        "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
         "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
+        "ecmaVersion": 2021,
+        "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module",
-        "project": "./tsconfig.json"
+        }
     },
     "plugins": [
+        "@typescript-eslint",
         "react",
-        "@typescript-eslint"
+        "prettier"
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
         "react/jsx-filename-extension": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/prop-types": "off",
         "import/prefer-default-export": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "no-use-before-define": "off"
     },
     "settings": {
         "import/resolver": {
             "node": {
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+                "extensions": [".ts", ".tsx"]
             }
         }
     }

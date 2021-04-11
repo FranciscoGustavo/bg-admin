@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 import { useStyles } from './styles';
 
-const LayoutAdmin = ({ children }) => {
+type LayoutAdminProps = {
+  children: ReactNode;
+};
+
+const LayoutAdmin: FC<LayoutAdminProps> = ({ children }) => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const {
     DashboardLayoutRoot,

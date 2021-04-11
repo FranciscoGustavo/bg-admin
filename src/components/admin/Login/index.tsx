@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   Box,
   Container,
@@ -7,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './styles';
 
-const Login = () => {
+const Login: FC = () => {
   const { SContainer } = useStyles();
   return (
     <Box className={SContainer}>

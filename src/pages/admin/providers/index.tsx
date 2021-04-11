@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import LayoutAdmin from '../../../components/admin/LayoutAdmin';
 
-const AdminProvidersPage = () => (
+const AdminProvidersPage: FC = () => (
   <LayoutAdmin>
     <h1>Provedores</h1>
   </LayoutAdmin>

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import Link from 'next/link';
 import {
   AppBar,
@@ -12,7 +13,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 
-const Header = ({ onMobileNavOpen }) => (
+type HeaderProps = {
+  onMobileNavOpen: () => void;
+};
+
+const Header: FC<HeaderProps> = ({ onMobileNavOpen }) => (
   <AppBar elevation={0}>
     <Toolbar>
       <Link href="/">

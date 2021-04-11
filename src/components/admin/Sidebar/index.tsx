@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import { Hidden, Drawer, Box, List } from '@material-ui/core';
 import MenuItem from '../MenuItem';
 import { useStyles } from './styles';
-import Items from './items';
+import Items from './items.json';
 
-const ContentMenu = () => {
+const ContentMenu: FC = () => {
   const { SContainer, SContainerList } = useStyles();
   return (
     <Box className={SContainer}>
@@ -18,7 +19,12 @@ const ContentMenu = () => {
   );
 };
 
-const Sidebar = ({ openMobile, onMobileClose }) => (
+type SidebarProps = {
+  openMobile: boolean;
+  onMobileClose: () => void;
+};
+
+const Sidebar: FC<SidebarProps> = ({ openMobile, onMobileClose }) => (
   <>
     <Hidden lgUp>
       <Drawer

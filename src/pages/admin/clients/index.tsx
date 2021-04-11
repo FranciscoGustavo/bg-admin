@@ -1,6 +1,7 @@
-import LayoutAdmin from '../../../components/admin/LayoutAdmin';
+import { FC } from 'react';
+import LayoutAdmin from '@components/admin/LayoutAdmin';
 
-const AdminClientsPage = () => (
+const AdminClientsPage: FC = () => (
   <LayoutAdmin>
     <h1>Clientes</h1>
   </LayoutAdmin>
