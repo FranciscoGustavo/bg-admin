@@ -26,9 +26,7 @@ const TablePagination = ({
         <strong>{(pageIndex + 1) * pageSize - pageSize + 1}</strong>
         <RemoveOutlinedIcon />
         <strong>
-          {(pageIndex + 1) * pageSize}
-          {' '}
-          de
+          {(pageIndex + 1) * pageSize} de
           {total}
         </strong>
       </span>
@@ -52,9 +50,7 @@ const TablePagination = ({
       >
         {[10, 20, 30, 40, 50].map((pageSizeOption) => (
           <option key={pageSizeOption} value={pageSizeOption}>
-            Mostrar
-            {' '}
-            {pageSizeOption}
+            Mostrar {pageSizeOption}
           </option>
         ))}
       </select>
@@ -75,9 +71,7 @@ const TablePagination = ({
         <ArrowBackOutlinedIcon />
       </button>
       <span>
-        {pageIndex + 1}
-        {' '}
-        de
+        {pageIndex + 1} de
         {pageOptions.length}
       </span>
       <button type="button" onClick={() => nextPage()} disabled={!canNextPage}>

@@ -14,9 +14,7 @@ const Login = () => {
       <Container maxWidth="sm">
         <form action="">
           <Box>
-            <Typography variant="h2">
-              Inicar sesión
-            </Typography>
+            <Typography variant="h2">Inicar sesión</Typography>
           </Box>
           <TextField
             fullWidth

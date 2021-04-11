@@ -1,7 +1,5 @@
 import Login from '../../components/admin/Login';
 
-const AdminSigninPage = () => (
-  <Login />
-);
+const AdminSigninPage = () => <Login />;
 
 export default AdminSigninPage;

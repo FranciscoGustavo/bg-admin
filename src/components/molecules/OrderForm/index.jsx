@@ -4,9 +4,7 @@ import { AutocompleteInput } from '../../atoms';
 import { getClientsName, getClientsCode } from '../../../localdata/clients';
 import './styles.css';
 
-const OrderForm = ({
-  onSubmit, onChange, onKeyUp, data, columns,
-}) => (
+const OrderForm = ({ onSubmit, onChange, onKeyUp, data, columns }) => (
   <form className="orderForm">
     <div className="orderForm__info">
       <div className="orderForm__client">
@@ -109,10 +107,7 @@ const OrderForm = ({
       </p>
       <p>
         <span>El total es:</span>
-        <span>
-          $
-          {data.total}
-        </span>
+        <span>${data.total}</span>
       </p>
     </div>
   </form>

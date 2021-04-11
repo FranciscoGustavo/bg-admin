@@ -1,6 +1,4 @@
-import {
-  Hidden, Drawer, Box, List,
-} from '@material-ui/core';
+import { Hidden, Drawer, Box, List } from '@material-ui/core';
 import MenuItem from '../MenuItem';
 import { useStyles } from './styles';
 import Items from './items';
@@ -11,9 +9,7 @@ const ContentMenu = () => {
     <Box className={SContainer}>
       <Box className={SContainerList}>
         <List>
-          {Items.map(({
-            uid, label, to, submenu,
-          }) => (
+          {Items.map(({ uid, label, to, submenu }) => (
             <MenuItem key={uid} label={label} to={to} submenu={submenu} />
           ))}
         </List>

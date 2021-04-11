@@ -1,6 +1,4 @@
-import React, {
-  useState, useEffect, useMemo, useCallback,
-} from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { AutocompleteInput, Loading } from '../../components/atoms';
@@ -39,14 +37,14 @@ const Reception = () => {
     }
 
     const element = document.querySelector(
-      `input[name=${splitedNameInput.join('-')}`,
+      `input[name=${splitedNameInput.join('-')}`
     );
 
     if (element) element.focus();
 
     if (
-      (keyCode === 13 && splitedNameInput[1] === 'code' && !element)
-      || (keyCode === 40 && splitedNameInput[1] === 'price' && !element)
+      (keyCode === 13 && splitedNameInput[1] === 'code' && !element) ||
+      (keyCode === 40 && splitedNameInput[1] === 'price' && !element)
     ) {
       setData({
         ...data,
@@ -91,8 +89,10 @@ const Reception = () => {
         });
 
         if (propertyName === 'count' || propertyName === 'price') {
-          const count = propertyName === 'count' ? value : products[index].count;
-          const price = propertyName === 'price' ? value : products[index].price;
+          const count =
+            propertyName === 'count' ? value : products[index].count;
+          const price =
+            propertyName === 'price' ? value : products[index].price;
 
           products[index] = {
             ...products[index],
@@ -151,7 +151,7 @@ const Reception = () => {
           try {
             const client = await getProvider(
               name.substr(6, 10).toLocaleLowerCase(),
-              value,
+              value
             );
             if (client) {
               setData({
@@ -167,7 +167,7 @@ const Reception = () => {
         getClientNameAndCode();
       }
     },
-    [data],
+    [data]
   );
 
   const onSubmit = (_event) => {
@@ -265,7 +265,7 @@ const Reception = () => {
       },
       { Header: 'Importe', accessor: 'totalPrice' },
     ],
-    [],
+    []
   );
 
   const order = useMemo(() => data, [data]);

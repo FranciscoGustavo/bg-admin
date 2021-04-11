@@ -1,6 +1,4 @@
-import React, {
-  useState, useEffect, useMemo, useCallback,
-} from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Loading } from '../../components/atoms';
 import { ProductForm, ToolsHeader } from '../../components/molecules';
@@ -16,16 +14,17 @@ const Products = () => {
   const [tryLoadDataAgain, setTryLoadDataAgain] = useState(0);
   const [, setSelectedRows] = useState();
 
-  const hanldeTryLoadDataAgain = () => setTryLoadDataAgain(tryLoadDataAgain + 1);
+  const hanldeTryLoadDataAgain = () =>
+    setTryLoadDataAgain(tryLoadDataAgain + 1);
 
   const handleEdit = useCallback(
     (uid) => {
       const data = products.data.filter(
-        (filterProduct) => filterProduct.uid === uid,
+        (filterProduct) => filterProduct.uid === uid
       )[0];
       dispatch(openFormProduct({ data, isOpenModal: true }));
     },
-    [dispatch, products.data],
+    [dispatch, products.data]
   );
 
   const handleColoseModal = () => {
@@ -44,7 +43,7 @@ const Products = () => {
           unity: 'kg',
         },
         isOpenModal: true,
-      }),
+      })
     );
   };
 
@@ -76,7 +75,8 @@ const Products = () => {
     saveData();
   };
 
-  const cellIsActive = ({ value }) => (value ? <p>Activo</p> : <p>No Activo</p>);
+  const cellIsActive = ({ value }) =>
+    value ? <p>Activo</p> : <p>No Activo</p>;
   cellIsActive.propTypes = { value: PropTypes.string.isRequired };
 
   const cellEdit = ({ value }) => (
@@ -95,7 +95,7 @@ const Products = () => {
       { Header: 'Estado', accessor: 'isActive', Cell: cellIsActive },
       { accessor: 'uid', Cell: cellEdit },
     ],
-    [handleEdit],
+    [handleEdit]
   );
 
   const data = useMemo(() => products.data, [products.data]);

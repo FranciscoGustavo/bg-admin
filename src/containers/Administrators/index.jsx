@@ -31,7 +31,7 @@ const Administrators = () => {
         Cell: () => <button type="button">Editar</button>,
       },
     ],
-    [],
+    []
   );
 
   const data = useMemo(() => administrators.data, [administrators.data]);
@@ -50,7 +50,7 @@ const Administrators = () => {
       }
 
       dispatch(
-        addAdministrators({ data: dataAdministrators, loading: false, error }),
+        addAdministrators({ data: dataAdministrators, loading: false, error })
       );
       return data;
     };

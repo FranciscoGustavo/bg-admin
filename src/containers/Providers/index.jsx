@@ -26,7 +26,7 @@ const Providers = () => {
         data: { ...SCHEMA_PROVIDER },
         isOpenModal: true,
         error: false,
-      }),
+      })
     );
   };
 
@@ -55,11 +55,11 @@ const Providers = () => {
   const handleEdit = useCallback(
     (uid) => {
       const data = providers.data.filter(
-        (filterProvider) => filterProvider.uid === uid,
+        (filterProvider) => filterProvider.uid === uid
       )[0];
       dispatch(openFormProvider({ data, isOpenModal: true, error: false }));
     },
-    [dispatch, providers.data],
+    [dispatch, providers.data]
   );
 
   const onPrint = () => {};
@@ -82,7 +82,7 @@ const Providers = () => {
       { Header: 'Correo', accessor: 'email' },
       { accessor: 'uid', Cell: cellEdit },
     ],
-    [handleEdit],
+    [handleEdit]
   );
 
   const data = useMemo(() => providers.data, [providers.data]);
