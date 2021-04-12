@@ -19,8 +19,10 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@apps/*": ["./src/apps/*"],
+      "@admin/*": ["./src/apps/admin/*"],
+      "@landing/*": ["./src/apps/landing/*"],
+      "@utils/*": ["./src/utils/*"],
     },
   },
   "include": [

@@ -1,10 +1,6 @@
 import { FC } from 'react';
-import LayoutAdmin from '../../../components/admin/LayoutAdmin';
+import { Products } from '@admin/containers';
 
-const AdminProductsPage: FC = () => (
-  <LayoutAdmin>
-    <h1>Productos</h1>
-  </LayoutAdmin>
-);
+const AdminProductsPage: FC = () => <Products />;
 
 export default AdminProductsPage;
