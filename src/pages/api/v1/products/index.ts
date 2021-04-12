@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nc from 'next-connect';
 import successResponse from '@utils/responses/successResponse';
-import prisma from '../../../../lib/prisma';
+import prisma from '@lib/prisma';
 
 const handler = nc();
 

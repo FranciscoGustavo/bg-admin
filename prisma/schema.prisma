@@ -13,7 +13,20 @@ model Product {
   name        String
   cover       String?   @default("")
   unity       String
-  isActive    Boolean?   @default(true)
+  isActive    Boolean?  @default(true)
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+}
+
+model User {
+  id          Int       @default(autoincrement()) @id
+  code        String
+  username    String    @unique()
+  password    String
+  name        String
+  cover       String?   @default("")
+  role        String    @default("user")
+  isActive    Boolean?  @default(true)
   createdAt   DateTime  @default(now()) @map(name: "created_at")
   updatedAt   DateTime  @updatedAt @map(name: "updated_at")
 }

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const getProducts = async (url) => {
+type getProductsType = (url: string) => any;
+
+const getProducts: getProductsType = async (url) => {
   const { data } = await axios.get(url);
   return data.body;
 };

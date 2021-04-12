@@ -8,15 +8,20 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './styles';
 
-const Login: FC = () => {
+type LoginProps = {
+  csrfToken: string;
+};
+
+const Login: FC<LoginProps> = ({ csrfToken }) => {
   const { SContainer } = useStyles();
   return (
     <Box className={SContainer}>
       <Container maxWidth="sm">
-        <form action="">
+        <form method="post" action="/api/auth/callback/credentials">
           <Box>
             <Typography variant="h2">Inicar sesión</Typography>
           </Box>
+          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
           <TextField
             fullWidth
             label="Correo electronico"

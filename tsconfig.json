@@ -23,6 +23,7 @@
       "@admin/*": ["./src/apps/admin/*"],
       "@landing/*": ["./src/apps/landing/*"],
       "@utils/*": ["./src/utils/*"],
+      "@lib/*": ["./src/lib/*"],
     },
   },
   "include": [
