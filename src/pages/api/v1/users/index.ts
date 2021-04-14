@@ -7,7 +7,10 @@ import prisma from '@lib/prisma';
 const handler = nc();
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-  const users = await prisma.user.findMany();
+  const { query } = req;
+  const { role } = query;
+
+  const users = await prisma.user.findMany({ where: { role: role as string } });
   const usersWithoutPassword = users.map((user) => ({
     ...user,
     password: undefined,
