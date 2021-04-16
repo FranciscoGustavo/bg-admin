@@ -87,8 +87,6 @@ const User: FC<UserProps> = ({ typeRole }) => {
     setTimeout(() => setSubmitting(false), 2000);
   };
 
-  const onUploadImage = () => {};
-
   if (error) return <div>ERROR</div>;
   if (loading) return <div>Cargando</div>;
   return (

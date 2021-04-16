@@ -19,6 +19,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const AdminUsersPage: FC = () => <Users typeRole="user" labelToolbar="usuario" />;
+const AdminUsersPage: FC = () => (
+  <Users typeRole="user" labelToolbar="usuario" />
+);
 
 export default AdminUsersPage;

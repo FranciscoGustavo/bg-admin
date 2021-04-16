@@ -1,9 +1,11 @@
 import { FC } from 'react';
+import { GetStaticProps } from 'next'
+import { Home } from '@landing/containers';
 
-const HomePage: FC = () => (
-  <div>
-    <h1>Home</h1>
-  </div>
-);
+export const getStaticProps: GetStaticProps = async () => ({
+    props: {},
+  });
+
+const HomePage: FC = () => <Home />;
 
 export default HomePage;

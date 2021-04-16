@@ -75,7 +75,7 @@ const Users: FC<UsersProps> = ({ typeRole, labelToolbar }) => {
                           <TableCell>{updatedAt}</TableCell>
                           <TableCell>{createdAt}</TableCell>
                           <TableCell>
-                            <Link href={`/admin/clients/${id}`}>
+                            <Link href={`/admin/${typeRole}s/${id}`}>
                               <Button component="a" color="primary">
                                 Más detalles
                               </Button>

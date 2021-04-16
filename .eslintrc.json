@@ -39,6 +39,16 @@
     },
     "settings": {
         "import/resolver": {
+            "alias": [
+                ["@admin/containers", "./src/apps/admin/containers/index.ts"],
+                ["@admin/components", "./src/apps/admin/components/index.ts"],
+                ["@admin/api", "./src/apps/admin/api/index.ts"],
+                ["@admin/hooks", "./src/apps/admin/hooks/index.ts"],
+                ["@landing/containers", "./src/apps/landing/containers/index.ts"],
+                ["@landing/components", "./src/apps/landing/components/index.ts"],
+                ["@lib/prisma", "./src/lib/prisma.ts"],
+                ["@utils/responses/successResponse", "./src/utils/responses/successResponse.ts"]
+            ],
             "node": {
                 "extensions": [".ts", ".tsx"]
             }

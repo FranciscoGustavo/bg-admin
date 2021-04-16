@@ -46,7 +46,7 @@ type useGetUserType = (
 
 export const useGetUser: useGetUserType = (role) => {
   const router = useRouter();
-  const {id} = router.query;
+  const { id } = router.query;
   const { data, error } = useSwr(`/api/v1/users/${id}?role=${role}`, getUser);
 
   return {
