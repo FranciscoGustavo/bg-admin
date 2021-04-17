@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   AppBar,
   Toolbar,
@@ -25,14 +26,20 @@ const Header: FC<HeaderProps> = ({ onMobileNavOpen }) => {
   const classes = useStyles();
   return (
     <AppBar elevation={1} position="static">
-      <Container>
-        <Toolbar>
-          <Link href="/shop">
-            <Button component="a">
-              <img src="/logo.svg" alt="" width="45" />
-            </Button>
-          </Link>
-          <div className={classes.SSearch}>
+      {/* <Container> */}
+      <Toolbar>
+        <Link href="/shop">
+          <a>
+            <Image
+              src="/img/logo-white.png"
+              layout="fixed"
+              width="45"
+              height="45"
+              alt="vegyfresh logo"
+            />
+          </a>
+        </Link>
+        {/* <div className={classes.SSearch}>
             <div className={classes.SSearchIcon}>
               <SearchIcon />
             </div>
@@ -44,30 +51,30 @@ const Header: FC<HeaderProps> = ({ onMobileNavOpen }) => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
-          <Box style={{ flexGrow: 1 }} />
-          <IconButton aria-label="show 4 new mails" color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <IconButton aria-label="show 17 new notifications" color="inherit">
-            <Badge badgeContent={17} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <IconButton
-            edge="end"
-            aria-label="account of current user"
-            // aria-controls={menuId}
-            aria-haspopup="true"
-            // onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-        </Toolbar>
-      </Container>
+          </div> */}
+        <Box style={{ flexGrow: 1 }} />
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <IconButton aria-label="show 17 new notifications" color="inherit">
+          <Badge badgeContent={17} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <IconButton
+          edge="end"
+          aria-label="account of current user"
+          // aria-controls={menuId}
+          aria-haspopup="true"
+          // onClick={handleProfileMenuOpen}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+      </Toolbar>
+      {/* </Container> */}
     </AppBar>
   );
 };

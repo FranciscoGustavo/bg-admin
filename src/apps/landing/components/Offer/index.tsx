@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from 'next/image';
 import {
   Box,
   Container,
@@ -29,15 +30,16 @@ const Offer: FC = () => {
               <Typography variant="h2">Organic fuits 50% off</Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={4} className={SContainerImageOffer}>
-              <img
-                src="/img/offer.jpg"
-                alt=""
-                width="100%"
-                className={SImageOffer}
-              />
+              <div className={SImageOffer}>
+                <Image src="/img/offer.jpg" layout="fill" alt="" />
+              </div>
             </Grid>
             <Grid item xs={12} sm={12} md={4} className={SContainerButtonOffer}>
-              <Button variant="outlined" className={SButtonOffer}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                className={SButtonOffer}
+              >
                 read more
               </Button>
             </Grid>

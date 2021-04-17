@@ -46,6 +46,8 @@
                 ["@admin/hooks", "./src/apps/admin/hooks/index.ts"],
                 ["@landing/containers", "./src/apps/landing/containers/index.ts"],
                 ["@landing/components", "./src/apps/landing/components/index.ts"],
+                ["@shop/containers", "./src/apps/shop/containers/index.ts"],
+                ["@shop/components", "./src/apps/shop/components/index.ts"],
                 ["@lib/prisma", "./src/lib/prisma.ts"],
                 ["@utils/responses/successResponse", "./src/utils/responses/successResponse.ts"]
             ],

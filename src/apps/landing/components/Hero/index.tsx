@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from 'next/image';
 import { Box, Container, Grid, Button, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
@@ -16,13 +17,23 @@ const Hero: FC = () => {
               <Typography variant="body1">
                 Organic vegetables fruits and lot more to your door
               </Typography>
-              <Button className={SButtonBuy} variant="contained">
+              <Button
+                className={SButtonBuy}
+                variant="contained"
+                color="secondary"
+              >
                 Buy Now
               </Button>
             </Box>
           </Grid>
           <Grid item xs={5} sm={5} md={4}>
-            <img src="/img/orange.png" alt="" width="100%" />
+            <Image
+              src="/img/orange.png"
+              layout="responsive"
+              width="690"
+              height="492"
+              alt="hero image"
+            />
           </Grid>
         </Grid>
       </Container>

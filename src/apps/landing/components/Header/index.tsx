@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 
@@ -19,11 +20,19 @@ const ButtonLink: FC<ButtonLinkProps> = ({ children, href }) => (
 const Header: FC = () => {
   const { SContainerHeader } = useStyles();
   return (
-    <AppBar elevation={0} className={SContainerHeader}>
+    <AppBar elevation={1} className={SContainerHeader}>
       <Toolbar>
-        <ButtonLink href="/">
-          <img src="/logo.svg" alt="vegyfresh logo" width="45" height="45" />
-        </ButtonLink>
+        <Link href="/">
+          <a>
+            <Image
+              src="/img/logo.png"
+              layout="fixed"
+              width="45"
+              height="45"
+              alt="vegyfresh logo"
+            />
+          </a>
+        </Link>
         <Box style={{ flexGrow: 1 }} />
         <ButtonLink href="#">Inicio</ButtonLink>
         <ButtonLink href="#">Nosotros</ButtonLink>

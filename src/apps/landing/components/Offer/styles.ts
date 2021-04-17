@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   SRoot: {
     position: 'relative',
+    backgroundColor: theme.palette.background.paper,
   },
   SContainerOffer: {
     position: 'absolute',
@@ -34,15 +35,20 @@ export const useStyles = makeStyles((theme) => ({
         display: 'block',
         width: '60px',
         height: '150%',
-        backgroundColor: '#fff',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+        backgroundColor: '#fff',
         transform: 'rotate(20deg)',
+        zIndex: 1,
       },
     },
   },
   SImageOffer: {
+    position: 'relative',
+    width: '100%',
     height: '150px',
-    objectFit: 'cover',
+    '& img': {
+      objectFit: 'cover',
+    },
   },
   SContainerButtonOffer: {
     display: 'flex',
