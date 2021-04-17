@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { GetStaticProps } from 'next'
+import { GetStaticProps } from 'next';
 import { Home } from '@landing/containers';
 
 export const getStaticProps: GetStaticProps = async () => ({
-    props: {},
-  });
+  props: {},
+});
 
 const HomePage: FC = () => <Home />;
 

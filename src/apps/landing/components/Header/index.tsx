@@ -1,20 +1,20 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import Link from 'next/link';
 import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { useStyles } from './styles';
 
 type ButtonLinkProps = {
-  children: string;
+  children: string | ReactNode;
   href: string;
 };
 
 const ButtonLink: FC<ButtonLinkProps> = ({ children, href }) => (
-    <Link href={href}>
-      <Button component="a" variant="text">
-        {children}
-      </Button>
-    </Link>
-  );
+  <Link href={href}>
+    <Button component="a" variant="text">
+      {children}
+    </Button>
+  </Link>
+);
 
 const Header: FC = () => {
   const { SContainerHeader } = useStyles();
