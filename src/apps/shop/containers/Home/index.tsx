@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   Box,
   Container,
@@ -11,53 +12,44 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
-import { Header } from '@shop/components';
+import { Layout } from '@shop/components';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   SMedia: {
-    height: 200,
-  },
-  SContent: {
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
+    height: 150,
   },
   SActions: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3),
-    paddingTop: '0',
-    paddingBottom: theme.spacing(3),
   },
 }));
 
-const Home = () => {
+const Home: FC = () => {
   const classes = useStyles();
   return (
-    <Box>
-      <Header onMobileNavOpen={() => {}} />
+    <Layout>
       <Box>
         <Container>
           <Typography>Descuento en brotes</Typography>
         </Container>
       </Box>
       <Box>
-        <Container>
-          <Grid container spacing={10}>
+        <Container maxWidth="md">
+          <Grid container spacing={3}>
             {Array(6)
               .fill(1)
-              .map(() => (
-                <Grid item xs={12} sm={6} md={4}>
+              .map((n, idx) => (
+                <Grid key={idx} item xs={12} sm={6} md={4}>
                   <Card>
                     <CardMedia
                       className={classes.SMedia}
                       image="/img/fruit-1.png"
                     />
-                    <CardContent className={classes.SContent}>
+                    <CardContent>
                       <Box>
-                        <Typography variant="h3">Papa blanca grande</Typography>
+                        <Typography variant="body1">
+                          Papa blanca grande
+                        </Typography>
                       </Box>
                       <Box>
                         <StarIcon />
@@ -79,7 +71,7 @@ const Home = () => {
           </Grid>
         </Container>
       </Box>
-    </Box>
+    </Layout>
   );
 };
 

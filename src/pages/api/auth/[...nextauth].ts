@@ -3,8 +3,22 @@ import Providers from 'next-auth/providers';
 import bcrypt from 'bcrypt';
 import prisma from '@lib/prisma';
 
-const findUser = async (username, password) => {
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  image: string | null;
+  role: string;
+};
+
+type findUserType = (
+  username: string,
+  password: string
+) => Promise<null | User>;
+
+const findUser: findUserType = async (username, password) => {
   const user = await prisma.user.findUnique({ where: { username } });
+  if (!user) return null;
   const isValidPassword = await bcrypt.compare(password, user.password);
 
   if (!isValidPassword) return null;

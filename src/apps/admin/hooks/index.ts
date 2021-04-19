@@ -1,9 +1,10 @@
 import useSwr from 'swr';
 import { useRouter } from 'next/router';
 import { getProducts, getUsers, getUser } from '@admin/api';
+import { UserProps, ProductProps } from '@admin/api';
 
 type useGetProductsType = () => {
-  data: any;
+  data: Array<ProductProps> | undefined;
   loading: boolean;
   error: Error | boolean;
 };
@@ -21,7 +22,7 @@ export const useGetProducts: useGetProductsType = () => {
 type useGetUsersType = (
   role: string
 ) => {
-  data: any;
+  data: Array<UserProps> | undefined;
   loading: boolean;
   error: Error | boolean;
 };

@@ -44,7 +44,7 @@ const Products: FC = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data.map(
+                    {data?.map(
                       ({
                         id,
                         code,

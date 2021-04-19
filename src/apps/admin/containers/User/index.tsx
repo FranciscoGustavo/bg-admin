@@ -32,7 +32,7 @@ const UserPicture: FC<UserPictureProps> = ({ defaultSrc, name, username }) => {
   const defaultCover = '/default-avatar.svg';
   const [cover] = useState(defaultSrc || defaultCover);
 
-  const onUploadImage = (_event) => {
+  const onUploadImage = (_event: any) => {
     // const file = _event.target.files[0];
   };
 
@@ -71,6 +71,11 @@ type UserProps = {
   typeRole: string;
 };
 
+type onSubmitFunc = (
+  values: any,
+  options: { setSubmitting: (param: boolean) => void }
+) => void;
+
 const User: FC<UserProps> = ({ typeRole }) => {
   const {
     SRoot,
@@ -80,15 +85,25 @@ const User: FC<UserProps> = ({ typeRole }) => {
   } = useStyles();
   const { data, loading, error } = useGetUser(typeRole);
 
-  const onSubmit = (values, { setSubmitting }) => {
+  const onSubmit: onSubmitFunc = (values, { setSubmitting }) => {
     const { code, id, isActive, name, password, username } = values;
     console.log({ code, id, isActive, name, password, username });
 
     setTimeout(() => setSubmitting(false), 2000);
   };
 
-  if (error) return <div>ERROR</div>;
-  if (loading) return <div>Cargando</div>;
+  if (error)
+    return (
+      <LayoutAdmin>
+        <div>ERROR</div>
+      </LayoutAdmin>
+    );
+  if (loading)
+    return (
+      <LayoutAdmin>
+        <div>Cargando</div>
+      </LayoutAdmin>
+    );
   return (
     <LayoutAdmin>
       <Box className={SRoot}>

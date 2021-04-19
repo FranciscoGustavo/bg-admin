@@ -25,9 +25,20 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       where: {
         AND: { id: Number(id), role: role as string },
       },
+      select: {
+        id: true,
+        code: true,
+        username: true,
+        name: true,
+        cover: true,
+        role: true,
+        isActive: true,
+        createdAt: true,
+        updatedAt: true,
+        password: false,
+      },
     });
   }
-  user.password = '';
   return successResponse(res, 'users listed', user);
 });
 

@@ -25,8 +25,18 @@ const Users: FC<UsersProps> = ({ typeRole, labelToolbar }) => {
   const { Scontainer, SGridContainer } = useStyles();
   const { data, loading, error } = useGetUsers(typeRole);
 
-  if (error) return <div>ERROR</div>;
-  if (loading) return <div>Cargando</div>;
+  if (error)
+    return (
+      <LayoutAdmin>
+        <div>ERROR</div>
+      </LayoutAdmin>
+    );
+  if (loading)
+    return (
+      <LayoutAdmin>
+        <div>Cargando</div>
+      </LayoutAdmin>
+    );
   return (
     <LayoutAdmin>
       <Box className={Scontainer}>
@@ -51,7 +61,7 @@ const Users: FC<UsersProps> = ({ typeRole, labelToolbar }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data.map(
+                    {data?.map(
                       ({
                         id,
                         code,

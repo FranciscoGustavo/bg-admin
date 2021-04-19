@@ -9,7 +9,7 @@ const MyApp = (props: AppProps) => {
   const { Component, pageProps } = props;
 
   useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles: Element | any = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }

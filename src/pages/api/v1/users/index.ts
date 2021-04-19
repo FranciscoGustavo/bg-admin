@@ -10,12 +10,23 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   const { query } = req;
   const { role } = query;
 
-  const users = await prisma.user.findMany({ where: { role: role as string } });
-  const usersWithoutPassword = users.map((user) => ({
-    ...user,
-    password: undefined,
-  }));
-  return successResponse(res, 'users listed', usersWithoutPassword);
+  const users = await prisma.user.findMany({
+    where: { role: role as string },
+    select: {
+      id: true,
+      code: true,
+      username: true,
+      name: true,
+      cover: true,
+      role: true,
+      isActive: true,
+      createdAt: true,
+      updatedAt: true,
+      password: false,
+    },
+  });
+
+  return successResponse(res, 'users listed', users);
 });
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -33,8 +44,19 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
       username,
       password: hashedPassword,
     },
+    select: {
+      id: true,
+      code: true,
+      username: true,
+      name: true,
+      cover: true,
+      role: true,
+      isActive: true,
+      createdAt: true,
+      updatedAt: true,
+      password: false,
+    },
   });
-  createdUser.password = undefined;
 
   return successResponse(res, 'user created', createdUser, 201);
 });
