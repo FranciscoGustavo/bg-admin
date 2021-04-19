@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nc from 'next-connect';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import successResponse from '@utils/responses/successResponse';
 import prisma from '@lib/prisma';
 
