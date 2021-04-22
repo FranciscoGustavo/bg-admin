@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import Image from 'next/image';
 import {
   Box,
   Container,
@@ -10,7 +11,29 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { useStyles } from './styles';
 
-const pictures = ['/img/fruit-1.png', '/img/fruit-2.png', '/img/fruit-3.png'];
+const carousel = ['/img/fruit-1.png', '/img/fruit-2.png', '/img/fruit-3.png'];
+const features = [
+  {
+    uid: 1,
+    title: '100 % Natural',
+    image: '/img/apple.png',
+  },
+  {
+    uid: 2,
+    title: 'Super Healthy',
+    image: '/img/broccoli.png',
+  },
+  {
+    uid: 3,
+    title: 'Premium Quality',
+    image: '/img/strawberry.png',
+  },
+  {
+    uid: 4,
+    title: 'Fresh Goods',
+    image: '/img/olive.png',
+  },
+];
 
 const Products: FC = () => {
   const {
@@ -23,6 +46,24 @@ const Products: FC = () => {
     SHexagon,
     SHexagonText,
   } = useStyles();
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const onGoBackImage = () => {
+    if (currentImage === 0) {
+      setCurrentImage(carousel.length - 1);
+    } else {
+      setCurrentImage(currentImage + -1);
+    }
+  };
+
+  const onGoNextImage = () => {
+    if (currentImage === carousel.length - 1) {
+      setCurrentImage(0);
+    } else {
+      setCurrentImage(currentImage + 1);
+    }
+  };
+
   return (
     <Box className={SRoot}>
       <Container>
@@ -32,24 +73,26 @@ const Products: FC = () => {
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8} md={6} className={SContainerCarrusel}>
-            <IconButton>
+            <IconButton onClick={onGoBackImage}>
               <KeyboardArrowUpIcon />
             </IconButton>
             <Box className={SCarrusel}>
-              <img src={pictures[1]} alt="" width="100%" />
+              <img src={carousel[currentImage]} alt="" width="100%" />
             </Box>
-            <IconButton>
+            <IconButton onClick={onGoNextImage}>
               <KeyboardArrowDownIcon />
             </IconButton>
           </Grid>
 
           <Grid item xs={12} sm={4} md={6}>
-            {[1, 2, 3, 4].map(() => (
-              <Box className={SContainerInfo}>
+            {features.map(({ uid, title, image }) => (
+              <Box key={uid} className={SContainerInfo}>
                 <Box className={SContainerHexagon}>
-                  <Box className={SHexagon}>logo</Box>
+                  <Box className={SHexagon}>
+                    <Image src={image} layout="fixed" width="50" height="50" />
+                  </Box>
                 </Box>
-                <p className={SHexagonText}>100% Natural</p>
+                <p className={SHexagonText}>{title}</p>
               </Box>
             ))}
           </Grid>
