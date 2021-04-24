@@ -1,7 +1,15 @@
 import { FC, ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  Hidden,
+  IconButton,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles } from './styles';
 
 type ButtonLinkProps = {
@@ -17,7 +25,11 @@ const ButtonLink: FC<ButtonLinkProps> = ({ children, href }) => (
   </Link>
 );
 
-const Header: FC = () => {
+type HeaderProps = {
+  onMobileNavOpen: () => void;
+};
+
+const Header: FC<HeaderProps> = ({ onMobileNavOpen }) => {
   const { SContainerHeader } = useStyles();
   return (
     <AppBar elevation={1} className={SContainerHeader}>
@@ -34,10 +46,17 @@ const Header: FC = () => {
           </a>
         </Link>
         <Box style={{ flexGrow: 1 }} />
-        <ButtonLink href="#">Inicio</ButtonLink>
-        <ButtonLink href="#">Nosotros</ButtonLink>
-        <ButtonLink href="/shop">Tienda</ButtonLink>
-        <ButtonLink href="/signin">Acceder</ButtonLink>
+        <Hidden mdDown>
+          <ButtonLink href="#">Inicio</ButtonLink>
+          <ButtonLink href="#">Nosotros</ButtonLink>
+          <ButtonLink href="/shop">Tienda</ButtonLink>
+          <ButtonLink href="/signin">Acceder</ButtonLink>
+        </Hidden>
+        <Hidden lgUp>
+          <IconButton onClick={onMobileNavOpen}>
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
       </Toolbar>
     </AppBar>
   );

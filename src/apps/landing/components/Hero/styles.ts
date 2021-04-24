@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   SRoot: {
-    paddingTop: theme.spacing(14),
+    paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(26),
     backgroundColor: theme.palette.background.paper,
     [theme.breakpoints.up('sm')]: {
